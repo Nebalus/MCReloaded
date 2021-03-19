@@ -1,0 +1,56 @@
+# Settings
+
+# Notes in this config are lost on updates if the config file changes
+# If you would like to see the notes, delete this file and it will regenerate with notes
+# (Make sure to backup your config file)
+
+# Updates the plugin automatically
+Auto-Updater: true
+
+ResourcePack:
+  # Enable the MCReloaded resource pack for players
+  EnableResourcePack: true
+  # The link to the pack, you can put a custom link here if need be
+  ResourcePackURL: https://resourcepack.host/dl/jfgleQr050rBXfK99OWydDbUt7qFLenb/%C2%A77Minecraft%C2%A78-%C2%A7aReloaded.zip
+  # Notify players when they log in if they deny the resource pack
+  NotifyMessage: true
+
+Mechanics:
+ # Players will have an energy level out of 20, as it drops, players will get weak and suffer some bad effects
+  Energy:
+    # With this enabled, players will need to sleep often or risk losing energy
+    enabled: true
+    # The amount of energy a player will start with (out of 20.0)
+    start-level: 20.0
+    # The amount of energy a player will get after they respawn (out of 20.0)
+    respawn-level: 20.0
+    # Warn the player via message when energy starts dropping below 10
+    warning: true
+    # The amount of energy a player loses every 5 seconds of gameplay
+    # Default (0.015) equivalent to 3.6 levels in 1 MC day (20 minutes)
+    drain-rate: 0.015
+    # If the player is in a cold biome, exposed to the sky, drain energy quicker
+    # Default (0.015) equivalent to 3.6 levels in 1 MC day (20 minutes)
+    # Setting to 0 will disable this
+    cold-drain-rate: 0.015
+    # Every 5 seconds a player spends in bed, the level of energy to increase
+    sleeping-refresh-rate: 0.83 
+    # Default (0.83) equivalent to 10 levels in 1 minute
+    # Players doing exhaustive tasks (such as mining, running, jumping) will lose energy quicker
+    # Amount to drop per exhaustion reset (when the player's hunger bar drops) (set to 0 to disable)
+    exhaustion: 0.15
+    # Enables coffee recipes and effects (Drink coffee to regain energy)
+    coffee: true
+  
+
+Recipes:
+
+Achievements:
+  FIRSTJOIN: true
+  GILDEDNETHERITE: true
+  FIRSTCHAT: true
+  STAYHYDRATED: true
+  PURIFIED: true
+   
+# Please don´t remove!!!!!
+Config-Version: '1.0'

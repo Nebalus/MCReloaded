@@ -1,0 +1,90 @@
+###
+# Custom Messaging File.
+#
+# Messaging can include any of the formatting codes found on http://minecraft.gamepedia.com/Formatting_codes and must use the '&' character to denote them.
+# Make sure to include the single quotes around the custom messages.
+# With new updates, this is subject to change and previous versions might not display information properly. Changes will be noted in the changelog.
+###
+
+prefix: '&7[&bMCR&7] '
+
+console:
+  enable:
+    litesql-loaded: 'The connection to the database was established successfully.' 
+    config-file-created: 'New config.yml created.'
+    config-file-loaded: 'config.yml has been loaded.'
+    listeners-loaded: 'All listeners has been loaded({0}).'
+    commands-loaded: 'All commands has been loaded({0}).'
+    timers-loaded: 'All timers has been loaded({0}).'
+    plugin-loaded: '{0} has been loaded in {1} milliseconds.'
+    cache-loaded: 'Cache has been loaded.'
+    resourcepack:
+      disabled: 'Resource pack disabled.'
+      enabled: 'Resource pack enabled.'
+      no-url: 'Resource pack is not set! Plugin disabling!!!!'
+    itemmanager:
+      initialize-itemmanager: 'Initializing itemmanager...'
+      craftingrecipe-remove: 'Craftingrecipes has been successfully debugged.'
+      customitems-loaded: 'Customitem instance has been loaded.'
+      recipes-loaded: 'Recipe patcher has been loaded.' 
+    cache:
+      one-player-cached: '{0} player is currently cached.'
+      few-players-cached: '{0} players are currently cached.'
+      nobody-cached: 'No players are currently cached.'
+  error:
+    wrong-version:
+      line1: 'Your version is not supported: {0}'
+      line2: 'This plugin only works on Minecraft 1.16.5'
+    not-spigot:
+      line1: 'Your server software is not supported: {0}'
+      line2: 'This plugin will only work on Spigot or Paper.'
+    not-onlinemode:
+      line1: 'This plugin will only work when the mod has been to online mode!'
+  warning:
+    alpha-version: '&cYOU ARE RUNNING A Alpha VERSION, PLEASE USE WITH CAUTION!'
+    only-player: '&cYou can only use this command as a player!'
+  disable:
+    litesql-disabled: 'The connection to the database was successfully terminated.' 
+error:
+  no-permission: '&cYou do not have enough permmisions to execute this command!'
+  player-not-online: '&6{0} &cis not online&c!'
+  player-was-never-online: '&6{0} &cwas never on this server&c!'
+  kickmessage: '&cAn internal error occured. To avoid major damage, the server will be put into a security mode please rejoin later. Please report this issue to an admin. &7({0})'
+  
+resourcepack:
+  resource_pack_declined: '&c**Resource pack declined**'
+  resource_pack_apply: '&6Please apply the requested Resource Pack.'
+  resource_pack_required: '&6The resource pack is required for visual effects.'
+  resource_pack_accepted: '&aSuccessfully loaded resource pack.'
+  resource_pack_optifine: '&dInfo&f: &aIn order to see the custom armor you need to install Optifine to your Minecraft!'
+commands:
+  fly:
+    enabled: '&6Your fly has been &aActivated&6!'
+    disabled: '&6Your fly has been &cDeactivated&6!'
+    enabled-other: '&6You have &aAktivated &2{0}&6`s fly!'
+    disabled-other: '&6You have &cDeactivated &2{0}&6`s fly!'
+  ping:
+    self: '&7Your ping is &c{0}&7ms.'
+    other: '&7{0}`s ping is &c{1}&7ms.'
+  gm:
+    survival: '&2{0} gamemode has been successfully changed to &fSurvival&2.'
+    adventure: '&2{0} gamemode has been successfully changed to &fAdventure&2.'
+    creative: '&2{0} gamemode has been successfully changed to &fCreative&2.'
+    spectator: '&2{0} gamemode has been successfully changed to &fSpectator&2.'
+  friend:
+    allready-friends: '&cYou are already friends with &6{0}!' 
+    allready-requested: '&cYou already sent &6{0} &ca friend request!' 
+    no-request: '&6{0} &cdidn`t send you a friend request!' 
+    arent-friends: '&cYou and &6{0} &care not friends!' 
+    not-yourself: '&cYou cannot select youreself!' 
+  getitem: 
+    successful-gived: ''
+    error-item-not-found: '&6{0} &cis not regesterd in my database!!!'
+  cordinates:
+    own-cordinates: '&6You are on the coordinates: &b{0}X {1}Y {2}Z&6.'
+    send-info: '&dInfo&f: &6Send with &2/cordinates [Player] &6 your cordinates to another player!'
+    send-info-other: '&dInfo&f: &6Send with &2/cordinates {0} &6 your cordinates back!'
+    send-cordinates-info-self: '&6You sent &2{0} &6your cordinates!'
+    send-cordinates-info: '&2{0} &6sent you his coordinates: &b{1}X {2}Y {3}Z&6!'
+usage:
+  command: '&cUsage: {0}'
