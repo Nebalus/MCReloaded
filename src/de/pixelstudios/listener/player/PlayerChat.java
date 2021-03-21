@@ -19,9 +19,9 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class PlayerChat implements Listener{
 
-	@SuppressWarnings("deprecation")
 	@EventHandler(
-		      priority = EventPriority.HIGHEST
+			ignoreCancelled = true,
+		    priority = EventPriority.HIGHEST
 		   )
 	public void onChat(AsyncPlayerChatEvent e) {
 		Player p = e.getPlayer();
@@ -38,6 +38,7 @@ public class PlayerChat implements Listener{
 						}
 			            count++;
 					}
+			        all.sendMessage("§7"+p.getName()+" §8» §r"+FormatLibary.format(message));
 			        /*
 						TextComponent tc = new TextComponent("§7"+p.getName()+" ");
 						tc.setHoverEvent(new HoverEvent(net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§6Click to see " + p.getName()+"`s profile.").create()));	
@@ -47,7 +48,6 @@ public class PlayerChat implements Listener{
 						tc.addExtra(tc1);
 						all.spigot().sendMessage(tc);
 			         */
-						all.sendMessage("§7"+p.getName()+" §8» §r"+FormatLibary.format(message));
 					}
 				Bukkit.getConsoleSender().sendMessage(p.getName()+": "+e.getMessage());
 		}else {

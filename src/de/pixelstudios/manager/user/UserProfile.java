@@ -134,8 +134,12 @@ public class UserProfile {
 						update = true;
 					}else {
 						for(String currentAchievements : yaml.getStringList("Achievements.list")){
-							achievements.add(Achievements.valueOf(currentAchievements));
-							achievementclaimedtime.put(Achievements.valueOf(currentAchievements), yaml.getLong("Achievements."+currentAchievements+".claimedtime"));
+							try {
+								achievements.add(Achievements.valueOf(currentAchievements));
+								achievementclaimedtime.put(Achievements.valueOf(currentAchievements), yaml.getLong("Achievements."+currentAchievements+".claimedtime"));
+							}catch(IllegalArgumentException e) {
+								e.printStackTrace();
+							}
 						}	
 					}
 					if(update) {

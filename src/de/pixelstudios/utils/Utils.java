@@ -41,34 +41,6 @@ public class Utils {
 	public static Boolean isReloading = false;
 	public static Boolean isStoping = false;
 	
-	 private static Enchantment enchant[] = {
-	    		Enchantment.SILK_TOUCH,
-	    		Enchantment.DURABILITY,
-	    		Enchantment.DIG_SPEED,
-	    		Enchantment.LOOT_BONUS_BLOCKS,
-	    		Enchantment.DAMAGE_ALL,
-	    		Enchantment.KNOCKBACK,
-	    		Enchantment.FIRE_ASPECT,
-	    		Enchantment.DAMAGE_ARTHROPODS,
-	    		Enchantment.DAMAGE_UNDEAD,
-	    		Enchantment.LOOT_BONUS_MOBS,
-	    		Enchantment.ARROW_DAMAGE,
-	    		Enchantment.ARROW_FIRE,
-	    	    Enchantment.ARROW_INFINITE,
-	    	    Enchantment.ARROW_KNOCKBACK,
-	    	    Enchantment.PROTECTION_ENVIRONMENTAL,
-	    	    Enchantment.PROTECTION_EXPLOSIONS,
-	    	    Enchantment.PROTECTION_FALL,
-	    	    Enchantment.PROTECTION_FIRE,
-	    	    Enchantment.PROTECTION_PROJECTILE,
-	    	    Enchantment.LURE,
-	    	    Enchantment.LUCK,
-	    	    Enchantment.OXYGEN,
-	    	    Enchantment.THORNS,
-	    	    Enchantment.WATER_WORKER };
-	 
-	 
-	
 	
 	public static ItemStack getSkullByTextureURL(String textureURL, String Name, ArrayList<String> lore) {
 		ItemStack head = new ItemStack(Material.PLAYER_HEAD);
@@ -103,13 +75,11 @@ public class Utils {
 			return rs.next();
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}
-			
+		}		
 		return false;
 	} 
 	 
-	public static String getTimeString(Long from, Long to) {
-			
+	public static String getTimeString(Long from, Long to) {			
 		Long rawData = from - to;
 		long sekunden = rawData/1000;
 		long minuten = sekunden/60;
@@ -144,7 +114,6 @@ public class Utils {
 					return "§b"+sekunden+" seconds";			
 				}				
 			}
-			
 			return "§bHmm something went wrong ._.";	
 		}
 		
@@ -155,16 +124,7 @@ public class Utils {
 		}
 		
 		
-	public static ItemStack removeEnchants(ItemStack item) {
-		ItemMeta itemmeta = item.getItemMeta();
-		for(Enchantment en: enchant){
-	       if(itemmeta.hasEnchants()){
-	    	   itemmeta.removeEnchant(en);
-	           item.setItemMeta(itemmeta);
-	           }
-	       }
-		return item;
-	}
+	
 	
 	 public static boolean isRunningMinecraft(int major, int minor, int revision) {
 	        String[] version = Bukkit.getServer().getBukkitVersion().split("-")[0].split("\\.");
