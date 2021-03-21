@@ -30,17 +30,8 @@ public class PrepareCraftEvent implements Listener{
 			for(ItemStack item : matrix) {
 				if(item != null) {
 					if(ItemManager.isSimilar(item, ItemManager.CRYSTAL_FRAGMENT)) {
-						if(recipe.getResult().equals(ItemManager.CRYSTAL_ARMOR_BOOTS)) {
+						if(recipe.getResult().getItemMeta().getPersistentDataContainer().has(ItemManager.cristal_armor_Key, PersistentDataType.BYTE)) {
 							
-						}
-						else if(recipe.getResult().equals(ItemManager.CRYSTAL_ARMOR_CHESTPLATE)) {
-							
-						}
-						else if(recipe.getResult().equals(ItemManager.CRYSTAL_ARMOR_HELMET)) {
-		
-						}
-						else if(recipe.getResult().equals(ItemManager.CRYSTAL_ARMOR_LEGGINGS)) {
-		
 						}else {
 							inventory.setResult(null);
 						}
@@ -58,60 +49,47 @@ public class PrepareCraftEvent implements Listener{
 	public void onPrepareSmithing(PrepareSmithingEvent e) {
 		SmithingInventory inventory = e.getInventory();
 		if(inventory.getItem(0) != null && inventory.getItem(1) != null) {
-			if(inventory.getItem(1).getType().equals(Material.GOLD_BLOCK) || inventory.getItem(1).getType().equals(Material.NETHERITE_INGOT)) {
+			if(inventory.getItem(1).getType().equals(Material.NETHERITE_INGOT) && inventory.getItem(1).getItemMeta().hasCustomModelData()) {
 				if(inventory.getItem(0).getType().equals(Material.NETHERITE_HELMET)) {
-					if(!inventory.getItem(0).getItemMeta().hasCustomModelData()) {
-						ItemStack item = new ItemStack(inventory.getItem(0));
-						ItemMeta itemMeta = item.getItemMeta();
-						itemMeta.setCustomModelData(ItemManager.GILDED_NETHERITE_ARMOR_HELMET.getItemMeta().getCustomModelData());
-						itemMeta.getPersistentDataContainer().set(ItemManager.gilded_netherite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-						if(!item.getItemMeta().hasDisplayName()) {
-							itemMeta.setDisplayName(ItemManager.GILDED_NETHERITE_ARMOR_HELMET.getItemMeta().getDisplayName());
-						}
-						item.setItemMeta(itemMeta);
-						e.setResult(item);
-					}else {
-						e.setResult(null);
+					ItemStack item = new ItemStack(inventory.getItem(0));
+					ItemMeta itemMeta = item.getItemMeta();
+					itemMeta.setCustomModelData(ItemManager.GOLDERITE_ARMOR_HELMET.getItemMeta().getCustomModelData());
+					itemMeta.getPersistentDataContainer().set(ItemManager.golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+					if(!item.getItemMeta().hasDisplayName()) {
+						itemMeta.setDisplayName(ItemManager.GOLDERITE_ARMOR_HELMET.getItemMeta().getDisplayName());
 					}
-				}
-				if(inventory.getItem(0).getType().equals(Material.NETHERITE_CHESTPLATE)) {
-					if(!inventory.getItem(0).getItemMeta().hasCustomModelData()) {
+					item.setItemMeta(itemMeta);
+					e.setResult(item);
+				}else if(inventory.getItem(0).getType().equals(Material.NETHERITE_CHESTPLATE)) {
+					
+							ItemStack item = new ItemStack(inventory.getItem(0));
+							ItemMeta itemMeta = item.getItemMeta();
+							itemMeta.setCustomModelData(ItemManager.GOLDERITE_ARMOR_CHESTPLATE.getItemMeta().getCustomModelData());
+							itemMeta.getPersistentDataContainer().set(ItemManager.golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+							if(!item.getItemMeta().hasDisplayName()) {
+								itemMeta.setDisplayName(ItemManager.GOLDERITE_ARMOR_CHESTPLATE.getItemMeta().getDisplayName());
+							}
+							item.setItemMeta(itemMeta);
+							e.setResult(item);
+					}else if(inventory.getItem(0).getType().equals(Material.NETHERITE_LEGGINGS)) {
+					
+							ItemStack item = new ItemStack(inventory.getItem(0));
+							ItemMeta itemMeta = item.getItemMeta();
+							itemMeta.setCustomModelData(ItemManager.GOLDERITE_ARMOR_LEGGINGS.getItemMeta().getCustomModelData());
+							itemMeta.getPersistentDataContainer().set(ItemManager.golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+							if(!item.getItemMeta().hasDisplayName()) {
+								itemMeta.setDisplayName(ItemManager.GOLDERITE_ARMOR_LEGGINGS.getItemMeta().getDisplayName());
+							}
+							item.setItemMeta(itemMeta);
+							e.setResult(item);
+						}else if(inventory.getItem(0).getType().equals(Material.NETHERITE_BOOTS)) {
+					
 						ItemStack item = new ItemStack(inventory.getItem(0));
 						ItemMeta itemMeta = item.getItemMeta();
-						itemMeta.setCustomModelData(ItemManager.GILDED_NETHERITE_ARMOR_CHESTPLATE.getItemMeta().getCustomModelData());
-						itemMeta.getPersistentDataContainer().set(ItemManager.gilded_netherite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+						itemMeta.setCustomModelData(ItemManager.GOLDERITE_ARMOR_BOOTS.getItemMeta().getCustomModelData());
+						itemMeta.getPersistentDataContainer().set(ItemManager.golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
 						if(!item.getItemMeta().hasDisplayName()) {
-							itemMeta.setDisplayName(ItemManager.GILDED_NETHERITE_ARMOR_CHESTPLATE.getItemMeta().getDisplayName());
-						}
-						item.setItemMeta(itemMeta);
-						e.setResult(item);
-					}else {
-						e.setResult(null);
-					}
-				}
-				if(inventory.getItem(0).getType().equals(Material.NETHERITE_LEGGINGS)) {
-					if(!inventory.getItem(0).getItemMeta().hasCustomModelData()) {
-						ItemStack item = new ItemStack(inventory.getItem(0));
-						ItemMeta itemMeta = item.getItemMeta();
-						itemMeta.setCustomModelData(ItemManager.GILDED_NETHERITE_ARMOR_LEGGINGS.getItemMeta().getCustomModelData());
-						itemMeta.getPersistentDataContainer().set(ItemManager.gilded_netherite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-						if(!item.getItemMeta().hasDisplayName()) {
-							itemMeta.setDisplayName(ItemManager.GILDED_NETHERITE_ARMOR_LEGGINGS.getItemMeta().getDisplayName());
-						}
-						item.setItemMeta(itemMeta);
-						e.setResult(item);
-					}else {
-						e.setResult(null);
-					}
-				}
-				if(inventory.getItem(0).getType().equals(Material.NETHERITE_BOOTS)) {
-					if(!inventory.getItem(0).getItemMeta().hasCustomModelData()) {
-						ItemStack item = new ItemStack(inventory.getItem(0));
-						ItemMeta itemMeta = item.getItemMeta();
-						itemMeta.setCustomModelData(ItemManager.GILDED_NETHERITE_ARMOR_BOOTS.getItemMeta().getCustomModelData());
-						itemMeta.getPersistentDataContainer().set(ItemManager.gilded_netherite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-						if(!item.getItemMeta().hasDisplayName()) {
-							itemMeta.setDisplayName(ItemManager.GILDED_NETHERITE_ARMOR_BOOTS.getItemMeta().getDisplayName());
+							itemMeta.setDisplayName(ItemManager.GOLDERITE_ARMOR_BOOTS.getItemMeta().getDisplayName());
 						}
 						item.setItemMeta(itemMeta);
 						e.setResult(item);
@@ -122,8 +100,6 @@ public class PrepareCraftEvent implements Listener{
 			}else {
 				e.setResult(null);
 			}
-		}else {
-			e.setResult(null);
-		}
+		
 	}
 }

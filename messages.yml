@@ -25,7 +25,7 @@ console:
     itemmanager:
       initialize-itemmanager: 'Initializing itemmanager...'
       craftingrecipe-remove: 'Craftingrecipes has been successfully debugged.'
-      customitems-loaded: 'Customitem instance has been loaded.'
+      customitems-loaded: 'Customitem repository has been loaded.'
       recipes-loaded: 'Recipe patcher has been loaded.' 
     cache:
       one-player-cached: '{0} player is currently cached.'

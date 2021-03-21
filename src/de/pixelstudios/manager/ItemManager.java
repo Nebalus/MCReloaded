@@ -80,7 +80,7 @@ public class ItemManager {
     public static NamespacedKey cristal_fragment_Key = new NamespacedKey(MCReloaded.getPlugin(), "crystal_fragment");
  
     public static NamespacedKey cristal_armor_Key = new NamespacedKey(MCReloaded.getPlugin(), "cristal_armor");
-    public static NamespacedKey gilded_netherite_armor_Key = new NamespacedKey(MCReloaded.getPlugin(), "gilded_netherite_armor");
+    public static NamespacedKey golderite_armor_Key = new NamespacedKey(MCReloaded.getPlugin(), "golderite_armor");
 	
     //*************************************************************
     public static NamespacedKey telekinesis_enchantment = new NamespacedKey(MCReloaded.getPlugin(), "ENCHANTMENT_TELEKINESIS");
@@ -121,10 +121,11 @@ public class ItemManager {
 	public static ItemStack CRYSTAL_ARMOR_BOOTS;
 	public static ItemStack CRYSTAL_FRAGMENT;
 	
-	public static ItemStack GILDED_NETHERITE_ARMOR_HELMET;
-	public static ItemStack GILDED_NETHERITE_ARMOR_CHESTPLATE;
-	public static ItemStack GILDED_NETHERITE_ARMOR_LEGGINGS;
-	public static ItemStack GILDED_NETHERITE_ARMOR_BOOTS;
+	public static ItemStack GOLDERITE_ARMOR_HELMET;
+	public static ItemStack GOLDERITE_ARMOR_CHESTPLATE;
+	public static ItemStack GOLDERITE_ARMOR_LEGGINGS;
+	public static ItemStack GOLDERITE_ARMOR_BOOTS;
+	public static ItemStack GOLDERITE_INGOT;
 	
 	//*************************************************************
 	//Costmetics
@@ -349,37 +350,44 @@ public class ItemManager {
 	    GRANITE_PICKAXE.setItemMeta(granite_pickaxe_meta);
 	    ALL_ITEMS.put("GRANITE_PICKAXE", GRANITE_PICKAXE);
 		
-	    GILDED_NETHERITE_ARMOR_HELMET = new ItemStack(Material.NETHERITE_HELMET);
-		ItemMeta Gilded_Netherite_Armor_Helmet1 = GILDED_NETHERITE_ARMOR_HELMET.getItemMeta();
-		Gilded_Netherite_Armor_Helmet1.setDisplayName("§fGilded Netherite Helmet");
+	    GOLDERITE_INGOT = new ItemStack(Material.NETHERITE_INGOT);
+		ItemMeta Gilded_Netherite_Ingot1 = GOLDERITE_INGOT.getItemMeta();
+		Gilded_Netherite_Ingot1.setDisplayName("§fGolderite Ingot");
+		Gilded_Netherite_Ingot1.setCustomModelData(1);
+		GOLDERITE_INGOT.setItemMeta(Gilded_Netherite_Ingot1);
+		ALL_ITEMS.put("GOLDERITE_INGOT", GOLDERITE_INGOT);
+	    
+		GOLDERITE_ARMOR_HELMET = new ItemStack(Material.NETHERITE_HELMET);
+		ItemMeta Gilded_Netherite_Armor_Helmet1 = GOLDERITE_ARMOR_HELMET.getItemMeta();
+		Gilded_Netherite_Armor_Helmet1.setDisplayName("§fGolderite Helmet");
 		Gilded_Netherite_Armor_Helmet1.setCustomModelData(1);
-		Gilded_Netherite_Armor_Helmet1.getPersistentDataContainer().set(gilded_netherite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-		GILDED_NETHERITE_ARMOR_HELMET.setItemMeta(Gilded_Netherite_Armor_Helmet1);
-		ALL_ITEMS.put("GILDED_NETHERITE_ARMOR_HELMET", GILDED_NETHERITE_ARMOR_HELMET);
+		Gilded_Netherite_Armor_Helmet1.getPersistentDataContainer().set(golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+		GOLDERITE_ARMOR_HELMET.setItemMeta(Gilded_Netherite_Armor_Helmet1);
+		ALL_ITEMS.put("GOLDERITE_ARMOR_HELMET", GOLDERITE_ARMOR_HELMET);
 		
-		GILDED_NETHERITE_ARMOR_CHESTPLATE = new ItemStack(Material.NETHERITE_CHESTPLATE);
-		ItemMeta Gilded_Netherite_Armor_Chestplate1 = GILDED_NETHERITE_ARMOR_CHESTPLATE.getItemMeta();
-		Gilded_Netherite_Armor_Chestplate1.setDisplayName("§fGilded Netherite Chestplate");
+		GOLDERITE_ARMOR_CHESTPLATE = new ItemStack(Material.NETHERITE_CHESTPLATE);
+		ItemMeta Gilded_Netherite_Armor_Chestplate1 = GOLDERITE_ARMOR_CHESTPLATE.getItemMeta();
+		Gilded_Netherite_Armor_Chestplate1.setDisplayName("§fGolderite Chestplate");
 		Gilded_Netherite_Armor_Chestplate1.setCustomModelData(1);
-		Gilded_Netherite_Armor_Chestplate1.getPersistentDataContainer().set(gilded_netherite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-		GILDED_NETHERITE_ARMOR_CHESTPLATE.setItemMeta(Gilded_Netherite_Armor_Chestplate1);
-		ALL_ITEMS.put("GILDED_NETHERITE_ARMOR_CHESTPLATE", GILDED_NETHERITE_ARMOR_CHESTPLATE);
+		Gilded_Netherite_Armor_Chestplate1.getPersistentDataContainer().set(golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+		GOLDERITE_ARMOR_CHESTPLATE.setItemMeta(Gilded_Netherite_Armor_Chestplate1);
+		ALL_ITEMS.put("GOLDERITE_ARMOR_CHESTPLATE", GOLDERITE_ARMOR_CHESTPLATE);
 		
-		GILDED_NETHERITE_ARMOR_LEGGINGS = new ItemStack(Material.NETHERITE_LEGGINGS);
-		ItemMeta Gilded_Netherite_Armor_Leggings1 = GILDED_NETHERITE_ARMOR_LEGGINGS.getItemMeta();
-		Gilded_Netherite_Armor_Leggings1.setDisplayName("§fGilded Netherite Leggings");
+		GOLDERITE_ARMOR_LEGGINGS = new ItemStack(Material.NETHERITE_LEGGINGS);
+		ItemMeta Gilded_Netherite_Armor_Leggings1 = GOLDERITE_ARMOR_LEGGINGS.getItemMeta();
+		Gilded_Netherite_Armor_Leggings1.setDisplayName("§fGolderite Leggings");
 		Gilded_Netherite_Armor_Leggings1.setCustomModelData(1);
-		Gilded_Netherite_Armor_Leggings1.getPersistentDataContainer().set(gilded_netherite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-		GILDED_NETHERITE_ARMOR_LEGGINGS.setItemMeta(Gilded_Netherite_Armor_Leggings1);
-		ALL_ITEMS.put("GILDED_NETHERITE_ARMOR_LEGGINGS", GILDED_NETHERITE_ARMOR_LEGGINGS);
+		Gilded_Netherite_Armor_Leggings1.getPersistentDataContainer().set(golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+		GOLDERITE_ARMOR_LEGGINGS.setItemMeta(Gilded_Netherite_Armor_Leggings1);
+		ALL_ITEMS.put("GOLDERITE_ARMOR_LEGGINGS", GOLDERITE_ARMOR_LEGGINGS);
 		
-		GILDED_NETHERITE_ARMOR_BOOTS = new ItemStack(Material.NETHERITE_BOOTS);
-		ItemMeta Gilded_Netherite_Armor_Boots1 = GILDED_NETHERITE_ARMOR_BOOTS.getItemMeta();
-		Gilded_Netherite_Armor_Boots1.setDisplayName("§fGilded Netherite Boots");
+		GOLDERITE_ARMOR_BOOTS = new ItemStack(Material.NETHERITE_BOOTS);
+		ItemMeta Gilded_Netherite_Armor_Boots1 = GOLDERITE_ARMOR_BOOTS.getItemMeta();
+		Gilded_Netherite_Armor_Boots1.setDisplayName("§fGolderite Boots");
 		Gilded_Netherite_Armor_Boots1.setCustomModelData(1);
-		Gilded_Netherite_Armor_Boots1.getPersistentDataContainer().set(gilded_netherite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-		GILDED_NETHERITE_ARMOR_BOOTS.setItemMeta(Gilded_Netherite_Armor_Boots1);
-		ALL_ITEMS.put("GILDED_NETHERITE_ARMOR_BOOTS", GILDED_NETHERITE_ARMOR_BOOTS);
+		Gilded_Netherite_Armor_Boots1.getPersistentDataContainer().set(golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+		GOLDERITE_ARMOR_BOOTS.setItemMeta(Gilded_Netherite_Armor_Boots1);
+		ALL_ITEMS.put("GOLDERITE_ARMOR_BOOTS", GOLDERITE_ARMOR_BOOTS);
 	    
 		COFFEE_BEAN = new ItemStack(Material.COCOA_BEANS);
 	    ItemMeta coffee_bean_meta = COFFEE_BEAN.getItemMeta();
@@ -647,20 +655,20 @@ public class ItemManager {
 		//Smithing Rezepte
 		//*******************************************************************
 	
-		SmithingRecipe gilded_netherite_helmet = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "gilded_netherite_helmet"), GILDED_NETHERITE_ARMOR_HELMET, new MaterialChoice(Material.NETHERITE_HELMET), new MaterialChoice(Material.GOLD_BLOCK));
-		Bukkit.getServer().addRecipe(gilded_netherite_helmet);	
+		SmithingRecipe golderite_helmet = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "golderite_helmet"), GOLDERITE_ARMOR_HELMET, new MaterialChoice(Material.NETHERITE_HELMET), new ExactChoice(GOLDERITE_INGOT));
+		Bukkit.getServer().addRecipe(golderite_helmet);	
 		//*******************************************************************
 		
-		SmithingRecipe gilded_netherite_chestplate = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "gilded_netherite_chestplate"), GILDED_NETHERITE_ARMOR_CHESTPLATE, new MaterialChoice(Material.NETHERITE_CHESTPLATE), new MaterialChoice(Material.GOLD_BLOCK));
-		Bukkit.getServer().addRecipe(gilded_netherite_chestplate);	
+		SmithingRecipe golderite_chestplate = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "golderite_chestplate"), GOLDERITE_ARMOR_CHESTPLATE, new MaterialChoice(Material.NETHERITE_CHESTPLATE), new ExactChoice(GOLDERITE_INGOT));
+		Bukkit.getServer().addRecipe(golderite_chestplate);	
 		//*******************************************************************
 		
-		SmithingRecipe gilded_netherite_leggings = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "gilded_netherite_leggings"), GILDED_NETHERITE_ARMOR_LEGGINGS, new MaterialChoice(Material.NETHERITE_LEGGINGS), new MaterialChoice(Material.GOLD_BLOCK));
-		Bukkit.getServer().addRecipe(gilded_netherite_leggings);	
+		SmithingRecipe golderite_leggings = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "golderite_leggings"), GOLDERITE_ARMOR_LEGGINGS, new MaterialChoice(Material.NETHERITE_LEGGINGS), new ExactChoice(GOLDERITE_INGOT));
+		Bukkit.getServer().addRecipe(golderite_leggings);	
 		//*******************************************************************
 		
-		SmithingRecipe gilded_netherite_boots = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "gilded_netherite_boots"), GILDED_NETHERITE_ARMOR_BOOTS, new MaterialChoice(Material.NETHERITE_BOOTS), new MaterialChoice(Material.GOLD_BLOCK));
-		Bukkit.getServer().addRecipe(gilded_netherite_boots);	
+		SmithingRecipe golderite_boots = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "golderite_boots"), GOLDERITE_ARMOR_BOOTS, new MaterialChoice(Material.NETHERITE_BOOTS), new ExactChoice(GOLDERITE_INGOT));
+		Bukkit.getServer().addRecipe(golderite_boots);	
 		//*******************************************************************
 		
 		if(config.MECHANICS_ENERGY_COFFEE) {
@@ -690,6 +698,16 @@ public class ItemManager {
         Bukkit.getServer().addRecipe(enchanted_golden_apple_juice);		
         //*******************************************************************
         
+        ShapelessRecipe golderite_ingot = new ShapelessRecipe(new NamespacedKey(MCReloaded.getPlugin(), "golderite_ingot"), GOLDERITE_INGOT);
+		
+        golderite_ingot.addIngredient(Material.NETHERITE_INGOT);
+        golderite_ingot.addIngredient(Material.GOLD_INGOT);
+        golderite_ingot.addIngredient(Material.GOLD_INGOT);
+        golderite_ingot.addIngredient(Material.GOLD_INGOT);
+        golderite_ingot.addIngredient(Material.GOLD_INGOT);
+        Bukkit.getServer().addRecipe(golderite_ingot);		
+        
+        //*******************************************************************
         ShapedRecipe Super_Axe = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "super_axe"),SUPER_AXE);
         Super_Axe.shape("LL", "LN", " N");
 		Super_Axe.setIngredient('N', Material.STICK);
@@ -721,14 +739,14 @@ public class ItemManager {
         Bukkit.getServer().addRecipe(Warped_pearl);		
         
         //*******************************************************************		
-      		ShapelessRecipe Warped_fruit = new ShapelessRecipe(new NamespacedKey(MCReloaded.getPlugin(), "warped_fruit"), WARPED_FRUIT);
+      	ShapelessRecipe Warped_fruit = new ShapelessRecipe(new NamespacedKey(MCReloaded.getPlugin(), "warped_fruit"), WARPED_FRUIT);
       		
-      		Warped_fruit.addIngredient(Material.CHORUS_FRUIT);
-      		Warped_fruit.addIngredient(Material.WARPED_FUNGUS);
-      		Warped_fruit.addIngredient(Material.SUGAR);
-            Bukkit.getServer().addRecipe(Warped_fruit);		
+      	Warped_fruit.addIngredient(Material.CHORUS_FRUIT);
+      	Warped_fruit.addIngredient(Material.WARPED_FUNGUS);
+      	Warped_fruit.addIngredient(Material.SUGAR);
+        Bukkit.getServer().addRecipe(Warped_fruit);		
+        
 		//*******************************************************************
-		
 		ShapedRecipe grappling_hook = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "grappling_hook"), GRAPPLING_HOOK);
 
         grappling_hook.shape(" 3 ", "121", " 3 ");
@@ -736,7 +754,6 @@ public class ItemManager {
         grappling_hook.setIngredient('2', Material.STRING);
         grappling_hook.setIngredient('3', Material.IRON_INGOT);
         Bukkit.getServer().addRecipe(grappling_hook);		
-        
         
 		//*******************************************************************	
 		ShapedRecipe Crystal_Armor_Helmet = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "crystal_helmet"), CRYSTAL_ARMOR_HELMET);
@@ -1003,11 +1020,6 @@ public class ItemManager {
 	}
 	
     public enum Tags {
-     
-       
-        /**
-         * Any water bottle
-         */
     	DRINKABLE(DIRTY_WATER, CLEAN_WATER, PURIFIED_WATER, WATER_BOWL, COLD_MILK, HOT_MILK, COFFEE,
     			ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE),
        
@@ -1018,18 +1030,21 @@ public class ItemManager {
     	GRINDSTONE_BLOCKED(DIRTY_WATER, CLEAN_WATER, PURIFIED_WATER, WATER_BOWL, COLD_MILK, HOT_MILK,
     			COFFEE, GRAPPLING_HOOK, HEART_OF_THE_MINE, PORTABLE_CRAFTING_TABLE, INVISIBLE_ITEM_FRAME,
     			EXPERIENCE_OBELISK_I, EXPERIENCE_OBELISK_II, EXPERIENCE_OBELISK_III, EXPERIENCE_OBELISK_IV,
-    			EXPERIENCE_ORB, CRYSTAL_FRAGMENT, ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE),
+    			EXPERIENCE_ORB, CRYSTAL_FRAGMENT, ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE,
+    			GOLDERITE_INGOT),
     	
     	ANVIL_BLOCKED(HEART_OF_THE_MINE, DIRTY_WATER, CLEAN_WATER, PURIFIED_WATER, WATER_BOWL,
     			COLD_MILK, HOT_MILK, COFFEE, COFFEE_BEAN, EXPERIENCE_OBELISK_I, EXPERIENCE_OBELISK_II, 
     			EXPERIENCE_OBELISK_III, EXPERIENCE_OBELISK_IV, EXPERIENCE_ORB, CRYSTAL_FRAGMENT,
-    			ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE),
+    			ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE, GOLDERITE_INGOT),
     	
     	PLAYER_HEAD(PORTABLE_CRAFTING_TABLE, PORTABLE_ENDERCHEST, EXPERIENCE_OBELISK_I, EXPERIENCE_OBELISK_II, 
     			EXPERIENCE_OBELISK_III, EXPERIENCE_OBELISK_IV, EXPERIENCE_ORB),
     	
     	PLACEABLE_BLOCKED(PORTABLE_CRAFTING_TABLE, PORTABLE_ENDERCHEST, EXPERIENCE_OBELISK_I, EXPERIENCE_OBELISK_II, 
-    			EXPERIENCE_OBELISK_III, EXPERIENCE_OBELISK_IV, EXPERIENCE_ORB, COFFEE_BEAN);
+    			EXPERIENCE_OBELISK_III, EXPERIENCE_OBELISK_IV, EXPERIENCE_ORB, COFFEE_BEAN),
+    	
+    	NETHERITE_INGOT(GOLDERITE_INGOT);
     	
         private final ItemStack[] items;
 
@@ -1069,7 +1084,7 @@ public class ItemManager {
 
     }
  
-	   /**
+	 /**
      * Enums of all custom recipes
      */
     public enum Recipes {
@@ -1097,6 +1112,7 @@ public class ItemManager {
     	WARPED_FRUIT("warped_fruit"),
     	GOLDEN_APPLE_JUICE("golden_apple_juice"),
     	ENCHANTED_GOLDEN_APPLE_JUICE("enchanted_golden_apple_juice"),
+    	GOLDERITE_INGOT("golderite_ingot"),
     	
     	// CUSTOM ARMOR
     	CRYSTAL_ARMOR_HELMET("crystal_helmet"),

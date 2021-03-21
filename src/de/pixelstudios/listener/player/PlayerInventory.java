@@ -102,7 +102,7 @@ public class PlayerInventory implements Listener{
 		p.updateInventory();
 		for(ItemStack item : p.getInventory().getContents()) {
 			if(item != null && item.hasItemMeta()) {
-				if(item.getItemMeta().getPersistentDataContainer().has(ItemManager.gilded_netherite_armor_Key, PersistentDataType.BYTE)) {
+				if(item.getItemMeta().getPersistentDataContainer().has(ItemManager.golderite_armor_Key, PersistentDataType.BYTE)) {
 					up.giveAchievement(Achievements.GILDEDNETHERITE);
 				}
 			}

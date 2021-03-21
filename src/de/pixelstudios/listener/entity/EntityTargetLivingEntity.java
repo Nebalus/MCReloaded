@@ -32,18 +32,19 @@ public class EntityTargetLivingEntity implements Listener{
 			UserProfile pp = playermanager.getProfile(p);
 			if(!pp.isVanished()) {
 				EntityType et = e.getEntityType();
+				PlayerInventory pi = p.getInventory();
+				ItemStack[] ac = pi.getArmorContents();
 				if(et.equals(EntityType.PIGLIN)) {
-					PlayerInventory pi = p.getInventory();
-					ItemStack[] ac = pi.getArmorContents();
-					boolean canceled = false;
+					int ifGolderiteArmor = 0;
 					for(ItemStack is : ac) {
-						if(!canceled && is != null && is.hasItemMeta()) {
-							if(is.getItemMeta().getPersistentDataContainer().has(ItemManager.gilded_netherite_armor_Key, PersistentDataType.BYTE)) {
-								canceled = true;
+						if(is != null && is.hasItemMeta()) {
+							if(is.getItemMeta().getPersistentDataContainer().has(ItemManager.golderite_armor_Key, PersistentDataType.BYTE)) {
+								ifGolderiteArmor++;
 							}
 						}
 					}
-					if(canceled) {
+					//If the player has a full armor set
+					if(ifGolderiteArmor >= 4) {
 						e.setCancelled(true);
 					}
 				}

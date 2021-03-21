@@ -476,46 +476,44 @@ public class MCReloaded extends JavaPlugin implements Listener{
 			public void run() {
 				for(World w: Bukkit.getWorlds()) {
 					for(ArmorStand as : w.getEntitiesByClass(ArmorStand.class)) {		
-							if(!as.hasGravity()) {
-								if(!as.isCollidable()) {
-									if(as.getCustomName().equals("byjfbvxyBJIUG892psx-sujxcbPrujsnxiseIJKskls93as2542473697997979792210")) {
-										if(tpupordown.get(as.getUniqueId()) == null) {
-											tpupordown.put(as.getUniqueId(), true);
-											tpup_down.put(as.getUniqueId(), 1);
-										}
-										if(tpupordown.get(as.getUniqueId()) == true) {			
-											if(tpup_down.get(as.getUniqueId()) >= 50) {
-												tpupordown.put(as.getUniqueId(), false);
-											}else {
-												int amount = tpup_down.get(as.getUniqueId());
-												amount++;
-												tpup_down.put(as.getUniqueId(), amount);
-												Location loc = as.getLocation();
-												loc.setY(as.getLocation().getY() + 0.01f);
-												loc.setYaw(as.getLocation().getYaw()+3f);
-												as.teleport(loc);
-											}
-										}else {
-											if(tpup_down.get(as.getUniqueId()) <= 0) {
-												tpupordown.put(as.getUniqueId(), true);
-											}else {
-												int amount = tpup_down.get(as.getUniqueId());
-												amount--;
-												tpup_down.put(as.getUniqueId(), amount);
-												Location loc = as.getLocation();
-												loc.setY(as.getLocation().getY() - 0.01f);
-												loc.setYaw(as.getLocation().getYaw()+3f);
-												as.teleport(loc);
-											}
-										}
-										
-										Location loc = as.getEyeLocation();
-										loc.setY(loc.getY()+1);
-										FastParticle.spawnParticle(w, ParticleType.TOTEM, loc, 1, 0.1f, 0f, 0.1f, 0.07f);
+						if(!as.hasGravity()) {
+							if(!as.isCollidable()) {
+								if(as.getCustomName().equals("byjfbvxyBJIUG892psx-sujxcbPrujsnxiseIJKskls93as2542473697997979792210")) {
+									if(tpupordown.get(as.getUniqueId()) == null) {
+										tpupordown.put(as.getUniqueId(), true);
+										tpup_down.put(as.getUniqueId(), 1);
 									}
+									if(tpupordown.get(as.getUniqueId()) == true) {			
+										if(tpup_down.get(as.getUniqueId()) >= 50) {
+											tpupordown.put(as.getUniqueId(), false);
+										}else {
+											int amount = tpup_down.get(as.getUniqueId());
+											amount++;
+											tpup_down.put(as.getUniqueId(), amount);
+											Location loc = as.getLocation();
+											loc.setY(as.getLocation().getY() + 0.01f);
+											loc.setYaw(as.getLocation().getYaw()+3f);
+											as.teleport(loc);
+										}
+									}else {
+										if(tpup_down.get(as.getUniqueId()) <= 0) {
+											tpupordown.put(as.getUniqueId(), true);
+										}else {
+											int amount = tpup_down.get(as.getUniqueId());
+											amount--;
+											tpup_down.put(as.getUniqueId(), amount);
+											Location loc = as.getLocation();
+											loc.setY(as.getLocation().getY() - 0.01f);
+											loc.setYaw(as.getLocation().getYaw()+3f);
+											as.teleport(loc);
+											}
+										}
+									Location loc = as.getEyeLocation();
+									loc.setY(loc.getY()+1);
+									FastParticle.spawnParticle(w, ParticleType.TOTEM, loc, 1, 0.1f, 0f, 0.1f, 0.07f);
 								}
 							}
-						
+						}
 					}
 				}
 			}

@@ -1,5 +1,7 @@
 package de.pixelstudios.manager;
 
+import java.util.Collection;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -18,14 +20,11 @@ public class BlockManager {
 				itemLoc.setX(b.getX() + 0.5);
 				itemLoc.setZ(b.getZ() + 0.5);
 				if(item != null) {
-					if(item.getEnchantments().containsKey(Enchantment.SILK_TOUCH)) {
+					Collection<ItemStack> drops = b.getDrops(item);
+					if(!drops.isEmpty()) {
+						b.getWorld().dropItemNaturally(itemLoc, drops.iterator().next());
 						b.setType(Material.AIR);
-						itemLoc.getWorld().dropItem(itemLoc, new ItemStack(b.getType()));
-					}else if(item.getEnchantments().containsKey(Enchantment.LUCK)) {
-							
-					}else {
-						b.breakNaturally();
-						}
+					}
 				}else {
 					b.breakNaturally();
 					}

@@ -20,7 +20,6 @@ public class EntityDeath implements Listener{
 		   )
     private void onEntityDeath(EntityDeathEvent e) {
 		LivingEntity entity = e.getEntity();
-	    Player p = e.getEntity().getKiller();  	
 	       switch (entity.getType()) {
 		        case ITEM_FRAME:
 		        case ARMOR_STAND:

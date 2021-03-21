@@ -123,6 +123,7 @@ public class PlayerJoin implements Listener{
 		p.discoverRecipes(Recipes.WARPED_FRUIT.getKeys());
 		p.discoverRecipes(Recipes.ENCHANTED_GOLDEN_APPLE_JUICE.getKeys());
 		p.discoverRecipes(Recipes.GOLDEN_APPLE_JUICE.getKeys());
+		p.discoverRecipes(Recipes.GOLDERITE_INGOT.getKeys());
 		
 		if (up.isVanished()) {
 			for(Player all : Bukkit.getOnlinePlayers()) {
