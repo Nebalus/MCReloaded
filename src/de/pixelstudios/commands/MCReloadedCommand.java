@@ -10,13 +10,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.StringUtil;
-
 import de.pixelstudios.MCReloaded;
 import de.pixelstudios.items.manager.HeadList;
 import de.pixelstudios.manager.ItemManager;
-import de.pixelstudios.manager.PlayerManager;
 import de.pixelstudios.messaging.MessageFormatter;
 
 public class MCReloadedCommand implements CommandExecutor, TabCompleter{

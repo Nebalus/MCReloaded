@@ -1,7 +1,7 @@
 package de.pixelstudios.manager;
 
-import java.io.Console;
 import java.util.HashMap;
+
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

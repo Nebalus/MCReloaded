@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 
 import de.pixelstudios.MCReloaded;
 import de.pixelstudios.datamanagement.FileManager;
-import de.pixelstudios.guis.LoadingGUI;
 import de.pixelstudios.guis.ProfileGUI;
 import de.pixelstudios.messaging.MessageFormatter;
 

@@ -19,7 +19,6 @@ import de.pixelstudios.guis.ProfileGUI;
 import de.pixelstudios.items.manager.GUIicons;
 import de.pixelstudios.manager.ItemManager;
 import de.pixelstudios.manager.user.UserProfile;
-import de.pixelstudios.utils.Achievements;
 
 public class PlayerInventory implements Listener{
 	@EventHandler(

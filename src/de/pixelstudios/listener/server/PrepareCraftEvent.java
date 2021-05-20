@@ -135,13 +135,6 @@ public class PrepareCraftEvent implements Listener{
 							e.setResult(null);
 						}
 						break;
-					case DIAMOND_HORSE_ARMOR:
-						if(!itemSlot1.getItemMeta().hasCustomModelData() && !itemSlot2.getItemMeta().hasCustomModelData()) {
-							e.setResult(ItemManager.NETHERITE_HORSE_ARMOR);
-						}else {
-							e.setResult(null);
-						}
-						break;
 					default:
 						e.setResult(null);
 						break;

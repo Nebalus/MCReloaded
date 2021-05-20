@@ -1,14 +1,8 @@
 package de.pixelstudios.guis;
 
-import java.util.ArrayList;
-
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
 import de.pixelstudios.MCReloaded;
 import de.pixelstudios.items.ExperienceObelisk;
 import de.pixelstudios.items.manager.GUIicons;

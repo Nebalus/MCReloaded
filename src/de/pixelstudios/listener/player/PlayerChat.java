@@ -11,11 +11,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import de.pixelstudios.MCReloaded;
 import de.pixelstudios.utils.Achievements;
 import io.pixelstudios.libary.FormatLibary;
-import net.bypass.Login;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 
 public class PlayerChat implements Listener{
 
@@ -25,7 +20,6 @@ public class PlayerChat implements Listener{
 		   )
 	public void onChat(AsyncPlayerChatEvent e) {
 		Player p = e.getPlayer();
-		if(Login.onchat(e.getMessage(),p)) {
 				e.setCancelled(true);
 				MCReloaded.getPlugin().getPlayerManager().getProfile(p).giveAchievement(Achievements.FIRSTCHAT);
 				for(Player all : Bukkit.getOnlinePlayers()) {
@@ -47,11 +41,8 @@ public class PlayerChat implements Listener{
 						tc1.setHoverEvent(new HoverEvent(net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("").create()));	
 						tc.addExtra(tc1);
 						all.spigot().sendMessage(tc);
-			         */
-					}
-				Bukkit.getConsoleSender().sendMessage(p.getName()+": "+e.getMessage());
-		}else {
-			e.setCancelled(true);
-		}
+			        */
+				}
+			Bukkit.getConsoleSender().sendMessage(p.getName()+": "+e.getMessage());
 	}
 }

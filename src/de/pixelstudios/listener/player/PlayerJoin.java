@@ -2,60 +2,16 @@ package de.pixelstudios.listener.player;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
-import org.bukkit.EntityEffect;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
-import org.bukkit.World;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.PistonMoveReaction;
-import org.bukkit.entity.Cow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityCategory;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Pose;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Entity.Spigot;
-import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
-import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.loot.LootTable;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.BoundingBox;
-import org.bukkit.util.RayTraceResult;
-import org.bukkit.util.Vector;
-
-import com.mysql.jdbc.Util;
-
 import de.pixelstudios.MCReloaded;
 import de.pixelstudios.datamanagement.LiteSQL;
-import de.pixelstudios.items.manager.GUIicons;
 import de.pixelstudios.manager.OfflinePlayerProfile;
 import de.pixelstudios.manager.PlayerManager;
 import de.pixelstudios.manager.ItemManager.Recipes;
@@ -125,21 +81,8 @@ public class PlayerJoin implements Listener{
 		p.discoverRecipes(Recipes.GOLDEN_APPLE_JUICE.getKeys());
 		p.discoverRecipes(Recipes.GOLDERITE_INGOT.getKeys());
 		
-		if (up.isVanished()) {
-			for(Player all : Bukkit.getOnlinePlayers()) {
-				if(!all.isOp()) {
-					if(all.canSee(p)) {
-						all.hidePlayer(p);
-					}
-				}
-			}
-			p.setSilent(true);
-			p.setCollidable(false);
-			p.setCanPickupItems(false);
-			p.setAllowFlight(true);
-		}else {
-			Bukkit.broadcastMessage("§e"+p.getName()+" [§a+§e]");
-		}
+		Bukkit.broadcastMessage("§e"+p.getName()+" [§a+§e]");
+
 		up.giveAchievement(Achievements.FIRSTJOIN);
 		e.setJoinMessage(null);		
 	}

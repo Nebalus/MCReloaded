@@ -8,7 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
 import de.pixelstudios.manager.BlockManager;
-import de.pixelstudios.utils.Utils;
 
 public class EntityExplode implements Listener{
 

@@ -29,27 +29,22 @@ public class EntityTargetLivingEntity implements Listener{
 	public void onTarget(EntityTargetLivingEntityEvent e) {
 		if(e.getTarget() instanceof Player) {
 			Player p = (Player) e.getTarget();
-			UserProfile pp = playermanager.getProfile(p);
-			if(!pp.isVanished()) {
-				EntityType et = e.getEntityType();
-				PlayerInventory pi = p.getInventory();
-				ItemStack[] ac = pi.getArmorContents();
-				if(et.equals(EntityType.PIGLIN)) {
-					int ifGolderiteArmor = 0;
-					for(ItemStack is : ac) {
-						if(is != null && is.hasItemMeta()) {
-							if(is.getItemMeta().getPersistentDataContainer().has(ItemManager.golderite_armor_Key, PersistentDataType.BYTE)) {
-								ifGolderiteArmor++;
-							}
+			EntityType et = e.getEntityType();
+			PlayerInventory pi = p.getInventory();
+			ItemStack[] ac = pi.getArmorContents();
+			if(et.equals(EntityType.PIGLIN)) {
+				int ifGolderiteArmor = 0;
+				for(ItemStack is : ac) {
+					if(is != null && is.hasItemMeta()) {
+						if(is.getItemMeta().getPersistentDataContainer().has(ItemManager.golderite_armor_Key, PersistentDataType.BYTE)) {
+							ifGolderiteArmor++;
 						}
 					}
-					//If the player has a full armor set
-					if(ifGolderiteArmor >= 4) {
-						e.setCancelled(true);
-					}
 				}
-			}else {
-				e.setCancelled(true);
+					//If the player has a full armor set
+				if(ifGolderiteArmor >= 4) {
+					e.setCancelled(true);
+				}
 			}
 		}
 	}

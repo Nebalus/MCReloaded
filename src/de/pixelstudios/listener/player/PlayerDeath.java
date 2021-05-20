@@ -1,7 +1,5 @@
 package de.pixelstudios.listener.player;
 
-import java.util.ArrayList;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
@@ -53,21 +51,17 @@ public class PlayerDeath implements Listener{
 	    	Player p = e.getEntity();
 	    	Player k = p.getKiller();
 	    	UserProfile pp = playermanager.getProfile(p);
-	    	if(!pp.isVanished()) {
-		    	if(k !=null) {
-		            e.setDeathMessage(null);
-		            for(Player player : Bukkit.getOnlinePlayers()) {
-		            	if(p == player) {
-		            		player.sendMessage(" §c☠ §7You were killed by " + k.getName());	
-		            	}else
-		            	player.sendMessage(" §c☠ §7" + p.getName() +" was killed by " + k.getName());
-		            }
+		    if(k !=null) {
+		         e.setDeathMessage(null);
+		         for(Player player : Bukkit.getOnlinePlayers()) {
+		        	 if(p == player) {
+		            	player.sendMessage(" §c☠ §7You were killed by " + k.getName());	
+		            }else
+		            player.sendMessage(" §c☠ §7" + p.getName() +" was killed by " + k.getName());
+		           }
 		            ItemStack skullinfo = new ItemStack(Material.PLAYER_HEAD);
 		    		SkullMeta skullinfo1 = (SkullMeta) skullinfo.getItemMeta();
 		    		skullinfo1.setOwner(p.getName());
-		    		ArrayList<String> skullinfo2 = new ArrayList<String>();
-		    		skullinfo2.add("§dKilled by " + k.getName());
-		    		skullinfo1.setLore(skullinfo2);
 		    		skullinfo.setItemMeta(skullinfo1);
 		            p.getWorld().dropItemNaturally(p.getEyeLocation(), skullinfo);
 		            respawn(p, 10);
@@ -88,9 +82,7 @@ public class PlayerDeath implements Listener{
 					}
 		    	pp.setThirst(pp.getMaxThirst());
 		    	pp.setEnergy(config.MECHANICS_ENERGY_RESPAWN_LEVEL);
-	    	}else {
-	    		e.setDeathMessage(null);
-	    	}
+	    	
 		}
 		/*
 		@EventHandler

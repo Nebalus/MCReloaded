@@ -25,11 +25,7 @@ public class PlayerQuit implements Listener{
 	public void onLeave(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 		UserProfile pp = playermanager.getProfile(p);
-		if(pp.isVanished()) {
-				
-		}else {
-			Bukkit.broadcastMessage("§e"+p.getName()+" [§c-§e]");
-		}
+		Bukkit.broadcastMessage("§e"+p.getName()+" [§c-§e]");
 		e.setQuitMessage(null);
 		pp.setLastTimeOnline(System.currentTimeMillis());
 		playermanager.unloadProfile(p);

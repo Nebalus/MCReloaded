@@ -2,33 +2,17 @@ package de.pixelstudios.guis;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
-import org.bukkit.persistence.PersistentDataContainer;
-
-import com.google.common.collect.Multimap;
-
 import de.pixelstudios.MCReloaded;
 import de.pixelstudios.items.manager.GUIicons;
 import de.pixelstudios.items.manager.HeadList;
-import de.pixelstudios.manager.ItemManager;
 import de.pixelstudios.utils.Utils;
 
 

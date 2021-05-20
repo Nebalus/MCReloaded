@@ -116,9 +116,7 @@ public class ItemManager {
 	public static ItemStack GRAND_EXPERIENCE_BOTTLE;
 	
 	public static ItemStack EXPERIENCE_ORB;
-	
-	public static ItemStack NETHERITE_HORSE_ARMOR;
-	
+		
 	public static ItemStack CRYSTAL_ARMOR_HELMET;
 	public static ItemStack CRYSTAL_ARMOR_CHESTPLATE;
 	public static ItemStack CRYSTAL_ARMOR_LEGGINGS;
@@ -130,6 +128,7 @@ public class ItemManager {
 	public static ItemStack GOLDERITE_ARMOR_LEGGINGS;
 	public static ItemStack GOLDERITE_ARMOR_BOOTS;
 	public static ItemStack GOLDERITE_INGOT;
+	public static ItemStack GOLDERITE_SWORD;
 	
 	//*************************************************************
 	//Costmetics
@@ -353,13 +352,6 @@ public class ItemManager {
 	    granite_pickaxe_meta.setDisplayName("§fGranite Pickaxe");
 	    GRANITE_PICKAXE.setItemMeta(granite_pickaxe_meta);
 	    ALL_ITEMS.put("GRANITE_PICKAXE", GRANITE_PICKAXE);
-		
-	    NETHERITE_HORSE_ARMOR = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
-	    ItemMeta Netherite_Horse_armor = NETHERITE_HORSE_ARMOR.getItemMeta();
-	    Netherite_Horse_armor.setDisplayName("§fNetherite Horse Armor");
-	    Netherite_Horse_armor.setCustomModelData(1);
-	    NETHERITE_HORSE_ARMOR.setItemMeta(Netherite_Horse_armor);
-		ALL_ITEMS.put("NETHERITE_HORSE_ARMOR", NETHERITE_HORSE_ARMOR);
 	    
 	    GOLDERITE_INGOT = new ItemStack(Material.NETHERITE_INGOT);
 		ItemMeta Golderite_Ingot1 = GOLDERITE_INGOT.getItemMeta();
@@ -369,6 +361,20 @@ public class ItemManager {
 		GOLDERITE_INGOT.setItemMeta(Golderite_Ingot1);
 		ALL_ITEMS.put("GOLDERITE_INGOT", GOLDERITE_INGOT);
 	    
+		GOLDERITE_SWORD = new ItemStack(Material.NETHERITE_SWORD);
+		ItemMeta Golderite_Sword = GOLDERITE_SWORD.getItemMeta();
+		Golderite_Sword.setDisplayName("§fGolderite Sword");
+		ArrayList<String> Golderite_Sword_Lore = new ArrayList<String>();
+		Golderite_Sword_Lore.add(" ");
+		Golderite_Sword_Lore.add("§a§lBonus");
+		Golderite_Sword_Lore.add("§7● Increase §6Damage§7 dealt to §6Piglin Brute§7 by §62§7.");
+		Golderite_Sword_Lore.add("§7● Increase §6Looting Level§7 by §61§7.");
+		Golderite_Sword.setLore(Golderite_Sword_Lore);
+		Golderite_Sword.setCustomModelData(1);
+		Golderite_Sword.getPersistentDataContainer().set(golderite_ingot_Key, PersistentDataType.BYTE, (byte) 1);
+		GOLDERITE_SWORD.setItemMeta(Golderite_Sword);
+		ALL_ITEMS.put("GOLDERITE_SWORD", GOLDERITE_SWORD);
+		
 		ArrayList<String> Golderite_Armor_Lore = new ArrayList<String>();
 		Golderite_Armor_Lore.add(" ");
 		Golderite_Armor_Lore.add("§a§lSet Bonus");
@@ -674,9 +680,6 @@ public class ItemManager {
 		Bukkit.getServer().addRecipe(furnace_hot_milk);	
 		//}
 		//Smithing Rezepte
-		//*******************************************************************
-		SmithingRecipe netherite_horse_armor = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "netherite_horse_armor"), NETHERITE_HORSE_ARMOR, new MaterialChoice(Material.DIAMOND_HORSE_ARMOR), new MaterialChoice(Material.NETHERITE_INGOT));
-		Bukkit.getServer().addRecipe(netherite_horse_armor);	
 		//*******************************************************************
 		
 		SmithingRecipe better_netherite_helmet = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "better_netherite_helmet"), new ItemStack(Material.NETHERITE_HELMET), new MaterialChoice(Material.NETHERITE_HELMET), new MaterialChoice(Material.NETHERITE_INGOT));

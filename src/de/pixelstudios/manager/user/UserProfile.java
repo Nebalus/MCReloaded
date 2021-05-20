@@ -21,7 +21,6 @@ import de.pixelstudios.datamanagement.FileManager;
 import de.pixelstudios.datamanagement.LiteSQL;
 import de.pixelstudios.manager.FriendManager;
 import de.pixelstudios.utils.Achievements;
-import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -50,7 +49,6 @@ public class UserProfile {
 	private Long isAfkIn;
 	private final int timeUntilAfk = 1000*60*10;
 	
-	private boolean isVanished;
 	private long lastTimeOnline;
 	private boolean isLoading = true;
 	
@@ -117,14 +115,6 @@ public class UserProfile {
 						update = true;
 					}else {
 						lastTimeOnline = yaml.getLong("lastTimeOnline");
-					}
-					//********************************************************************
-					if(!yaml.contains("vanished")) {
-						yaml.set("vanished", false);
-						isVanished = false;
-						update = true;
-					}else {
-						isVanished = yaml.getBoolean("vanished");
 					}
 					//********************************************************************
 					if(!yaml.contains("Achievements.list")) {
@@ -271,17 +261,6 @@ public class UserProfile {
 		}
 		return false;
 	}
-	public boolean setVanished(Boolean setVanished) {
-		if(setVanished != isVanished) {
-			YamlConfiguration yaml = YamlConfiguration.loadConfiguration(playerdataFile);
-			isVanished = setVanished;
-			yaml.set("vanished", setVanished);
-			if(saveYaml(yaml, playerdataFile)) {
-				return true;	
-			}
-		}
-		return false;
-	}
 	public boolean setAfk(Boolean setAfk) {
 		if(isAfk != setAfk) {	
 			isAfk = setAfk;
@@ -316,9 +295,6 @@ public class UserProfile {
 			isAfk = true;
 		}
 		return isAfk;
-	}
-	public boolean isVanished() {
-		return isVanished;
 	}
 	public double getThirst() {
 		return thirst;

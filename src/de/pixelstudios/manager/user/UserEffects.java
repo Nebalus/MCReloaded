@@ -1,7 +1,5 @@
 package de.pixelstudios.manager.user;
 
-import java.io.File;
-
 import org.bukkit.entity.Player;
 
 public class UserEffects {
