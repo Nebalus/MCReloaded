@@ -81,6 +81,8 @@ import de.pixelstudios.utils.Utils;
 import fr.mrmicky.fastparticle.FastParticle;
 import fr.mrmicky.fastparticle.ParticleType;
 import io.pixelstudios.libary.ChunkLibary;
+import io.pixelstudios.libary.MathLibary;
+import net.minecraft.server.v1_16_R3.MinecraftServer;
 import net.minecraft.server.v1_16_R3.PacketPlayOutWorldBorder;
 import net.minecraft.server.v1_16_R3.WorldBorder;
 
@@ -380,6 +382,25 @@ public class MCReloaded extends JavaPlugin implements Listener{
 	
 	@SuppressWarnings("deprecation")
 	private void runLoop(MCReloaded mcreloaded) {
+		Bukkit.getScheduler().scheduleAsyncRepeatingTask(mcreloaded, new Runnable() {		
+			@SuppressWarnings("resource")
+			@Override
+			public void run() {
+				Runtime r = Runtime.getRuntime();
+				long memUsed = (r.totalMemory() - r.freeMemory()) / 1048576;
+				double tps = 0d;
+				for ( double firsttps : MinecraftServer.getServer().recentTps ){
+					if(tps <= 0d) {
+						tps = MathLibary.roundUp(firsttps);
+					}
+		        }
+				for(Player p : Bukkit.getOnlinePlayers()) {	
+					p.setPlayerListFooter(" \n"
+							+ " \n"
+							+ "§7┃§r §8Ping: §7"+Utils.getPing(p) +" ┃§8 Ram: §7"+memUsed+"§8/§7"+(r.totalMemory()/ 1048576)+"§6mb§7 ┃§8 Tps: §7"+tps +" ┃");
+				}
+			}
+		}, 0, 1);
 		Bukkit.getScheduler().scheduleAsyncRepeatingTask(mcreloaded, new Runnable() {		
 			@Override
 			public void run() {
