@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>MCReloaded</groupId>
   <artifactId>MCReloaded</artifactId>
-  <version>0.4.1-ALPHA</version>
+  <version>0.4.2</version>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
