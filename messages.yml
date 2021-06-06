@@ -71,12 +71,6 @@ commands:
     adventure: '&2{0} gamemode has been successfully changed to &fAdventure&2.'
     creative: '&2{0} gamemode has been successfully changed to &fCreative&2.'
     spectator: '&2{0} gamemode has been successfully changed to &fSpectator&2.'
-  friend:
-    allready-friends: '&cYou are already friends with &6{0}!' 
-    allready-requested: '&cYou already sent &6{0} &ca friend request!' 
-    no-request: '&6{0} &cdidn`t send you a friend request!' 
-    arent-friends: '&cYou and &6{0} &care not friends!' 
-    not-yourself: '&cYou cannot select youreself!' 
   getitem: 
     successful-gived: ''
     error-item-not-found: '&6{0} &cis not regesterd in my database!!!'

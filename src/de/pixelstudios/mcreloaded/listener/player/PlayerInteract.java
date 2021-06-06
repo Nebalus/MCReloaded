@@ -34,7 +34,7 @@ import de.pixelstudios.mcreloaded.guis.ExperienceObeliskGUI;
 import de.pixelstudios.mcreloaded.items.ExperienceObelisk;
 import de.pixelstudios.mcreloaded.items.manager.HeadList;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
-import de.pixelstudios.mcreloaded.manager.user.UserProfile;
+import de.pixelstudios.mcreloaded.manager.UserProfile;
 import de.pixelstudios.mcreloaded.utils.Achievements;
 import de.pixelstudios.mcreloaded.utils.Utils;
 import io.pixelstudios.libary.InventoryLibary;

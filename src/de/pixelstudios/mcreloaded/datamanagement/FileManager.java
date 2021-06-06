@@ -2,7 +2,6 @@ package de.pixelstudios.mcreloaded.datamanagement;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -16,23 +15,6 @@ public class FileManager {
 	public static String serverPath = MCReloaded.getPlugin().getDataFolder().getAbsolutePath()
 			.substring(0, MCReloaded.getPlugin().getDataFolder().getAbsolutePath().length() - (9 + MCReloaded.getPlugin().getName().length()));
 	
-
-	public static void createFriendsdir(UUID uuid) {
-		String uuidshort = uuid.toString().substring(0, 2);
-		
-		File uuidshortdir = new File(serverPath + "/PixelStudios/MCReloaded/PlayerData/"+uuidshort+"/");
-		if(!uuidshortdir.exists()) {
-			uuidshortdir.mkdirs();
-		}
-		File playerdatafile = new File(serverPath + "/PixelStudios/MCReloaded/PlayerData/"+uuidshort+"/"+uuid.toString()+".yml");
-		if(!playerdatafile.exists()) {
-			try {	
-				playerdatafile.createNewFile();
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
 	public static void createPlayerdir(Player player) {
 		String uuid = player.getUniqueId().toString();
 		String uuidshort = uuid.substring(0, 2);

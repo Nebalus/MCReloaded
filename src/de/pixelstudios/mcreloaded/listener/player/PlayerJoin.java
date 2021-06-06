@@ -15,8 +15,8 @@ import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.datamanagement.LiteSQL;
 import de.pixelstudios.mcreloaded.manager.OfflinePlayerProfile;
 import de.pixelstudios.mcreloaded.manager.PlayerManager;
+import de.pixelstudios.mcreloaded.manager.UserProfile;
 import de.pixelstudios.mcreloaded.manager.ItemManager.Recipes;
-import de.pixelstudios.mcreloaded.manager.user.UserProfile;
 import de.pixelstudios.mcreloaded.messaging.MessageFormatter;
 import de.pixelstudios.mcreloaded.utils.Achievements;
 import de.pixelstudios.mcreloaded.utils.Utils;
@@ -75,8 +75,6 @@ public class PlayerJoin implements Listener{
 		p.discoverRecipes(Recipes.GRANITE_PICKAXE.getKeys());
 		p.discoverRecipes(Recipes.ANDESITE_PICKAXE.getKeys());
 		p.discoverRecipes(Recipes.DIORITE_PICKAXE.getKeys());
-		p.discoverRecipes(Recipes.WARPED_PEARL.getKeys());
-		p.discoverRecipes(Recipes.WARPED_FRUIT.getKeys());
 		p.discoverRecipes(Recipes.ENCHANTED_GOLDEN_APPLE_JUICE.getKeys());
 		p.discoverRecipes(Recipes.GOLDEN_APPLE_JUICE.getKeys());
 		p.discoverRecipes(Recipes.GOLDERITE_INGOT.getKeys());

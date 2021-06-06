@@ -143,9 +143,6 @@ public class ItemManager {
 	public static ItemStack ENCHANTED_GOLDEN_APPLE_JUICE;
 	//*************************************************************
 	
-	public static ItemStack WARPED_PEARL;
-	public static ItemStack WARPED_FRUIT;
-	
 	
 	public void loadItemManager() {
 	    ConsoleLogger.info(null, messageFormatter.format(false, "console.enable.itemmanager.initialize-itemmanager"));
@@ -311,20 +308,6 @@ public class ItemManager {
 	    ALL_ITEMS.put("ELYTRA_MATRIX", ELYTRA_MATRIX);
 		
 		//******************************************************************
-	    WARPED_PEARL = new ItemStack(Material.ENDER_PEARL);
-	    ItemMeta warped_pearl_meta = WARPED_PEARL.getItemMeta();
-	    warped_pearl_meta.setCustomModelData(1);
-	    warped_pearl_meta.setDisplayName("§fWarped Pearl");
-	    WARPED_PEARL.setItemMeta(warped_pearl_meta);
-	    ALL_ITEMS.put("WARPED_PEARL", WARPED_PEARL);
-	    
-	    WARPED_FRUIT = new ItemStack(Material.APPLE);
-	    ItemMeta warped_fruit_meta = WARPED_FRUIT.getItemMeta();
-	    warped_fruit_meta.setCustomModelData(1);
-	    warped_fruit_meta.setDisplayName("§fWarped Fruit");
-	    WARPED_FRUIT.setItemMeta(warped_fruit_meta);
-	    ALL_ITEMS.put("WARPED_FRUIT", WARPED_FRUIT);
-	    
 	    ANDESITE_PICKAXE = new ItemStack(Material.STONE_PICKAXE);
 	    ItemMeta andesite_pickaxe_meta = ANDESITE_PICKAXE.getItemMeta();
 	    andesite_pickaxe_meta.setCustomModelData(1);
@@ -360,8 +343,8 @@ public class ItemManager {
 		ArrayList<String> Golderite_Sword_Lore = new ArrayList<String>();
 		Golderite_Sword_Lore.add(" ");
 		Golderite_Sword_Lore.add("§a§lBonus");
-		Golderite_Sword_Lore.add("§7�? Increase §6Damage§7 dealt to §6Piglin Brute§7 by §62§7.");
-		Golderite_Sword_Lore.add("§7�? Increase §6Looting Level§7 by §61§7.");
+		Golderite_Sword_Lore.add("§7● Increase §6Damage§7 dealt to §6Piglin Brute§7 by §62§7.");
+		Golderite_Sword_Lore.add("§7● Increase §6Looting Level§7 by §61§7.");
 		Golderite_Sword.setLore(Golderite_Sword_Lore);
 		Golderite_Sword.setCustomModelData(1);
 		Golderite_Sword.getPersistentDataContainer().set(golderite_ingot_Key, PersistentDataType.BYTE, (byte) 1);
@@ -371,7 +354,7 @@ public class ItemManager {
 		ArrayList<String> Golderite_Armor_Lore = new ArrayList<String>();
 		Golderite_Armor_Lore.add(" ");
 		Golderite_Armor_Lore.add("§a§lSet Bonus");
-		Golderite_Armor_Lore.add("§7�? §6Piglin §7become §6Neutral§7.");
+		Golderite_Armor_Lore.add("§7● §6Piglin §7become §6Neutral§7.");
 		
 		GOLDERITE_ARMOR_HELMET = new ItemStack(Material.NETHERITE_HELMET);
 		ItemMeta Gilded_Netherite_Armor_Helmet = GOLDERITE_ARMOR_HELMET.getItemMeta();
@@ -708,21 +691,6 @@ public class ItemManager {
         Bukkit.getServer().addRecipe(Heart_of_the_mine);		
         
 		//*******************************************************************		
-		ShapelessRecipe Warped_pearl = new ShapelessRecipe(new NamespacedKey(MCReloaded.getPlugin(), "warped_pearl"), WARPED_PEARL);
-		
-		Warped_pearl.addIngredient(Material.ENDER_PEARL);
-		Warped_pearl.addIngredient(Material.WARPED_FUNGUS);
-        Bukkit.getServer().addRecipe(Warped_pearl);		
-        
-        //*******************************************************************		
-      	ShapelessRecipe Warped_fruit = new ShapelessRecipe(new NamespacedKey(MCReloaded.getPlugin(), "warped_fruit"), WARPED_FRUIT);
-      		
-      	Warped_fruit.addIngredient(Material.CHORUS_FRUIT);
-      	Warped_fruit.addIngredient(Material.WARPED_FUNGUS);
-      	Warped_fruit.addIngredient(Material.SUGAR);
-        Bukkit.getServer().addRecipe(Warped_fruit);		
-        
-		//*******************************************************************
 		ShapedRecipe grappling_hook = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "grappling_hook"), GRAPPLING_HOOK);
 
         grappling_hook.shape(" 3 ", "121", " 3 ");
@@ -1056,8 +1024,6 @@ public class ItemManager {
     	GRANITE_PICKAXE("granite_pickaxe"),
     	ANDESITE_PICKAXE("andesite_pickaxe"),
     	DIORITE_PICKAXE("diorite_pickaxe"),
-    	WARPED_PEARL("warped_pearl"),
-    	WARPED_FRUIT("warped_fruit"),
     	GOLDEN_APPLE_JUICE("golden_apple_juice"),
     	ENCHANTED_GOLDEN_APPLE_JUICE("enchanted_golden_apple_juice"),
     	GOLDERITE_INGOT("golderite_ingot"),

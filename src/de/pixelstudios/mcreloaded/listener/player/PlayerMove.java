@@ -8,6 +8,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
+import de.pixelstudios.mcreloaded.MCReloaded;
+import de.pixelstudios.mcreloaded.manager.UserProfile;
+
 
 public class PlayerMove implements Listener{
 
@@ -21,6 +24,9 @@ public class PlayerMove implements Listener{
 		
 		Vector vec = to.toVector();
 		double i = vec.distance(from.toVector());
+		
+		UserProfile up = MCReloaded.getPlugin().getPlayerManager().getProfile(p);
+		//up.setAfk(System.currentTimeMillis()+up.timeUntilAfk);
 		/*
 		Player p = e.getPlayer();
 		Location loc = p.getLocation();
@@ -29,5 +35,6 @@ public class PlayerMove implements Listener{
 			p.sendBlockChange(loc, Material.BEACON, (byte)0);
 		}
 		*/
+		
 	}
 }

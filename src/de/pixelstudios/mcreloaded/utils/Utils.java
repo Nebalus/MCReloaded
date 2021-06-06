@@ -1,6 +1,8 @@
 package de.pixelstudios.mcreloaded.utils;
 
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +25,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 
@@ -58,7 +62,28 @@ public class Utils {
         return head;
     }
 	
-	
+	public static String[] getSkin(Player player, String name) {
+		try {
+			URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + name);
+			InputStreamReader reader = new InputStreamReader(url.openStream());
+			String uuid = new JsonParser().parse(reader).getAsJsonObject().get("id").getAsString();
+			
+			URL url2 = new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid
+			     + "?unsigned=false");
+			InputStreamReader reader2 = new InputStreamReader(url2.openStream());
+			JsonObject property = new JsonParser().parse(reader2).getAsJsonObject().get("properties").getAsJsonArray().get(0).getAsJsonObject();
+			String texture = property.get("value").getAsString();
+			String signature = property.get("signature").getAsString();
+			return new String[] {texture, signature};
+		}catch(Exception e) {
+			EntityPlayer p = ((CraftPlayer) player).getHandle();
+			GameProfile profile = p.getProfile();
+			Property property = profile.getProperties().get("textures").iterator().next();
+			String texture = property.getValue();
+			String signature = property.getSignature();
+			return new String[] {texture, signature};
+		}
+	}
 	
 	 public static NamespacedKey getNamespacedKey(String key) {
 		    return new NamespacedKey(MCReloaded.getPlugin(), key);

@@ -31,8 +31,38 @@ public class PlayerChat implements Listener{
 				}
 				count++;
 			}
-			all.sendMessage("�7"+p.getName()+" �8� �r"+FormatLibary.format(e.getMessage()));
+			
+			String message = e.getMessage();
+			for(Emotes emote : Emotes.values()) {
+				message = message.replace(emote.getCode(), emote.getEmote()+"§r");
+			}
+			
+			all.sendMessage("§7"+p.getName()+" §8» §r"+FormatLibary.format(message));
 		}
 		Bukkit.getConsoleSender().sendMessage(p.getName()+": "+e.getMessage());
+	}
+	public enum Emotes {
+		
+		HEART("<3", "§c❤"),
+		NO(":no:", "§c✖"),
+		YES(":yes:", "§a✔"),
+		CAT(":cat:", "§e= §b⌃● ⋏ ●⌃ §e=");
+		
+		String code;
+		String emote;
+
+
+		private Emotes(String code,String emote) {
+			this.code = code;
+			this.emote = emote;
+		}
+		
+		public String getCode() {
+			return code;
+		}
+		
+		public String getEmote() {
+			return emote;
+		}
 	}
 }

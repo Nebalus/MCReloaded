@@ -5,7 +5,6 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import de.pixelstudios.mcreloaded.MCReloaded;
-import de.pixelstudios.mcreloaded.manager.user.UserProfile;
 import de.pixelstudios.mcreloaded.utils.Actionbar;
 import io.pixelstudios.libary.MathLibary;
 
@@ -44,29 +43,29 @@ public class VisualsManager {
 		double energy = MathLibary.roundUp(MathLibary.getPercent(up.getEnergy(),up.getMaxEnergy()));
 		
 		if(p.getGameMode().equals(GameMode.ADVENTURE) || p.getGameMode().equals(GameMode.SURVIVAL)) {
-			new Actionbar("§b"+thirst+"≈       §c�?�       §6"+energy+"⚡").send(p);
+			new Actionbar("§b"+thirst+"≈       §c❤       §6"+energy+"⚡").send(p);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,new Runnable() {
 				@Override
 				public void run() {
-					new Actionbar("§b"+thirst+"≈      §c(§f�?�§c)      §6"+energy+"⚡").send(p);
+					new Actionbar("§b"+thirst+"≈      §c(§f❤§c)      §6"+energy+"⚡").send(p);
 				}
 			}, 3);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,new Runnable() {
 				@Override
 				public void run() {
-					new Actionbar("§b"+thirst+"≈     §c( �?� )     §6"+energy+"⚡").send(p);
+					new Actionbar("§b"+thirst+"≈     §c( ❤ )     §6"+energy+"⚡").send(p);
 				}
 			}, 6);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,new Runnable() {
 				@Override
 				public void run() {
-					new Actionbar("§b"+thirst+"≈    §c(  �?�  )    §6"+energy+"⚡").send(p);	
+					new Actionbar("§b"+thirst+"≈    §c(  ❤  )    §6"+energy+"⚡").send(p);	
 				}
 			}, 9);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,new Runnable() {
 				@Override
 				public void run() {			
-					new Actionbar("§b"+thirst+"≈       §c�?�       §6"+energy+"⚡").send(p);	
+					new Actionbar("§b"+thirst+"≈       §c❤       §6"+energy+"⚡").send(p);	
 				}
 			}, 12);
 		}

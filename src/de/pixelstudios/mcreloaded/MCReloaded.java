@@ -30,7 +30,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import de.pixelstudios.mcreloaded.commands.CordinatesCommand;
 import de.pixelstudios.mcreloaded.commands.FlyCommand;
-import de.pixelstudios.mcreloaded.commands.FriendCommand;
 import de.pixelstudios.mcreloaded.commands.GmCommand;
 import de.pixelstudios.mcreloaded.commands.MCReloadedCommand;
 import de.pixelstudios.mcreloaded.commands.MenuCommand;
@@ -69,11 +68,10 @@ import de.pixelstudios.mcreloaded.listener.server.PrepareCraftEvent;
 import de.pixelstudios.mcreloaded.listener.server.ServerListPing;
 import de.pixelstudios.mcreloaded.listener.server.SetResourcePack;
 import de.pixelstudios.mcreloaded.listener.server.StructureGrowEvent;
-import de.pixelstudios.mcreloaded.manager.FriendManager;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
 import de.pixelstudios.mcreloaded.manager.PlayerManager;
+import de.pixelstudios.mcreloaded.manager.UserProfile;
 import de.pixelstudios.mcreloaded.manager.VisualsManager;
-import de.pixelstudios.mcreloaded.manager.user.UserProfile;
 import de.pixelstudios.mcreloaded.messaging.MessageFormatter;
 import de.pixelstudios.mcreloaded.utils.SleepSkipper;
 import de.pixelstudios.mcreloaded.utils.Utils;
@@ -98,7 +96,6 @@ public class MCReloaded extends JavaPlugin implements Listener{
 	private PlayerManager playerManager;
 	private VisualsManager visualsManager;
 	private ItemManager itemManager;
-	private FriendManager friendManager;
 	private LiteSQL liteSQL;
 	
 	private boolean loaded = true;
@@ -161,7 +158,6 @@ public class MCReloaded extends JavaPlugin implements Listener{
 		playerManager = new PlayerManager(this);
 		visualsManager = new VisualsManager(this);
 		itemManager = new ItemManager(this);
-		friendManager = new FriendManager(this);
 		for(Player p :Bukkit.getOnlinePlayers()) {
 			playerManager.loadProfile(p);
 		}
@@ -300,9 +296,6 @@ public class MCReloaded extends JavaPlugin implements Listener{
 		getCommand("gamemode").setExecutor(new GmCommand(this));
 		getCommand("gamemode").setTabCompleter(new GmCommand(this));
 		counter++;
-		getCommand("friend").setExecutor(new FriendCommand(this));
-		getCommand("friend").setTabCompleter(new FriendCommand(this));
-		counter++;
 		getCommand("ping").setExecutor(new PingCommand(this));
 		getCommand("ping").setTabCompleter(new PingCommand(this));
 		counter++;
@@ -420,22 +413,24 @@ public class MCReloaded extends JavaPlugin implements Listener{
 					ItemManager.debugInventory(p);
 					if(up.isAfk()) {
 						p.setPlayerListName(p.getName()+" §6[§cAFK§6]");
+					}else {
+						p.setPlayerListName(p.getName());
 					}
 				}
 				
 			}
 		}, 0, 20);
 		
-		Bukkit.getScheduler().scheduleAsyncRepeatingTask(mcreloaded, new Runnable() {		
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(mcreloaded, new Runnable() {		
 			@Override
 			public void run() {
 				int triggerprozent = 20;
 				for(Player p : Bukkit.getOnlinePlayers()) {
 					WorldBorder worldBorder = new WorldBorder();
-					worldBorder.setCenter(p.getWorld().getWorldBorder().getCenter().getX(),p.getWorld().getWorldBorder().getCenter().getZ());
+					worldBorder.world = ((CraftWorld) p.getWorld()).getHandle();
 					worldBorder.setSize(p.getWorld().getWorldBorder().getSize());
-			        worldBorder.world = ((CraftWorld) p.getWorld()).getHandle();
-			            
+					worldBorder.setCenter(p.getWorld().getWorldBorder().getCenter().getX(), p.getWorld().getWorldBorder().getCenter().getZ()); 
+					
 			        int healthProzent = (int) p.getHealth()*100/(int) p.getMaxHealth();
 			        
 					if((int) healthProzent <= triggerprozent) {
@@ -552,9 +547,6 @@ public class MCReloaded extends JavaPlugin implements Listener{
 		   public MessageFormatter getMessageFormatter() {
 			    return this.messageFormatter;
 			}
-		   public FriendManager getFriendManager() {
-			   return this.friendManager;
-		   }
 		   public static MCReloaded getPlugin() {
 				return instance;
 			}

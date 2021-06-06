@@ -18,7 +18,7 @@ import de.pixelstudios.mcreloaded.guis.LoadingGUI;
 import de.pixelstudios.mcreloaded.guis.ProfileGUI;
 import de.pixelstudios.mcreloaded.items.manager.GUIicons;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
-import de.pixelstudios.mcreloaded.manager.user.UserProfile;
+import de.pixelstudios.mcreloaded.manager.UserProfile;
 
 public class PlayerInventory implements Listener{
 	@EventHandler(

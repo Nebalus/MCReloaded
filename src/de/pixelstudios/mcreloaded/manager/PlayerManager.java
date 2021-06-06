@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import de.pixelstudios.mcreloaded.ConsoleLogger;
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.datamanagement.Config;
-import de.pixelstudios.mcreloaded.manager.user.UserProfile;
 
 public class PlayerManager {
     private final Config config;

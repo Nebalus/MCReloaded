@@ -13,7 +13,7 @@ import org.bukkit.persistence.PersistentDataType;
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
 import de.pixelstudios.mcreloaded.manager.PlayerManager;
-import de.pixelstudios.mcreloaded.manager.user.UserProfile;
+import de.pixelstudios.mcreloaded.manager.UserProfile;
 
 public class EntityTargetLivingEntity implements Listener{
 	private PlayerManager playermanager;

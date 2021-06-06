@@ -3,7 +3,6 @@ name: MCReloaded
 version: Alpha0.4.1
 author: AidenRocktDas
 api-version: 1.16
-website: www.pixel-deluxe.net
 
 commands:
   menu:

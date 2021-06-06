@@ -16,8 +16,8 @@ import org.bukkit.potion.PotionEffectType;
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
 import de.pixelstudios.mcreloaded.manager.PlayerManager;
+import de.pixelstudios.mcreloaded.manager.UserProfile;
 import de.pixelstudios.mcreloaded.manager.ItemManager.Tags;
-import de.pixelstudios.mcreloaded.manager.user.UserProfile;
 import de.pixelstudios.mcreloaded.utils.Achievements;
 
 public class PlayerItemConsume implements Listener{
