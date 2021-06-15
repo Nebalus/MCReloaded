@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import de.pixelstudios.mcreloaded.MCReloaded;
-import de.pixelstudios.mcreloaded.items.manager.GUIicons;
 import de.pixelstudios.mcreloaded.items.manager.HeadList;
 import de.pixelstudios.mcreloaded.utils.Utils;
 
@@ -25,7 +24,7 @@ public class ProfileGUI {
 	
 	
 public static void openProfileGui(Player p) {		
-		LoadingGUI.showLoadingScreen(p);
+
 		int GUI_Slots = 9*6;
 		
 		Inventory inventory = Bukkit.createInventory(null, GUI_Slots, "§5My profile!");
@@ -36,7 +35,7 @@ public static void openProfileGui(Player p) {
 			public void run() {
 				
 				for (int i = 0; i < GUI_Slots; ++i ) {
-					inventory.setItem(i, GUIicons.SLOTFILLER);
+					inventory.setItem(i, GUIicons.GRAYFILLER);
 				}
 				inventory.setItem(49, GUIicons.CLOSE_ICON);
 				inventory.setItem(50, GUIicons.SETTINGS);
@@ -58,7 +57,6 @@ public static void openProfileGui(Player p) {
 }
 @SuppressWarnings("deprecation")
 public static void openOtherProfileGui(String name, Player sender) {
-		LoadingGUI.showLoadingScreen(sender);
 	
 		int GUI_Slots = 9*6;
 		
@@ -85,7 +83,7 @@ public static void openOtherProfileGui(String name, Player sender) {
 				ItemMeta SlotfillerEmptyInvSlot1 = SlotfillerEmptyInvSlot.getItemMeta();
 		
 				for (int i = 0; i < GUI_Slots; ++i ) {
-					inventory.setItem(i, GUIicons.SLOTFILLER);
+					inventory.setItem(i, GUIicons.GRAYFILLER);
 				}
 				
 				SlotfillerEmptyInvSlot1.setDisplayName("§c§lHelmet Slot");

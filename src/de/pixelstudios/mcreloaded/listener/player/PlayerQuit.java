@@ -24,10 +24,10 @@ public class PlayerQuit implements Listener{
 		   )
 	public void onLeave(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
-		UserProfile pp = playermanager.getProfile(p);
+		UserProfile up = playermanager.getProfile(p);
 		Bukkit.broadcastMessage("§e"+p.getName()+" [§c-§e]");
 		e.setQuitMessage(null);
-		pp.setLastTimeOnline(System.currentTimeMillis());
+		up.setLastTimeOnline(System.currentTimeMillis());
 		playermanager.unloadProfile(p);
 	}
 }

@@ -30,8 +30,8 @@ import org.bukkit.persistence.PersistentDataType;
 
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.datamanagement.Cache;
-import de.pixelstudios.mcreloaded.guis.ExperienceObeliskGUI;
-import de.pixelstudios.mcreloaded.items.ExperienceObelisk;
+import de.pixelstudios.mcreloaded.guis.WarpCrystalGUI;
+import de.pixelstudios.mcreloaded.items.WarpCrystal;
 import de.pixelstudios.mcreloaded.items.manager.HeadList;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
 import de.pixelstudios.mcreloaded.manager.UserProfile;
@@ -92,16 +92,6 @@ public class PlayerInteract implements Listener{
 					}
 				}
 				break;
-			case LEATHER_BOOTS:
-			case LEATHER_LEGGINGS:
-			case LEATHER_CHESTPLATE:
-			case LEATHER_HELMET:
-				if(block == null) return;
-				if(block.getType().equals(Material.CAULDRON)) {
-					if(item.getItemMeta().getPersistentDataContainer().has(ItemManager.cristal_armor_Key, PersistentDataType.BYTE))
-						e.setCancelled(true);		
-				}
-				break;
 			default:
 				break;
 			}
@@ -121,8 +111,11 @@ public class PlayerInteract implements Listener{
 				if(ItemManager.Tags.PLACEABLE_BLOCKED.isTagged(item)) {
 					e.setCancelled(true);
 				}
-				if(item.getItemMeta().getPersistentDataContainer().has(ItemManager.experience_obelisk_Key, PersistentDataType.BYTE)) {
-					spawnExperienceObelisk(block.getLocation(), item, p.getGameMode());
+				if(item.getItemMeta().getPersistentDataContainer().has(ItemManager.warp_crystal_key, PersistentDataType.BYTE)) {
+					spawnWarpCrystal(block.getLocation(), item, p);
+					if(!p.getGameMode().equals(GameMode.CREATIVE)) {
+						item.setAmount(item.getAmount()-1);
+					}
 				}
 			}
 		}
@@ -133,11 +126,19 @@ public class PlayerInteract implements Listener{
 		if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if(block == null) return;
 			if(block.getType().equals(Material.BARRIER)) {
-				for(ExperienceObelisk eo : Cache.experience_obelisk) {
-					if(eo.getLocation().equals(block.getLocation())) {
-						ExperienceObeliskGUI eogui = new ExperienceObeliskGUI(eo,p);
-						eogui.loadGUI();
-						return;
+				for(WarpCrystal wc : Cache.warp_crystal) {
+					if(wc.getLocation().equals(block.getLocation())) {
+						if(p.getUniqueId().equals(wc.getOwnerUUID())) {
+							WarpCrystalGUI wcgui = new WarpCrystalGUI(wc,p);
+							wcgui.loadGUI();
+							Cache.warp_crystal_gui_session.put(p, wcgui);
+							return;
+						}else {
+							p.sendMessage("§cYou do not have permission to access this crystal!!!");
+						}
+						//}else {
+							//p.sendMessage("§cOnly one person can see the GUI from a warp crystal!!!");
+						//}
 					}
 				}
 			}
@@ -157,7 +158,7 @@ public class PlayerInteract implements Listener{
         return data instanceof Waterlogged && ((Waterlogged) data).isWaterlogged();
     }
 
-	private boolean spawnExperienceObelisk(Location loc, ItemStack itemStack, GameMode gameMode) {
+	private boolean spawnWarpCrystal(Location loc, ItemStack itemStack, Player p) {
 			Location Spawnloc = loc;
 			Spawnloc.setY(loc.getY() + 0.355);
 			Spawnloc.setX(loc.getX() + 0.5);
@@ -169,9 +170,10 @@ public class PlayerInteract implements Listener{
 				loc.getBlock().breakNaturally();
 				loc.getBlock().setType(Material.BARRIER);
 				
+				loc.setY(loc.getY()-1);
 				ArmorStand armorstand = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
 				armorstand.setVisible(false);
-				armorstand.setHelmet(HeadList.EXPERIENCE_BOTTLE);
+				armorstand.setHelmet(HeadList.WARP_CRYSTAL);
 				armorstand.setSilent(true);
 				armorstand.setSmall(true);
 				armorstand.setBasePlate(false);
@@ -179,47 +181,36 @@ public class PlayerInteract implements Listener{
 				armorstand.setMarker(true);
 				armorstand.setInvulnerable(true);
 				armorstand.setCollidable(false);
-				armorstand.setCustomName("byjfbvxyBJIUG892psx-sujxcbPrujsnxiseIJKskls93as2542473697997979792210");
+				armorstand.setCustomName("byjfbvxyBJIUG892psx-ssfsdjkbfhijkgcvuzg127263489263461924528648");
 				
-				
-				File experience_obelisk = new File(loc.getWorld().getWorldFolder()+"/data/mcdata/experience_obelisk.yml");
-				YamlConfiguration experience_obeliskyml = YamlConfiguration.loadConfiguration(experience_obelisk);			
-				List<String> uuids = (List<String>) experience_obeliskyml.getStringList("UUID");
+				loc.setY(loc.getY()+1);
+				File warp_crystalfile = new File(loc.getWorld().getWorldFolder()+"/data/mcdata/warp_crystal.yml");
+				YamlConfiguration warp_crystalyml = YamlConfiguration.loadConfiguration(warp_crystalfile);			
+				List<String> uuids = (List<String>) warp_crystalyml.getStringList("UUID");
 				UUID random = UUID.randomUUID();
 				uuids.add(random+"");
-				experience_obeliskyml.set("UUID",uuids);
-				experience_obeliskyml.set(random+".X", loc.getBlockX());
-				experience_obeliskyml.set(random+".Y", loc.getBlockY());
-				experience_obeliskyml.set(random+".Z", loc.getBlockZ());
-				experience_obeliskyml.set(random+".XP", 0);
+				warp_crystalyml.set("UUID",uuids);
+				warp_crystalyml.set(random+".X", loc.getBlockX());
+				warp_crystalyml.set(random+".Y", loc.getBlockY());
+				warp_crystalyml.set(random+".Z", loc.getBlockZ());
+				warp_crystalyml.set(random+".WarpCharge", 0);
+				warp_crystalyml.set(random+".Name", p.getName()+"'s Crystal");
+				warp_crystalyml.set(random+".OwnerUUID", p.getUniqueId().toString());
+				warp_crystalyml.set(random+".Visibility", 0);
 				
 				Integer X = loc.getBlockX();
-				Integer Y = loc.getBlockY()+1;
+				Integer Y = loc.getBlockY();
 				Integer Z = loc.getBlockZ();
 				Location sloc = new Location(loc.getWorld(), X, Y, Z);
-				Integer level = 1;
-				if(itemStack.getItemMeta().getPersistentDataContainer().has(ItemManager.experience_obelisk_II_Key, PersistentDataType.BYTE)) {
-					level = 2;
-				}
-				if(itemStack.getItemMeta().getPersistentDataContainer().has(ItemManager.experience_obelisk_III_Key, PersistentDataType.BYTE)) {
-					level = 3;
-				}
-				if(itemStack.getItemMeta().getPersistentDataContainer().has(ItemManager.experience_obelisk_IV_Key, PersistentDataType.BYTE)) {
-					level = 4;
-				}
-				experience_obeliskyml.set(random+".Level", level);
-				ExperienceObelisk experienceobelisk = new ExperienceObelisk(level, sloc, 0);
-				Cache.experience_obelisk.add(experienceobelisk);
+				
+				WarpCrystal warp_crystal = new WarpCrystal(sloc, 0, random+"",p.getUniqueId(),p.getName()+"'s Crystal",0);
+				Cache.warp_crystal.add(warp_crystal);
 				try {
-					experience_obeliskyml.save(experience_obelisk);
+					warp_crystalyml.save(warp_crystalfile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				if(!gameMode.equals(GameMode.CREATIVE)) {
-					itemStack.setAmount(itemStack.getAmount()-1);
-				}
 			}
 		return false;
-		
 	}
 }

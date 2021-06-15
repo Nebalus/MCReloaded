@@ -39,7 +39,7 @@ import org.bukkit.potion.PotionType;
 import de.pixelstudios.mcreloaded.ConsoleLogger;
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.datamanagement.Config;
-import de.pixelstudios.mcreloaded.items.manager.GUIicons;
+import de.pixelstudios.mcreloaded.guis.GUIicons;
 import de.pixelstudios.mcreloaded.items.manager.HeadList;
 import de.pixelstudios.mcreloaded.messaging.MessageFormatter;
 import de.pixelstudios.mcreloaded.utils.Utils;
@@ -70,24 +70,19 @@ public class ItemManager {
     public static NamespacedKey coffee_bean_Key = new NamespacedKey(MCReloaded.getPlugin(), "coffee_bean");
     public static NamespacedKey heart_of_the_mine_Key = new NamespacedKey(MCReloaded.getPlugin(), "heart_of_the_mine");
     public static NamespacedKey grand_experience_bottle_Key = new NamespacedKey(MCReloaded.getPlugin(), "grand_experience_bottle");
-    public static NamespacedKey experience_obelisk_Key = new NamespacedKey(MCReloaded.getPlugin(), "experience_obelisk");
-    public static NamespacedKey experience_obelisk_I_Key = new NamespacedKey(MCReloaded.getPlugin(), "experience_obelisk_I");
-    public static NamespacedKey experience_obelisk_II_Key = new NamespacedKey(MCReloaded.getPlugin(), "experience_obelisk_II");
-    public static NamespacedKey experience_obelisk_III_Key = new NamespacedKey(MCReloaded.getPlugin(), "experience_obelisk_III");
-    public static NamespacedKey experience_obelisk_IV_Key = new NamespacedKey(MCReloaded.getPlugin(), "experience_obelisk_IV");
-    public static NamespacedKey experience_orb_Key = new NamespacedKey(MCReloaded.getPlugin(), "experience_orb");
- 
+    public static NamespacedKey warp_crystal_key = new NamespacedKey(MCReloaded.getPlugin(), "warp_crystal");
+    public static NamespacedKey warp_fuel_key = new NamespacedKey(MCReloaded.getPlugin(), "warp_fuel");
+    
     public static NamespacedKey golderite_ingot_Key = new NamespacedKey(MCReloaded.getPlugin(), "golderite_ingot");
     public static NamespacedKey cristal_fragment_Key = new NamespacedKey(MCReloaded.getPlugin(), "crystal_fragment");
  
-    public static NamespacedKey cristal_armor_Key = new NamespacedKey(MCReloaded.getPlugin(), "cristal_armor");
     public static NamespacedKey golderite_armor_Key = new NamespacedKey(MCReloaded.getPlugin(), "golderite_armor");
 	
     //*************************************************************
     public static NamespacedKey telekinesis_enchantment = new NamespacedKey(MCReloaded.getPlugin(), "ENCHANTMENT_TELEKINESIS");
     public static NamespacedKey smelting_touch_enchantment = new NamespacedKey(MCReloaded.getPlugin(), "ENCHANTMENT_SMELTING_TOUCH");
-    
     //*************************************************************
+    
 	public static ItemStack PORTABLE_CRAFTING_TABLE;
 	public static ItemStack PORTABLE_ENDERCHEST;
 	public static ItemStack INVISIBLE_ITEM_FRAME;
@@ -107,14 +102,10 @@ public class ItemManager {
 	public static ItemStack SUPER_SHOVEL;
 	public static ItemStack SUPER_SHOVEL_NETHERITE;
 	
-	public static ItemStack EXPERIENCE_OBELISK_I;
-	public static ItemStack EXPERIENCE_OBELISK_II;
-	public static ItemStack EXPERIENCE_OBELISK_III;
-	public static ItemStack EXPERIENCE_OBELISK_IV;
-	
 	public static ItemStack GRAND_EXPERIENCE_BOTTLE;
 	
-	public static ItemStack EXPERIENCE_ORB;
+	public static ItemStack WARP_CRYSTAL;
+	public static ItemStack WARP_FUEL;
 	
 	public static ItemStack GOLDERITE_ARMOR_HELMET;
 	public static ItemStack GOLDERITE_ARMOR_CHESTPLATE;
@@ -209,7 +200,7 @@ public class ItemManager {
         HeadList.TELEPORTATION_CORE = Utils.getSkullByTextureURL(url+"4ec1c3f7d09ce6c0cb48ed30b4596a5c14fae79def8bfd14a59fc1935600bc7b", null, null);
         
         //https://minecraft-heads.com/custom-heads/decoration/36293-soul-lantern
-        HeadList.SOUL_CAGE = Utils.getSkullByTextureURL(url+"9580e5cd970c1ded973d0c139be418b0755e0713345d716ed594244a53e6e13d", null, null);
+        HeadList.SOUL_LANTERN = Utils.getSkullByTextureURL(url+"9580e5cd970c1ded973d0c139be418b0755e0713345d716ed594244a53e6e13d", null, null);
 
         //https://minecraft-heads.com/custom-heads/decoration/32371-opal
         HeadList.OPAL = Utils.getSkullByTextureURL(url+"49ae88a7d03f474558a05692e5f5c3ade312ddf1072166ad0426334ef5174b87", null, null);
@@ -219,6 +210,9 @@ public class ItemManager {
         
         //https://minecraft-heads.com/custom-heads/decoration/36763-stone-tank-empty
         HeadList.STONE_TANK = Utils.getSkullByTextureURL(url+"b91b7b21725f146d29c192b745d79d22603267c7ad893badeb6546e746600060", null, null);
+        
+        //https://minecraft-heads.com/custom-heads/decoration/44796-energy-core
+        HeadList.WARP_CRYSTAL = Utils.getSkullByTextureURL(url+"77400ea19dbd84f75c39ad6823ac4ef786f39f48fc6f84602366ac29b837422", null, null);
         
 	}
 	
@@ -241,49 +235,14 @@ public class ItemManager {
 		PORTABLE_ENDERCHEST.setItemMeta(Portable_enderchest1);
 		ALL_ITEMS.put("PORTABLE_ENDERCHEST", PORTABLE_ENDERCHEST);
 		
-		EXPERIENCE_OBELISK_I = new ItemStack(HeadList.EXPERIENCE_BOTTLE);
-		ItemMeta ExperienceObelisk1_I = EXPERIENCE_OBELISK_I.getItemMeta();
-		ExperienceObelisk1_I.setDisplayName("§fExperience Obelisk I");
-		ExperienceObelisk1_I.setCustomModelData(3);
-		ExperienceObelisk1_I.getPersistentDataContainer().set(experience_obelisk_Key, PersistentDataType.BYTE, (byte) 1);
-		ExperienceObelisk1_I.getPersistentDataContainer().set(experience_obelisk_I_Key, PersistentDataType.BYTE, (byte) 1);
-		EXPERIENCE_OBELISK_I.setItemMeta(ExperienceObelisk1_I);
-		ALL_ITEMS.put("EXPERIENCE_OBELISK_I", EXPERIENCE_OBELISK_I);
+		WARP_CRYSTAL = new ItemStack(HeadList.WARP_CRYSTAL);
+		ItemMeta WarpCrystal = WARP_CRYSTAL.getItemMeta();
+		WarpCrystal.setDisplayName("§fWarp Crystal");
+		WarpCrystal.setCustomModelData(3);
+		WarpCrystal.getPersistentDataContainer().set(warp_crystal_key, PersistentDataType.BYTE, (byte) 1);
+		WARP_CRYSTAL.setItemMeta(WarpCrystal);
+		ALL_ITEMS.put("WARP_CRYSTAL", WARP_CRYSTAL);	
 		
-		EXPERIENCE_OBELISK_II = new ItemStack(HeadList.EXPERIENCE_BOTTLE);
-		ItemMeta ExperienceObelisk1_II = EXPERIENCE_OBELISK_II.getItemMeta();
-		ExperienceObelisk1_II.setDisplayName("§fExperience Obelisk II");
-		ExperienceObelisk1_II.setCustomModelData(4);
-		ExperienceObelisk1_II.getPersistentDataContainer().set(experience_obelisk_Key, PersistentDataType.BYTE, (byte) 1);
-		ExperienceObelisk1_II.getPersistentDataContainer().set(experience_obelisk_II_Key, PersistentDataType.BYTE, (byte) 1);
-		EXPERIENCE_OBELISK_II.setItemMeta(ExperienceObelisk1_II);
-		ALL_ITEMS.put("EXPERIENCE_OBELISK_II", EXPERIENCE_OBELISK_II);
-		
-		EXPERIENCE_OBELISK_III = new ItemStack(HeadList.EXPERIENCE_BOTTLE);
-		ItemMeta ExperienceObelisk1_III = EXPERIENCE_OBELISK_III.getItemMeta();
-		ExperienceObelisk1_III.setDisplayName("§fExperience Obelisk III");
-		ExperienceObelisk1_III.setCustomModelData(5);
-		ExperienceObelisk1_III.getPersistentDataContainer().set(experience_obelisk_Key, PersistentDataType.BYTE, (byte) 1);
-		ExperienceObelisk1_III.getPersistentDataContainer().set(experience_obelisk_III_Key, PersistentDataType.BYTE, (byte) 1);
-		EXPERIENCE_OBELISK_III.setItemMeta(ExperienceObelisk1_III);
-		ALL_ITEMS.put("EXPERIENCE_OBELISK_III", EXPERIENCE_OBELISK_III);
-		
-		EXPERIENCE_OBELISK_IV = new ItemStack(HeadList.EXPERIENCE_BOTTLE);
-		ItemMeta ExperienceObelisk1_IV = EXPERIENCE_OBELISK_IV.getItemMeta();
-		ExperienceObelisk1_IV.setDisplayName("§fExperience Obelisk IV");
-		ExperienceObelisk1_IV.setCustomModelData(6);
-		ExperienceObelisk1_IV.getPersistentDataContainer().set(experience_obelisk_Key, PersistentDataType.BYTE, (byte) 1);
-		ExperienceObelisk1_IV.getPersistentDataContainer().set(experience_obelisk_IV_Key, PersistentDataType.BYTE, (byte) 1);
-		EXPERIENCE_OBELISK_IV.setItemMeta(ExperienceObelisk1_IV);
-		ALL_ITEMS.put("EXPERIENCE_OBELISK_IV", EXPERIENCE_OBELISK_IV);
-		
-		EXPERIENCE_ORB = new ItemStack(HeadList.EXPERIENCE_ORB);
-		ItemMeta ExperienceObelisk1Orb = EXPERIENCE_ORB.getItemMeta();
-		ExperienceObelisk1Orb.setDisplayName("§fExperience Orb");
-		ExperienceObelisk1Orb.setCustomModelData(7);
-		ExperienceObelisk1Orb.getPersistentDataContainer().set(experience_orb_Key, PersistentDataType.BYTE, (byte) 1);
-		EXPERIENCE_ORB.setItemMeta(ExperienceObelisk1Orb);
-		ALL_ITEMS.put("EXPERIENCE_ORB", EXPERIENCE_ORB);	
 		//******************************************************************
 		//Costmetics
 		ELYTRA_RAVEN_WINGS = new ItemStack(Material.ELYTRA);
@@ -329,6 +288,20 @@ public class ItemManager {
 	    GRANITE_PICKAXE.setItemMeta(granite_pickaxe_meta);
 	    ALL_ITEMS.put("GRANITE_PICKAXE", GRANITE_PICKAXE);
 	    
+	    WARP_FUEL = new ItemStack(Material.QUARTZ);
+		ItemMeta WarpFuel = WARP_FUEL.getItemMeta();
+		WarpFuel.setDisplayName("§fWarp Fuel");
+		WarpFuel.setCustomModelData(1);
+		WarpFuel.getPersistentDataContainer().set(warp_fuel_key, PersistentDataType.BYTE, (byte) 1);
+		WarpFuel.getPersistentDataContainer().set(new NamespacedKey(MCReloaded.getPlugin(), "fuelcharge"), PersistentDataType.INTEGER, 3);
+		ArrayList<String> WarpFuel_Lore = new ArrayList<String>();
+		WarpFuel_Lore.add("§7Charge §a3§7/§a3");
+		WarpFuel.setLore(WarpFuel_Lore);
+		WarpFuel.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		WarpFuel.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 0, true);
+		WARP_FUEL.setItemMeta(WarpFuel);
+		ALL_ITEMS.put("WARP_FUEL", WARP_FUEL);	
+	    
 	    GOLDERITE_INGOT = new ItemStack(Material.NETHERITE_INGOT);
 		ItemMeta Golderite_Ingot1 = GOLDERITE_INGOT.getItemMeta();
 		Golderite_Ingot1.setDisplayName("§fGolderite Ingot");
@@ -354,7 +327,7 @@ public class ItemManager {
 		ArrayList<String> Golderite_Armor_Lore = new ArrayList<String>();
 		Golderite_Armor_Lore.add(" ");
 		Golderite_Armor_Lore.add("§a§lSet Bonus");
-		Golderite_Armor_Lore.add("§7● §6Piglin §7become §6Neutral§7.");
+		Golderite_Armor_Lore.add("§7● §6Piglin §7become §6Passive§7.");
 		
 		GOLDERITE_ARMOR_HELMET = new ItemStack(Material.NETHERITE_HELMET);
 		ItemMeta Gilded_Netherite_Armor_Helmet = GOLDERITE_ARMOR_HELMET.getItemMeta();
@@ -505,19 +478,9 @@ public class ItemManager {
         COFFEE.setItemMeta(coffee_meta);
         ALL_ITEMS.put("COFFEE", COFFEE);
         
-        WATER_BOWL = new ItemStack(Material.POTION);
-        ItemMeta water_bowl_meta = WATER_BOWL.getItemMeta();
-        water_bowl_meta.setCustomModelData(7);
-        ((PotionMeta) water_bowl_meta).setBasePotionData(new PotionData(PotionType.WATER));
-        water_bowl_meta.setDisplayName("§fWater Bowl");
-        water_bowl_meta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
-        water_bowl_meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-        WATER_BOWL.setItemMeta(water_bowl_meta);
-        ALL_ITEMS.put("WATER_BOWL", WATER_BOWL);
-        
         GOLDEN_APPLE_JUICE = new ItemStack(Material.POTION);
         ItemMeta golden_apple_juice_meta = GOLDEN_APPLE_JUICE.getItemMeta();
-        golden_apple_juice_meta.setCustomModelData(8);
+        golden_apple_juice_meta.setCustomModelData(7);
         ((PotionMeta) golden_apple_juice_meta).setBasePotionData(new PotionData(PotionType.WATER));
         ((PotionMeta) golden_apple_juice_meta).setColor(Color.YELLOW);
         golden_apple_juice_meta.setDisplayName("§bGolden Apple Juice");
@@ -528,7 +491,7 @@ public class ItemManager {
         
         ENCHANTED_GOLDEN_APPLE_JUICE = new ItemStack(Material.POTION);
         ItemMeta enchanted_golden_apple_juice_meta = ENCHANTED_GOLDEN_APPLE_JUICE.getItemMeta();
-        enchanted_golden_apple_juice_meta.setCustomModelData(9);
+        enchanted_golden_apple_juice_meta.setCustomModelData(8);
         ((PotionMeta) enchanted_golden_apple_juice_meta).setBasePotionData(new PotionData(PotionType.WATER));
         ((PotionMeta) enchanted_golden_apple_juice_meta).setColor(Color.YELLOW);
         ((PotionMeta) enchanted_golden_apple_juice_meta).addCustomEffect(new PotionEffect(PotionEffectType.REGENERATION, 400, 1), false);
@@ -537,6 +500,17 @@ public class ItemManager {
         enchanted_golden_apple_juice_meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         ENCHANTED_GOLDEN_APPLE_JUICE.setItemMeta(enchanted_golden_apple_juice_meta);
         ALL_ITEMS.put("ENCHANTED_GOLDEN_APPLE_JUICE", ENCHANTED_GOLDEN_APPLE_JUICE);
+        
+        //Water Bowl Immer als letztes einfügen
+        WATER_BOWL = new ItemStack(Material.POTION);
+        ItemMeta water_bowl_meta = WATER_BOWL.getItemMeta();
+        water_bowl_meta.setCustomModelData(20);
+        ((PotionMeta) water_bowl_meta).setBasePotionData(new PotionData(PotionType.WATER));
+        water_bowl_meta.setDisplayName("§fWater Bowl");
+        water_bowl_meta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
+        water_bowl_meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        WATER_BOWL.setItemMeta(water_bowl_meta);
+        ALL_ITEMS.put("WATER_BOWL", WATER_BOWL);
         
         SUPER_PICKAXE = new ItemStack(Material.DIAMOND_PICKAXE);
 		ItemMeta Superpickaxe1 = SUPER_PICKAXE.getItemMeta();
@@ -614,20 +588,20 @@ public class ItemManager {
 		//Smithing Rezepte
 		//*******************************************************************
 		
-		SmithingRecipe better_netherite_helmet = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "better_netherite_helmet"), new ItemStack(Material.NETHERITE_HELMET), new MaterialChoice(Material.NETHERITE_HELMET), new MaterialChoice(Material.NETHERITE_INGOT));
-		Bukkit.getServer().addRecipe(better_netherite_helmet);	
+		SmithingRecipe guilded_netherite_helmet = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "guilded_netherite_helmet"), new ItemStack(Material.NETHERITE_HELMET), new MaterialChoice(Material.NETHERITE_HELMET), new MaterialChoice(Material.NETHERITE_INGOT));
+		Bukkit.getServer().addRecipe(guilded_netherite_helmet);	
 		//*******************************************************************
 		
-		SmithingRecipe better_netherite_chestplate = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "better_netherite_chestplate"), new ItemStack(Material.NETHERITE_CHESTPLATE), new MaterialChoice(Material.NETHERITE_CHESTPLATE), new MaterialChoice(Material.NETHERITE_INGOT));
-		Bukkit.getServer().addRecipe(better_netherite_chestplate);	
+		SmithingRecipe guilded_netherite_chestplate = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "guilded_netherite_chestplate"), new ItemStack(Material.NETHERITE_CHESTPLATE), new MaterialChoice(Material.NETHERITE_CHESTPLATE), new MaterialChoice(Material.NETHERITE_INGOT));
+		Bukkit.getServer().addRecipe(guilded_netherite_chestplate);	
 		//*******************************************************************
 		
-		SmithingRecipe better_netherite_leggings = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "better_netherite_leggings"), new ItemStack(Material.NETHERITE_LEGGINGS), new MaterialChoice(Material.NETHERITE_LEGGINGS), new MaterialChoice(Material.NETHERITE_INGOT));
-		Bukkit.getServer().addRecipe(better_netherite_leggings);	
+		SmithingRecipe guilded_netherite_leggings = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "guilded_netherite_leggings"), new ItemStack(Material.NETHERITE_LEGGINGS), new MaterialChoice(Material.NETHERITE_LEGGINGS), new MaterialChoice(Material.NETHERITE_INGOT));
+		Bukkit.getServer().addRecipe(guilded_netherite_leggings);	
 		//*******************************************************************
 		
-		SmithingRecipe better_netherite_boots = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "better_netherite_boots"), new ItemStack(Material.NETHERITE_BOOTS), new MaterialChoice(Material.NETHERITE_BOOTS), new MaterialChoice(Material.NETHERITE_INGOT));
-		Bukkit.getServer().addRecipe(better_netherite_boots);	
+		SmithingRecipe guilded_netherite_boots = new SmithingRecipe(new NamespacedKey(MCReloaded.getPlugin(), "guilded_netherite_boots"), new ItemStack(Material.NETHERITE_BOOTS), new MaterialChoice(Material.NETHERITE_BOOTS), new MaterialChoice(Material.NETHERITE_INGOT));
+		Bukkit.getServer().addRecipe(guilded_netherite_boots);	
 		//*******************************************************************
 		
 		if(config.MECHANICS_ENERGY_COFFEE) {
@@ -700,6 +674,27 @@ public class ItemManager {
         Bukkit.getServer().addRecipe(grappling_hook);		
         
         //*******************************************************************
+        ShapedRecipe warp_fuel = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "warp_fuel"), WARP_FUEL);
+
+        warp_fuel.shape("121", "232", "121");
+        warp_fuel.setIngredient('1', Material.BLAZE_POWDER);
+        warp_fuel.setIngredient('2', Material.REDSTONE);
+        warp_fuel.setIngredient('3', Material.QUARTZ);
+        Bukkit.getServer().addRecipe(warp_fuel);		
+        
+        //*******************************************************************
+        ShapedRecipe warp_crystal = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "warp_crystal"), WARP_CRYSTAL);
+
+        warp_crystal.shape("121", "343", "565");
+        warp_crystal.setIngredient('1', Material.MAGMA_CREAM);
+        warp_crystal.setIngredient('2', Material.MAP);
+        warp_crystal.setIngredient('3', Material.END_CRYSTAL);
+        warp_crystal.setIngredient('4', Material.ENDER_PEARL);
+        warp_crystal.setIngredient('5', Material.OBSIDIAN);
+        warp_crystal.setIngredient('6', Material.DIAMOND);
+        Bukkit.getServer().addRecipe(warp_crystal);		
+        
+        //*******************************************************************
         ShapedRecipe XP_Bottle = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "experience_bottle"), new ItemStack(Material.EXPERIENCE_BOTTLE, 1));
 
         XP_Bottle.shape(" 2 ", "212","222");
@@ -715,52 +710,6 @@ public class ItemManager {
         Grand_XP_Bottle.setIngredient('2', Material.LAPIS_BLOCK);
         Bukkit.getServer().addRecipe(Grand_XP_Bottle);		        
               
-        //*******************************************************************
-        
-        ShapedRecipe ExperienceObelisk_I = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "experience_obelisk_I"), EXPERIENCE_OBELISK_I);
-
-        ExperienceObelisk_I.shape("121", "343", "353");
-        ExperienceObelisk_I.setIngredient('1', Material.IRON_INGOT);
-        ExperienceObelisk_I.setIngredient('2', new RecipeChoice.MaterialChoice(Tag.WOODEN_SLABS));
-        ExperienceObelisk_I.setIngredient('3', Material.GLASS);
-        ExperienceObelisk_I.setIngredient('4', new ExactChoice(EXPERIENCE_ORB));
-        ExperienceObelisk_I.setIngredient('5', Material.EXPERIENCE_BOTTLE);
-        Bukkit.getServer().addRecipe(ExperienceObelisk_I);		
-	
-		//*******************************************************************
-        ShapedRecipe ExperienceObelisk_II = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "experience_obelisk_II"), EXPERIENCE_OBELISK_II);
-
-        ExperienceObelisk_II.shape("121", "545", "333");
-        ExperienceObelisk_II.setIngredient('1', Material.DIAMOND);
-        ExperienceObelisk_II.setIngredient('2', new ExactChoice(EXPERIENCE_ORB));
-        ExperienceObelisk_II.setIngredient('3', Material.GLASS);
-        ExperienceObelisk_II.setIngredient('4', new ExactChoice(EXPERIENCE_OBELISK_I));
-        ExperienceObelisk_II.setIngredient('5', new ExactChoice(GRAND_EXPERIENCE_BOTTLE));
-        Bukkit.getServer().addRecipe(ExperienceObelisk_II);		
-	
-		//*******************************************************************
-        ShapedRecipe ExperienceObelisk_III = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "experience_obelisk_III"), EXPERIENCE_OBELISK_III);
-
-        ExperienceObelisk_III.shape("121", "343", "565");
-        ExperienceObelisk_III.setIngredient('1', Material.DIAMOND);
-        ExperienceObelisk_III.setIngredient('2', new ExactChoice(EXPERIENCE_ORB));
-        ExperienceObelisk_III.setIngredient('3', Material.GLASS);
-        ExperienceObelisk_III.setIngredient('4', new ExactChoice(EXPERIENCE_OBELISK_II));
-        ExperienceObelisk_III.setIngredient('5', Material.OBSIDIAN);
-        ExperienceObelisk_III.setIngredient('6', Material.NETHERITE_INGOT);
-        Bukkit.getServer().addRecipe(ExperienceObelisk_III);		
-        //*******************************************************************
-        ShapedRecipe ExperienceObelisk_IV = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "experience_obelisk_IV"), EXPERIENCE_OBELISK_IV);
-
-        ExperienceObelisk_IV.shape("212", "343", "565");
-        ExperienceObelisk_IV.setIngredient('1', Material.NETHER_STAR);
-        ExperienceObelisk_IV.setIngredient('2', new ExactChoice(EXPERIENCE_ORB));
-        ExperienceObelisk_IV.setIngredient('3', Material.GLASS);
-        ExperienceObelisk_IV.setIngredient('4', new ExactChoice(EXPERIENCE_OBELISK_III));
-        ExperienceObelisk_IV.setIngredient('5', Material.OBSIDIAN);
-        ExperienceObelisk_IV.setIngredient('6', Material.NETHERITE_INGOT);
-        Bukkit.getServer().addRecipe(ExperienceObelisk_IV);		
-	
 		//*******************************************************************
         ShapedRecipe portable_enderchest = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "portable_enderchest"), PORTABLE_ENDERCHEST);
 
@@ -945,20 +894,16 @@ public class ItemManager {
     	
     	GRINDSTONE_BLOCKED(DIRTY_WATER, CLEAN_WATER, PURIFIED_WATER, WATER_BOWL, COLD_MILK, HOT_MILK,
     			COFFEE, GRAPPLING_HOOK, HEART_OF_THE_MINE, PORTABLE_CRAFTING_TABLE, INVISIBLE_ITEM_FRAME,
-    			EXPERIENCE_OBELISK_I, EXPERIENCE_OBELISK_II, EXPERIENCE_OBELISK_III, EXPERIENCE_OBELISK_IV,
-    			EXPERIENCE_ORB, ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE,
-    			GOLDERITE_INGOT),
+    			ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE,
+    			GOLDERITE_INGOT, WARP_FUEL),
     	
     	ANVIL_BLOCKED(HEART_OF_THE_MINE, DIRTY_WATER, CLEAN_WATER, PURIFIED_WATER, WATER_BOWL,
-    			COLD_MILK, HOT_MILK, COFFEE, COFFEE_BEAN, EXPERIENCE_OBELISK_I, EXPERIENCE_OBELISK_II, 
-    			EXPERIENCE_OBELISK_III, EXPERIENCE_OBELISK_IV, EXPERIENCE_ORB,
+    			COLD_MILK, HOT_MILK, COFFEE, COFFEE_BEAN, WARP_CRYSTAL,
     			ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE, GOLDERITE_INGOT),
     	
-    	PLAYER_HEAD(PORTABLE_CRAFTING_TABLE, PORTABLE_ENDERCHEST, EXPERIENCE_OBELISK_I, EXPERIENCE_OBELISK_II, 
-    			EXPERIENCE_OBELISK_III, EXPERIENCE_OBELISK_IV, EXPERIENCE_ORB),
+    	PLAYER_HEAD(PORTABLE_CRAFTING_TABLE, PORTABLE_ENDERCHEST, WARP_CRYSTAL, WARP_FUEL),
     	
-    	PLACEABLE_BLOCKED(PORTABLE_CRAFTING_TABLE, PORTABLE_ENDERCHEST, EXPERIENCE_OBELISK_I, EXPERIENCE_OBELISK_II, 
-    			EXPERIENCE_OBELISK_III, EXPERIENCE_OBELISK_IV, EXPERIENCE_ORB, COFFEE_BEAN),
+    	PLACEABLE_BLOCKED(PORTABLE_CRAFTING_TABLE, PORTABLE_ENDERCHEST, WARP_CRYSTAL, COFFEE_BEAN),
     	
     	NETHERITE_INGOT(GOLDERITE_INGOT);
     	
@@ -1016,10 +961,6 @@ public class ItemManager {
     	COLD_MILK("cold_milk"),
     	HOT_MILK("hot_milk"),
     	HEART_OF_THE_MINE("heart_of_the_mine"),
-    	EXPERIENCE_OBELISK_I("experience_obelisk_I"),
-    	EXPERIENCE_OBELISK_II("experience_obelisk_II"),
-    	EXPERIENCE_OBELISK_III("experience_obelisk_III"),
-    	EXPERIENCE_OBELISK_IV("experience_obelisk_IV"),
     	GRAND_EXPERIENCE_BOTTLE("grand_experience_bottle"),
     	GRANITE_PICKAXE("granite_pickaxe"),
     	ANDESITE_PICKAXE("andesite_pickaxe"),
@@ -1027,12 +968,11 @@ public class ItemManager {
     	GOLDEN_APPLE_JUICE("golden_apple_juice"),
     	ENCHANTED_GOLDEN_APPLE_JUICE("enchanted_golden_apple_juice"),
     	GOLDERITE_INGOT("golderite_ingot"),
+    	WARP_FUEL("warp_fuel"),
+    	WARP_CRYSTAL("warp_crystal"),
     	
     	// CUSTOM ARMOR
-    	CRYSTAL_ARMOR_HELMET("crystal_helmet"),
-    	CRYSTAL_ARMOR_CHESTPLATE("crystal_chestplate"),
-    	CRYSTAL_ARMOR_LEGGINGS("crystal_leggings"),
-    	CRYSTAL_ARMOR_BOOTS("crystal_boots"),
+    	
     	
         // VANILLA ITEMS
     	EXPERIENCE_BOTTLE("experience_bottle"),

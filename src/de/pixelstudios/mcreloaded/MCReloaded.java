@@ -12,9 +12,11 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
@@ -41,10 +43,9 @@ import de.pixelstudios.mcreloaded.commands.StopCommand;
 import de.pixelstudios.mcreloaded.datamanagement.Cache;
 import de.pixelstudios.mcreloaded.datamanagement.Config;
 import de.pixelstudios.mcreloaded.datamanagement.LiteSQL;
-import de.pixelstudios.mcreloaded.guis.LoadingGUI;
-import de.pixelstudios.mcreloaded.items.ExperienceObelisk;
 import de.pixelstudios.mcreloaded.items.GrapplingHook;
 import de.pixelstudios.mcreloaded.items.Invisible_Item_Frame;
+import de.pixelstudios.mcreloaded.items.WarpCrystal;
 import de.pixelstudios.mcreloaded.listener.entity.EntityDamage;
 import de.pixelstudios.mcreloaded.listener.entity.EntityDamageByEntity;
 import de.pixelstudios.mcreloaded.listener.entity.EntityDeath;
@@ -191,20 +192,20 @@ public class MCReloaded extends JavaPlugin implements Listener{
 	public void onDisable() {
 		if (!loaded) return;
 		ConsoleLogger.info(ConsoleLogger.FLUSH_MANAGER, "Prepearing for shutdown!");
-		playerManager.flushOfflineProfiles();
 		playerManager.flushProfiles();
 		ConsoleLogger.info(ConsoleLogger.FLUSH_MANAGER, "Flush completed!");
 		for(World w: Bukkit.getWorlds()) {
 			for(ArmorStand as : w.getEntitiesByClass(ArmorStand.class)) {		
 					if(!as.hasGravity()) {
 						if(!as.isCollidable()) {
-							if(as.getCustomName().equals("byjfbvxyBJIUG892psx-sujxcbPrujsnxiseIJKskls93as2542473697997979792210")) {
-								as.remove();
+							if(as.getCustomName().equals("byjfbvxyBJIUG892psx-ssfsdjkbfhijkgcvuzg127263489263461924528648")) {
 								Location loc = as.getEyeLocation();
 								loc.setY(loc.getY()+1);
 								if(loc.getBlock().getType().equals(Material.BARRIER)){
 									loc.getBlock().setType(Material.AIR);
-							}
+									
+								}
+								as.remove();
 						}
 					}
 				}
@@ -289,7 +290,7 @@ public class MCReloaded extends JavaPlugin implements Listener{
 		
 		getCommand("repair").setExecutor(new RepairCommand(this));
 		counter++;
-		getCommand("menu").setExecutor(new MenuCommand(this));
+		getCommand("menu").setExecutor(new MenuCommand());
 		counter++;
 		getCommand("gm").setExecutor(new GmCommand(this));
 		getCommand("gm").setTabCompleter(new GmCommand(this));
@@ -337,18 +338,20 @@ public class MCReloaded extends JavaPlugin implements Listener{
 	
 	private void loadCache() {
 		for(World w : Bukkit.getWorlds()) {
-			File experience_obelisk = new File(w.getWorldFolder()+"/data/mcdata/experience_obelisk.yml");
-			YamlConfiguration experience_obeliskyml = YamlConfiguration.loadConfiguration(experience_obelisk);			
-			List<String> uuids = (List<String>) experience_obeliskyml.getStringList("UUID");
+			File warp_crystal = new File(w.getWorldFolder()+"/data/mcdata/warp_crystal.yml");
+			YamlConfiguration warp_crystalyml = YamlConfiguration.loadConfiguration(warp_crystal);			
+			List<String> uuids = (List<String>) warp_crystalyml.getStringList("UUID");
 			for(String s : uuids) {
-				Integer X = experience_obeliskyml.getInt(s+".X");
-				Integer Y = experience_obeliskyml.getInt(s+".Y");
-				Integer Z = experience_obeliskyml.getInt(s+".Z");
+				Integer X = warp_crystalyml.getInt(s+".X");
+				Integer Y = warp_crystalyml.getInt(s+".Y");
+				Integer Z = warp_crystalyml.getInt(s+".Z");
 				Location loc = new Location(w, X, Y, Z);
-				Integer xp = experience_obeliskyml.getInt(s+".XP");
-				Integer level = experience_obeliskyml.getInt(s+".Level");
-				ExperienceObelisk experinceobelisk = new ExperienceObelisk(level,loc,xp);
-				Cache.experience_obelisk.add(experinceobelisk);
+				Integer WarpCharge = warp_crystalyml.getInt(s+".WarpCharge");
+				UUID owneruuid = UUID.fromString(warp_crystalyml.getString(s+".OwnerUUID"));
+				String name = warp_crystalyml.getString(s+".Name");
+				int visibility = warp_crystalyml.getInt(s+".Visibility");
+				WarpCrystal warpcrystal = new WarpCrystal(loc,WarpCharge,s,owneruuid,name,visibility);
+				Cache.warp_crystal.add(warpcrystal);
 			}
 		}
 		
@@ -395,18 +398,12 @@ public class MCReloaded extends JavaPlugin implements Listener{
 				}
 			}
 		}, 0, 1);
-		Bukkit.getScheduler().scheduleAsyncRepeatingTask(mcreloaded, new Runnable() {		
-			@Override
-			public void run() {
-				LoadingGUI.animate();
-			}
-		}, 0, 10);
 		
 		Bukkit.getScheduler().scheduleAsyncRepeatingTask(mcreloaded, new Runnable() {		
 			@Override
 			public void run() {
 				try {
-					Utils.checkExperienceObelisk();
+					Utils.checkWarpCrystal();
 				}catch(ConcurrentModificationException ex) {}
 				for(Player p : Bukkit.getOnlinePlayers()) {
 					UserProfile up = playerManager.getProfile(p);
@@ -495,7 +492,7 @@ public class MCReloaded extends JavaPlugin implements Listener{
 					for(ArmorStand as : w.getEntitiesByClass(ArmorStand.class)) {		
 						if(!as.hasGravity()) {
 							if(!as.isCollidable()) {
-								if(as.getCustomName().equals("byjfbvxyBJIUG892psx-sujxcbPrujsnxiseIJKskls93as2542473697997979792210")) {
+								if(as.getCustomName().equals("byjfbvxyBJIUG892psx-ssfsdjkbfhijkgcvuzg127263489263461924528648")) {
 									if(tpupordown.get(as.getUniqueId()) == null) {
 										tpupordown.put(as.getUniqueId(), true);
 										tpup_down.put(as.getUniqueId(), 1);
@@ -509,7 +506,7 @@ public class MCReloaded extends JavaPlugin implements Listener{
 											tpup_down.put(as.getUniqueId(), amount);
 											Location loc = as.getLocation();
 											loc.setY(as.getLocation().getY() + 0.01f);
-											loc.setYaw(as.getLocation().getYaw()+3f);
+											loc.setYaw(as.getLocation().getYaw()+5f);
 											as.teleport(loc);
 										}
 									}else {
@@ -521,13 +518,24 @@ public class MCReloaded extends JavaPlugin implements Listener{
 											tpup_down.put(as.getUniqueId(), amount);
 											Location loc = as.getLocation();
 											loc.setY(as.getLocation().getY() - 0.01f);
-											loc.setYaw(as.getLocation().getYaw()+3f);
+											loc.setYaw(as.getLocation().getYaw()+5f);
 											as.teleport(loc);
 											}
 										}
 									Location loc = as.getEyeLocation();
 									loc.setY(loc.getY()+1);
-									FastParticle.spawnParticle(w, ParticleType.TOTEM, loc, 1, 0.1f, 0f, 0.1f, 0.07f);
+									FastParticle.spawnParticle(w, ParticleType.END_ROD, loc, 1, 0.1f, 0f, 0.1f, 0.01f);
+									loc.setY(loc.getY()+1);
+									FastParticle.spawnParticle(w, ParticleType.ENCHANTMENT_TABLE, loc, 1, 0f, 0f, 0f, 1f);
+									loc.setY(loc.getY()-1);
+									for (int i = 0; i < 12; ++i ) {
+										loc.setY(loc.getY()+0.3);
+										FastParticle.spawnParticle(w, ParticleType.REDSTONE, loc, 1, 0f, 0f, 0f, 0f, new Particle.DustOptions(Color.AQUA,1));
+									}
+									
+									FastParticle.spawnParticle(w, ParticleType.REDSTONE, loc, 10, 0.4f, 0f, 0.4f, 0f, new Particle.DustOptions(Color.BLACK,3));
+									
+									
 								}
 							}
 						}

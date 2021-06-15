@@ -3,7 +3,6 @@ package de.pixelstudios.mcreloaded.manager;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import de.pixelstudios.mcreloaded.ConsoleLogger;
@@ -14,7 +13,6 @@ public class PlayerManager {
     private final Config config;
 	private final String url;
 	private HashMap<Player,UserProfile> playerprofile = new HashMap<Player,UserProfile>();
-	private HashMap<OfflinePlayer,OfflinePlayerProfile> offlineplayerprofile = new HashMap<OfflinePlayer,OfflinePlayerProfile>();
 	
 	public PlayerManager(MCReloaded plugin) {
 	   this.config = plugin.getMCReloadedConfig();
@@ -36,46 +34,7 @@ public class PlayerManager {
         }
     }
 	
-	public boolean loadOfflineProfile(OfflinePlayer op) {
-		if(!offlineplayerprofile.containsKey(op)) {
-			OfflinePlayerProfile opp = new OfflinePlayerProfile(op);
-			offlineplayerprofile.put(op, opp);
-			return true;
-		}
-		return false;
-	}
-	public boolean unloadOfflineProfile(OfflinePlayer op) {
-		if(offlineplayerprofile.containsKey(op)) {
-			OfflinePlayerProfile opp = offlineplayerprofile.get(op);
-			offlineplayerprofile.remove(op,opp);
-			return true;
-		}
-		return false;
-	}
-	public OfflinePlayerProfile getOfflineProfile(OfflinePlayer op) {
-		if(offlineplayerprofile.containsKey(op)) {
-			return offlineplayerprofile.get(op);
-		}else {
-			if(loadOfflineProfile(op)){
-				return offlineplayerprofile.get(op);
-			}
-		}
-		return null;
-	}
-	public HashMap<OfflinePlayer,OfflinePlayerProfile> getOfflineProfiles(){
-		return offlineplayerprofile;
-	}
-	public boolean flushOfflineProfiles() {
-		try {
-			ConsoleLogger.debug(ConsoleLogger.FLUSH_MANAGER,"Flushing all cached OfflineProfiles!");
-			offlineplayerprofile.clear();
-		}catch(Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	
+
 	public boolean loadProfile(Player p) {	
 		if(!playerprofile.containsKey(p)) {
 			ConsoleLogger.debug(null,"Loading profile for "+p.getName());
@@ -110,7 +69,7 @@ public class PlayerManager {
 	public boolean flushProfiles() {
 		try {
 			ConsoleLogger.debug(ConsoleLogger.FLUSH_MANAGER,"Flushing all cached OnlineProfiles!");
-			offlineplayerprofile.clear();
+			playerprofile.clear();
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;

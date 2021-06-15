@@ -3,17 +3,17 @@ package de.pixelstudios.mcreloaded.listener.player;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
+import org.bukkit.inventory.ItemStack;
 
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.datamanagement.LiteSQL;
-import de.pixelstudios.mcreloaded.manager.OfflinePlayerProfile;
 import de.pixelstudios.mcreloaded.manager.PlayerManager;
 import de.pixelstudios.mcreloaded.manager.UserProfile;
 import de.pixelstudios.mcreloaded.manager.ItemManager.Recipes;
@@ -62,14 +62,6 @@ public class PlayerJoin implements Listener{
 		p.discoverRecipes(Recipes.HEART_OF_THE_MINE.getKeys());
 		p.discoverRecipes(Recipes.PORTABLE_ENDERCHEST.getKeys());
 		p.discoverRecipes(Recipes.SUPER_AXE.getKeys());
-		p.discoverRecipes(Recipes.EXPERIENCE_OBELISK_I.getKeys());
-		p.discoverRecipes(Recipes.EXPERIENCE_OBELISK_II.getKeys());
-		p.discoverRecipes(Recipes.EXPERIENCE_OBELISK_III.getKeys());
-		p.discoverRecipes(Recipes.EXPERIENCE_OBELISK_IV.getKeys());
-		p.discoverRecipes(Recipes.CRYSTAL_ARMOR_BOOTS.getKeys());
-		p.discoverRecipes(Recipes.CRYSTAL_ARMOR_CHESTPLATE.getKeys());
-		p.discoverRecipes(Recipes.CRYSTAL_ARMOR_HELMET.getKeys());
-		p.discoverRecipes(Recipes.CRYSTAL_ARMOR_LEGGINGS.getKeys());
 		p.discoverRecipes(Recipes.GRAND_EXPERIENCE_BOTTLE.getKeys());
 		p.discoverRecipes(Recipes.EXPERIENCE_BOTTLE.getKeys());
 		p.discoverRecipes(Recipes.GRANITE_PICKAXE.getKeys());
@@ -78,10 +70,14 @@ public class PlayerJoin implements Listener{
 		p.discoverRecipes(Recipes.ENCHANTED_GOLDEN_APPLE_JUICE.getKeys());
 		p.discoverRecipes(Recipes.GOLDEN_APPLE_JUICE.getKeys());
 		p.discoverRecipes(Recipes.GOLDERITE_INGOT.getKeys());
+		p.discoverRecipes(Recipes.WARP_FUEL.getKeys());
+		p.discoverRecipes(Recipes.WARP_CRYSTAL.getKeys());
 		
 		Bukkit.broadcastMessage("§e"+p.getName()+" [§a+§e]");
 
-		up.giveAchievement(Achievements.FIRSTJOIN);
+		if(up.giveAchievement(Achievements.FIRSTJOIN)) {
+			p.getInventory().addItem(new ItemStack(Material.KNOWLEDGE_BOOK));
+		}
 		e.setJoinMessage(null);		
 	}
 	@EventHandler
@@ -90,19 +86,6 @@ public class PlayerJoin implements Listener{
 		if(!LiteSQL.isConnected()) {
 			e.disallow(Result.KICK_OTHER, messageFormatter.format(false, "error.kickmessage","DATABASE_DECODE_ERROR"));
 			return;
-		}
-		OfflinePlayer op = Bukkit.getOfflinePlayer(p.getUniqueId());
-		OfflinePlayerProfile opp = playermanager.getOfflineProfile(op);
-		if(opp.isBanned()) {
-			e.disallow(Result.KICK_BANNED, "§cYou were banned from this server\n"
-					+ "§cReason:§4\n"
-					+ "\n "
-					+ "\n "
-					+ "§cTime remaining:\n"
-					+ Utils.getTimeString(opp.getBantime(),System.currentTimeMillis())+"\n"
-					+ "\n "
-					+ "§cID:\n"
-					+ "§e#"+op.getUniqueId().toString().replace("-", ""));
 		}
 		if(Utils.doesPlayerExists(p.getUniqueId()+"")){
 			try {

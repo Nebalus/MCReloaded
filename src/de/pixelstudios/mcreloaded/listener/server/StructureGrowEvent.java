@@ -2,14 +2,10 @@ package de.pixelstudios.mcreloaded.listener.server;
 
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryPickupItemEvent;
-import org.bukkit.inventory.Inventory;
 
 public class StructureGrowEvent implements Listener{
 

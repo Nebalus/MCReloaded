@@ -26,10 +26,8 @@ public class LiteSQL {
 	private static Statement stmt;
 	public void connect() {
 		conn = null; 
-				try {
-			
-					FileManager.createServerdir();
-			
+		try {		
+			FileManager.createServerdir();	
 			File datenbank = new File(serverPath+"/PixelStudios/MCReloaded/datenbank.db");
 			if(!datenbank.exists()) {
 				ConsoleLogger.debug(ConsoleLogger.DATA_MANAGER, "Creating MCReloaded database in "+serverPath+"/PixelStudios/MCReloaded/");
@@ -40,7 +38,8 @@ public class LiteSQL {
 			conn = DriverManager.getConnection(url);
 			
 			stmt = conn.createStatement();
-			SQLManager.onCreate();
+			onUpdate("CREATE TABLE IF NOT EXISTs playerdata(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, uuid VARCHAR, ipadresse VARCHAR)");
+			onUpdate("CREATE TABLE IF NOT EXISTs achievements(claims INTEGER, achievementname VARCHAR)");
 			ConsoleLogger.info(ConsoleLogger.LITESQL,messageFormater.format(false, "console.enable.litesql-loaded"));
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();

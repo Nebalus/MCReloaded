@@ -14,6 +14,7 @@ import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
 import de.pixelstudios.mcreloaded.manager.PlayerManager;
 import de.pixelstudios.mcreloaded.manager.UserProfile;
+import de.pixelstudios.mcreloaded.utils.Achievements;
 
 public class EntityTargetLivingEntity implements Listener{
 	private PlayerManager playermanager;
@@ -32,6 +33,7 @@ public class EntityTargetLivingEntity implements Listener{
 			EntityType et = e.getEntityType();
 			PlayerInventory pi = p.getInventory();
 			ItemStack[] ac = pi.getArmorContents();
+			UserProfile up = MCReloaded.getPlugin().getPlayerManager().getProfile(p);
 			if(et.equals(EntityType.PIGLIN)) {
 				int ifGolderiteArmor = 0;
 				for(ItemStack is : ac) {
@@ -41,9 +43,10 @@ public class EntityTargetLivingEntity implements Listener{
 						}
 					}
 				}
-					//If the player has a full armor set
+				//If the player has a full armor set
 				if(ifGolderiteArmor >= 4) {
 					e.setCancelled(true);
+					up.giveAchievement(Achievements.PIGLINDISTRACKTOR);
 				}
 			}
 		}

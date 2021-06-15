@@ -46,7 +46,10 @@ public class PlayerChat implements Listener{
 		HEART("<3", "§c❤"),
 		NO(":no:", "§c✖"),
 		YES(":yes:", "§a✔"),
-		CAT(":cat:", "§e= §b⌃● ⋏ ●⌃ §e=");
+		CAT(":cat:", "§e= §b⌃● ⋏ ●⌃ §e="),
+		ARROW(":arrow:", "§e➜"),
+		STAR(":star:", "§6✰"),
+		PVP(":pvp:", "§e⚔");
 		
 		String code;
 		String emote;

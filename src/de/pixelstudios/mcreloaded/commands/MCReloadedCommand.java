@@ -37,10 +37,11 @@ public class MCReloadedCommand implements CommandExecutor, TabCompleter{
 				inv.addItem(HeadList.PLUS);
 				inv.addItem(HeadList.TELEPORTATION_CORE);
 				inv.addItem(HeadList.WORKBENCH);
-				inv.addItem(HeadList.SOUL_CAGE);
+				inv.addItem(HeadList.SOUL_LANTERN);
 				inv.addItem(HeadList.OPAL);
 				inv.addItem(HeadList.REVIVE_STONE);
 				inv.addItem(HeadList.STONE_TANK);
+				inv.addItem(HeadList.WARP_CRYSTAL);
 				p.openInventory(inv);
 				
 			}

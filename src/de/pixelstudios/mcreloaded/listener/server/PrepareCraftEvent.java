@@ -34,6 +34,8 @@ public class PrepareCraftEvent implements Listener{
 						inventory.setResult(null);
 					}else if(ItemManager.isSimilar(item, ItemManager.GOLDERITE_INGOT)) {
 						inventory.setResult(null);
+					}else if(ItemManager.isSimilar(item, ItemManager.WARP_FUEL)){
+						inventory.setResult(null);
 					}
 				}
 			}

@@ -33,7 +33,7 @@ import com.mojang.authlib.properties.Property;
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.datamanagement.Cache;
 import de.pixelstudios.mcreloaded.datamanagement.LiteSQL;
-import de.pixelstudios.mcreloaded.items.ExperienceObelisk;
+import de.pixelstudios.mcreloaded.items.WarpCrystal;
 import de.pixelstudios.mcreloaded.items.manager.HeadList;
 import net.minecraft.server.v1_16_R3.EntityPlayer;
 public class Utils {
@@ -174,7 +174,7 @@ public class Utils {
 	    		return false;
 			}
 		}
-	    public static void checkExperienceObelisk() {
+	    public static void checkWarpCrystal() {
 			
 			//Fehler muss noch behoben werden:
 			//list.add(all); soll für jeder location ausgeführt werden und nicht einmal für all 
@@ -187,7 +187,7 @@ public class Utils {
 					if(!worlds.contains(all.getWorld())) {
 						worlds.add(all.getWorld());
 					}
-					for(ExperienceObelisk eo : Cache.experience_obelisk) {
+					for(WarpCrystal eo : Cache.warp_crystal) {
 						Location loc = eo.getLocation();
 							if(loc.getWorld().equals(all.getWorld())) {
 								if (all.getLocation().distance(loc) <= 20 ) {
@@ -208,7 +208,7 @@ public class Utils {
 												
 												ArmorStand armorstand = (ArmorStand) eloc.getWorld().spawnEntity(eloc, EntityType.ARMOR_STAND);
 												armorstand.setVisible(false);
-												armorstand.setHelmet(HeadList.EXPERIENCE_BOTTLE);
+												armorstand.setHelmet(HeadList.WARP_CRYSTAL);
 												armorstand.setSilent(true);
 												armorstand.setSmall(true);
 												armorstand.setBasePlate(false);
@@ -216,7 +216,7 @@ public class Utils {
 												armorstand.setMarker(true);
 												armorstand.setInvulnerable(true);
 												armorstand.setCollidable(false);
-												armorstand.setCustomName("byjfbvxyBJIUG892psx-sujxcbPrujsnxiseIJKskls93as2542473697997979792210");
+												armorstand.setCustomName("byjfbvxyBJIUG892psx-ssfsdjkbfhijkgcvuzg127263489263461924528648");
 											}
 										});
 									}
@@ -225,14 +225,13 @@ public class Utils {
 						}
 					for(World w : worlds) {
 						for(ArmorStand as : w.getEntitiesByClass(ArmorStand.class)) {		
-							if(!as.hasGravity()) {
-								if(!as.isCollidable()) {
-									if(as.getCustomName().equals("byjfbvxyBJIUG892psx-sujxcbPrujsnxiseIJKskls93as2542473697997979792210")) {
+							if(!as.hasGravity() && !as.isCollidable()) {
+									if(as.getCustomName().equals("byjfbvxyBJIUG892psx-ssfsdjkbfhijkgcvuzg127263489263461924528648")) {
 										Location locas = as.getEyeLocation();
 										locas.setY(locas.getBlockY()+1);
 										locas.setX(locas.getBlockX());
 										locas.setZ(locas.getBlockZ());
-										for(ExperienceObelisk eo : Cache.experience_obelisk) {
+										for(WarpCrystal eo : Cache.warp_crystal) {
 											Location loc = eo.getLocation();
 											if(loc.getBlock().getLocation().equals(locas.getBlock().getLocation())) {
 												if(list.size() == 0) {
@@ -246,7 +245,7 @@ public class Utils {
 													});
 												}
 											}
-										}
+										
 									}
 								}
 							}

@@ -1,39 +1,20 @@
 package de.pixelstudios.mcreloaded.commands;
 
-import java.util.List;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 
-import de.pixelstudios.mcreloaded.MCReloaded;
-import de.pixelstudios.mcreloaded.messaging.MessageFormatter;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.TextComponent;
+import de.pixelstudios.mcreloaded.guis.ProfileGUI;
 
-public class MenuCommand implements CommandExecutor, TabCompleter{
-	private MessageFormatter messageFormatter;
-	
-	public MenuCommand(MCReloaded plugin) {
-		this.messageFormatter = plugin.getMessageFormatter();
-	}
+public class MenuCommand implements CommandExecutor{
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String lable, String[] args) {
-		TextComponent tc = new TextComponent("§1Test1 §2Test2 §3Test3 §4Test4 §5Test5 §6Test6 §7Test7 §8Test8 ");
-		tc.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.RUN_COMMAND, "/ping" ));			
-		TextComponent tc1 = new TextComponent("Test");
-		tc1.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/Test" ));			
-		tc.addExtra(tc1);
-		sender.spigot().sendMessage(tc);
+		if(sender instanceof Player) {
+			Player p = (Player) sender;
+			ProfileGUI.openProfileGui(p);
+		}
 		return false;
 	}
-
-	@Override
-	public List<String> onTabComplete(CommandSender sender, Command cmd, String lable, String[] args) {
-		
-		return null;
-	}
-
 }
