@@ -44,7 +44,6 @@ import de.pixelstudios.mcreloaded.items.manager.HeadList;
 import de.pixelstudios.mcreloaded.messaging.MessageFormatter;
 import de.pixelstudios.mcreloaded.utils.Utils;
 
-@SuppressWarnings("deprecation")
 public class ItemManager {
 	private MessageFormatter messageFormatter;
 	private Config config;
@@ -86,6 +85,7 @@ public class ItemManager {
 	public static ItemStack PORTABLE_CRAFTING_TABLE;
 	public static ItemStack PORTABLE_ENDERCHEST;
 	public static ItemStack INVISIBLE_ITEM_FRAME;
+	public static ItemStack INVISIBLE_GLOW_ITEM_FRAME;
 	public static ItemStack GRAPPLING_HOOK;
 	public static ItemStack HEART_OF_THE_MINE;
 	
@@ -113,6 +113,11 @@ public class ItemManager {
 	public static ItemStack GOLDERITE_ARMOR_BOOTS;
 	public static ItemStack GOLDERITE_INGOT;
 	public static ItemStack GOLDERITE_SWORD;
+	
+	public static ItemStack COPPER_ARMOR_HELMET;
+	public static ItemStack COPPER_ARMOR_CHESTPLATE;
+	public static ItemStack COPPER_ARMOR_LEGGINGS;
+	public static ItemStack COPPER_ARMOR_BOOTS;
 	
 	//*************************************************************
 	//Costmetics
@@ -382,24 +387,34 @@ public class ItemManager {
 		ALL_ITEMS.put("GRAND_EXPERIENCE_BOTTLE", GRAND_EXPERIENCE_BOTTLE);
 		
 		HEART_OF_THE_MINE = new ItemStack(Material.HEART_OF_THE_SEA);
-		ItemMeta Heart_of_the_mine1 = HEART_OF_THE_MINE.getItemMeta();
-		Heart_of_the_mine1.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		Heart_of_the_mine1.setDisplayName("§bHeart Of The Mine");
-		Heart_of_the_mine1.setCustomModelData(1);
-		Heart_of_the_mine1.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		Heart_of_the_mine1.getPersistentDataContainer().set(heart_of_the_mine_Key, PersistentDataType.BYTE, (byte) 1);
-		HEART_OF_THE_MINE.setItemMeta(Heart_of_the_mine1);
+		ItemMeta Heart_of_the_mine = HEART_OF_THE_MINE.getItemMeta();
+		Heart_of_the_mine.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		Heart_of_the_mine.setDisplayName("§bHeart Of The Mine");
+		Heart_of_the_mine.setCustomModelData(1);
+		Heart_of_the_mine.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+		Heart_of_the_mine.getPersistentDataContainer().set(heart_of_the_mine_Key, PersistentDataType.BYTE, (byte) 1);
+		HEART_OF_THE_MINE.setItemMeta(Heart_of_the_mine);
 		ALL_ITEMS.put("HEART_OF_THE_MINE", HEART_OF_THE_MINE);
 		
 		INVISIBLE_ITEM_FRAME = new ItemStack(Material.ITEM_FRAME);
-		ItemMeta Invisible_Itemframe1 = INVISIBLE_ITEM_FRAME.getItemMeta();
-		Invisible_Itemframe1.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		Invisible_Itemframe1.setDisplayName("§fInvisible Item Frame");
-		Invisible_Itemframe1.setCustomModelData(1);
-		Invisible_Itemframe1.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		Invisible_Itemframe1.getPersistentDataContainer().set(invisible_item_frame_Key, PersistentDataType.BYTE, (byte) 1);
-		INVISIBLE_ITEM_FRAME.setItemMeta(Invisible_Itemframe1);
+		ItemMeta Invisible_Itemframe = INVISIBLE_ITEM_FRAME.getItemMeta();
+		Invisible_Itemframe.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		Invisible_Itemframe.setDisplayName("§fInvisible Item Frame");
+		Invisible_Itemframe.setCustomModelData(1);
+		Invisible_Itemframe.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+		Invisible_Itemframe.getPersistentDataContainer().set(invisible_item_frame_Key, PersistentDataType.BYTE, (byte) 1);
+		INVISIBLE_ITEM_FRAME.setItemMeta(Invisible_Itemframe);
 		ALL_ITEMS.put("INVISIBLE_ITEM_FRAME", INVISIBLE_ITEM_FRAME);
+		
+		INVISIBLE_GLOW_ITEM_FRAME = new ItemStack(Material.GLOW_ITEM_FRAME);
+		ItemMeta Invisible_GlowItemframe = INVISIBLE_GLOW_ITEM_FRAME.getItemMeta();
+		Invisible_GlowItemframe.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		Invisible_GlowItemframe.setDisplayName("§fInvisible Glow Item Frame");
+		Invisible_GlowItemframe.setCustomModelData(1);
+		Invisible_GlowItemframe.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+		Invisible_GlowItemframe.getPersistentDataContainer().set(invisible_item_frame_Key, PersistentDataType.BYTE, (byte) 1);
+		INVISIBLE_GLOW_ITEM_FRAME.setItemMeta(Invisible_GlowItemframe);
+		ALL_ITEMS.put("INVISIBLE_GLOW_ITEM_FRAME", INVISIBLE_GLOW_ITEM_FRAME);
 		
 		GRAPPLING_HOOK = new ItemStack(Material.FISHING_ROD);
 		ItemMeta GrapplingHook1 = GRAPPLING_HOOK.getItemMeta();
@@ -726,6 +741,14 @@ public class ItemManager {
 		Invisible_Itemframe.setIngredient('N', Material.STICK);
 		Invisible_Itemframe.setIngredient('L', Material.GLASS_PANE);
 		Bukkit.getServer().addRecipe(Invisible_Itemframe);		
+		
+		//*******************************************************************
+		ShapelessRecipe Invisible_GlowItemframe = new ShapelessRecipe(new NamespacedKey(MCReloaded.getPlugin(), "invisible_glow_item_frame"), INVISIBLE_GLOW_ITEM_FRAME);
+		
+		Invisible_GlowItemframe.addIngredient(new ExactChoice(INVISIBLE_ITEM_FRAME));
+		Invisible_GlowItemframe.addIngredient(Material.GLOW_INK_SAC);
+        Bukkit.getServer().addRecipe(Invisible_GlowItemframe);		
+        
 		//*******************************************************************
 		
 		ShapedRecipe Super_Pickaxe = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "super_pickaxe"), SUPER_PICKAXE);
@@ -893,15 +916,15 @@ public class ItemManager {
     	BREWINGSTAND_BLOCKED(COFFEE, COLD_MILK, HOT_MILK, WATER_BOWL, ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE),
     	
     	GRINDSTONE_BLOCKED(DIRTY_WATER, CLEAN_WATER, PURIFIED_WATER, WATER_BOWL, COLD_MILK, HOT_MILK,
-    			COFFEE, GRAPPLING_HOOK, HEART_OF_THE_MINE, PORTABLE_CRAFTING_TABLE, INVISIBLE_ITEM_FRAME,
+    			COFFEE, GRAPPLING_HOOK, HEART_OF_THE_MINE, PORTABLE_CRAFTING_TABLE, INVISIBLE_ITEM_FRAME, INVISIBLE_GLOW_ITEM_FRAME,
     			ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE,
     			GOLDERITE_INGOT, WARP_FUEL),
     	
     	ANVIL_BLOCKED(HEART_OF_THE_MINE, DIRTY_WATER, CLEAN_WATER, PURIFIED_WATER, WATER_BOWL,
-    			COLD_MILK, HOT_MILK, COFFEE, COFFEE_BEAN, WARP_CRYSTAL,
-    			ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE, GOLDERITE_INGOT),
+    			COLD_MILK, HOT_MILK, COFFEE, COFFEE_BEAN, WARP_CRYSTAL, INVISIBLE_GLOW_ITEM_FRAME,
+    			ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE, GOLDERITE_INGOT, INVISIBLE_ITEM_FRAME),
     	
-    	PLAYER_HEAD(PORTABLE_CRAFTING_TABLE, PORTABLE_ENDERCHEST, WARP_CRYSTAL, WARP_FUEL),
+    	PLAYER_HEAD(PORTABLE_CRAFTING_TABLE, PORTABLE_ENDERCHEST, WARP_CRYSTAL),
     	
     	PLACEABLE_BLOCKED(PORTABLE_CRAFTING_TABLE, PORTABLE_ENDERCHEST, WARP_CRYSTAL, COFFEE_BEAN),
     	
@@ -970,6 +993,7 @@ public class ItemManager {
     	GOLDERITE_INGOT("golderite_ingot"),
     	WARP_FUEL("warp_fuel"),
     	WARP_CRYSTAL("warp_crystal"),
+    	INVISIBLE_GLOW_ITEM_FRAME("invisible_glow_item_frame"),
     	
     	// CUSTOM ARMOR
     	

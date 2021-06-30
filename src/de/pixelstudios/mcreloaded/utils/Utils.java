@@ -17,7 +17,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -35,7 +35,7 @@ import de.pixelstudios.mcreloaded.datamanagement.Cache;
 import de.pixelstudios.mcreloaded.datamanagement.LiteSQL;
 import de.pixelstudios.mcreloaded.items.WarpCrystal;
 import de.pixelstudios.mcreloaded.items.manager.HeadList;
-import net.minecraft.server.v1_16_R3.EntityPlayer;
+import net.minecraft.server.level.EntityPlayer;
 public class Utils {
 	
 	public static HashMap<Player, BlockFace> lastblockface = new HashMap<Player, BlockFace>();
@@ -142,8 +142,7 @@ public class Utils {
 		
 		public static int getPing(Player p) {
 			CraftPlayer pingc = (CraftPlayer) p;
-			EntityPlayer pinge = pingc.getHandle();
-			return pinge.ping;
+			return	p.getPing();
 		}
 		
 		
@@ -162,11 +161,10 @@ public class Utils {
 	        return maj > major || min > minor || (min == minor && rev >= revision);
 	    }
 
-	    public static boolean isRunningSpigot() {
+	 public static boolean isRunningSpigot() {
 	        return classExists("org.spigotmc.CustomTimingsHandler");
-	    }
-	    
-	    public static boolean classExists(final String className) {
+	    }	    
+	public static boolean classExists(final String className) {
 	    	try {
 	    		Class.forName(className);
 	    		return true;
@@ -174,7 +172,7 @@ public class Utils {
 	    		return false;
 			}
 		}
-	    public static void checkWarpCrystal() {
+	public static void checkWarpCrystal() {
 			
 			//Fehler muss noch behoben werden:
 			//list.add(all); soll für jeder location ausgeführt werden und nicht einmal für all 

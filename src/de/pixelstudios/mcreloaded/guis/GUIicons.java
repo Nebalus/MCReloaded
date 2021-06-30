@@ -11,12 +11,14 @@ public class GUIicons {
 	public static ItemStack CLOSE_ICON;
 	public static ItemStack NEXT_ICON;
 	public static ItemStack BACK_ICON;
-	public static ItemStack MENU;
 	public static ItemStack SETTINGS;
+	public static ItemStack ACHIEVEMENTS;
 	
 	public static ItemStack WARPCRYSTAL_PICKUP;
 	public static ItemStack WARPCRYSTAL_VISIBILITY_PUBLIC;
 	public static ItemStack WARPCRYSTAL_VISIBILITY_PRIVATE;
+	
+	
 	
 	public static ItemStack WHITEFILLER;
 	public static ItemStack GRAYFILLER;
@@ -46,16 +48,6 @@ public class GUIicons {
 		BACK_ICON.setItemMeta(Prev);
 		BACK_ICON.setAmount(1);
 		
-		MENU = new ItemStack(Material.BOOK);
-		ItemMeta menu = MENU.getItemMeta();
-		menu.setDisplayName("§aYour Profile");
-		ArrayList<String> menu1 = new ArrayList<String>();
-		menu1.add("§eClick to open!");
-		menu.setLore(menu1);
-		menu.setCustomModelData(3000);
-		MENU.setItemMeta(menu);
-		MENU.setAmount(1);
-		
 		SETTINGS = new ItemStack(Material.REDSTONE_TORCH);
 		ItemMeta settings = SETTINGS.getItemMeta();
 		settings.setDisplayName("§aSettings");
@@ -67,6 +59,18 @@ public class GUIicons {
 		settings.setCustomModelData(3000);
 		SETTINGS.setItemMeta(settings);
 		SETTINGS.setAmount(1);
+		
+		ACHIEVEMENTS = new ItemStack(Material.ENCHANTED_BOOK);
+		ItemMeta achievements = ACHIEVEMENTS.getItemMeta();
+		achievements.setDisplayName("§aAchievements");
+		ArrayList<String> achievements1 = new ArrayList<String>();
+		achievements1.add("§8Track your progress as you unlock");
+		achievements1.add("§8Achievments.");
+		achievements1.add(" ");
+		achievements1.add("§eClick to view your achievements!");
+		achievements.setLore(achievements1);
+		ACHIEVEMENTS.setItemMeta(achievements);
+		ACHIEVEMENTS.setAmount(1);
 		
 		WHITEFILLER = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
 		ItemMeta whitefiller = WHITEFILLER.getItemMeta();

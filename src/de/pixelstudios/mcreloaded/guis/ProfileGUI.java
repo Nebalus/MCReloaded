@@ -17,26 +17,20 @@ import de.pixelstudios.mcreloaded.utils.Utils;
 
 
 public class ProfileGUI {
-
 	
 	public static HashMap<Player, OfflinePlayer> OtherProfileSave = new HashMap<>();
 	
-	
-	
-public static void openProfileGui(Player p) {		
-
+	public static void openProfileGui(Player p) {		
 		int GUI_Slots = 9*6;
-		
-		Inventory inventory = Bukkit.createInventory(null, GUI_Slots, "§5My profile!");
-		
+		Inventory inventory = Bukkit.createInventory(null, GUI_Slots, "§5My profile!");	
 
 		Bukkit.getScheduler().runTaskAsynchronously(MCReloaded.getPlugin(),new Runnable() {
 			@Override
 			public void run() {
-				
 				for (int i = 0; i < GUI_Slots; ++i ) {
 					inventory.setItem(i, GUIicons.GRAYFILLER);
 				}
+				inventory.setItem(0, GUIicons.ACHIEVEMENTS);
 				inventory.setItem(49, GUIicons.CLOSE_ICON);
 				inventory.setItem(50, GUIicons.SETTINGS);
 				Bukkit.getScheduler().runTask(MCReloaded.getPlugin(),new Runnable() {
@@ -46,23 +40,15 @@ public static void openProfileGui(Player p) {
 					}
 				});
 			}
-		});
-
-	
-		
-		inventory.setItem(49, GUIicons.CLOSE_ICON);
-	
-	
+		});	
 		p.openInventory(inventory);		
-}
-@SuppressWarnings("deprecation")
-public static void openOtherProfileGui(String name, Player sender) {
+	}
+	@SuppressWarnings("deprecation")
+	public static void openOtherProfileGui(String name, Player sender) {
 	
 		int GUI_Slots = 9*6;
 		
 		Inventory inventory = Bukkit.createInventory(null, GUI_Slots, "§5"+name+"`s profile!");
-		
-		
 		
 		Bukkit.getScheduler().runTaskAsynchronously(MCReloaded.getPlugin(),new Runnable() {
 			@Override

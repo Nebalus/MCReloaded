@@ -24,21 +24,11 @@ public class SetResourcePack implements Listener {
 		this.messageFormatter = plugin.getMessageFormatter();
 	}
 
-
-
 	@EventHandler
 	private void onPlayerJoin(PlayerJoinEvent event) {
 		if (config.RESOURCE_PACK_ENABLED)
 			playerManager.applyResourcePack(event.getPlayer(), 20);
 	}
-
-	/* Ich bin mir nicht sicher, warum dies hinzugefügt wurde, und lasse es vorerst für den Fall, dass es tatsächlich benötigt wird
-	@EventHandler
-	public void onPlayerChangedWorld(PlayerChangedWorldEvent event) {
-		if (resourcePack)
-			applyResourcePack(event.getPlayer());
-	}
-	 */
 
 	@EventHandler
 	private void resourcePackEvent(PlayerResourcePackStatusEvent e) {

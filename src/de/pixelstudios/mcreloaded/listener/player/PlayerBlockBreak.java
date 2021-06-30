@@ -1,6 +1,7 @@
 package de.pixelstudios.mcreloaded.listener.player;
 
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -11,11 +12,13 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
+import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.manager.BlockManager;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
+import de.pixelstudios.mcreloaded.utils.Achievements;
 import de.pixelstudios.mcreloaded.utils.Utils;
 
-public class PlayerBlockBreak  implements Listener{
+public class PlayerBlockBreak implements Listener{
 	@SuppressWarnings("deprecation")
 	@EventHandler(
 			  priority = EventPriority.HIGHEST
@@ -25,6 +28,18 @@ public class PlayerBlockBreak  implements Listener{
 		Player p = e.getPlayer();
 		Block b = e.getBlock();
 		ItemStack item = new ItemStack(p.getItemInHand());
+		switch(b.getType()) {
+			case SPAWNER:
+				MCReloaded.getPlugin().getPlayerManager().getProfile(p).giveAchievement(Achievements.MINESPAWNER);
+				break;
+			case OBSIDIAN:
+				if(item.getType() == Material.AIR) {
+					MCReloaded.getPlugin().getPlayerManager().getProfile(p).giveAchievement(Achievements.NEWBEDROCK);
+				}
+				break;
+			default:
+				break;		
+		}
 			try {
 				//Boolean telekinesis = item.getItemMeta().getPersistentDataContainer().has(ItemManager.telekinesis_enchantment, PersistentDataType.BYTE);
 				Boolean isGamemode = !p.getGameMode().equals(GameMode.CREATIVE);
@@ -54,6 +69,22 @@ public class PlayerBlockBreak  implements Listener{
 					case SANDSTONE:
 					case OBSIDIAN:
 					case CRYING_OBSIDIAN:
+					case COBBLED_DEEPSLATE:
+					case DEEPSLATE:
+					case CALCITE:
+					case TUFF:
+					case DRIPSTONE_BLOCK:
+					case DEEPSLATE_IRON_ORE:
+					case DEEPSLATE_GOLD_ORE:
+					case DEEPSLATE_REDSTONE_ORE:
+					case DEEPSLATE_EMERALD_ORE:
+					case DEEPSLATE_LAPIS_ORE:
+					case DEEPSLATE_DIAMOND_ORE:
+					case COPPER_ORE:
+					case SMOOTH_BASALT:
+					case RAW_IRON_BLOCK:
+					case RAW_COPPER_BLOCK:
+					case RAW_GOLD_BLOCK:
 					superTools(b, p, e, isGamemode,item);
 					break;		
 					
@@ -68,7 +99,6 @@ public class PlayerBlockBreak  implements Listener{
 					case GRASS_BLOCK:
 					case DIRT:
 					case GRAVEL:
-					case GRASS_PATH:
 					case SNOW_BLOCK:
 					case SNOW:
 					case SOUL_SAND:

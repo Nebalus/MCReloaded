@@ -91,8 +91,7 @@ public class PlayerInventory implements Listener{
 						}
 						if(event.getCurrentItem().equals(GUIicons.WARPCRYSTAL_VISIBILITY_PUBLIC)) {
 							Cache.warp_crystal_gui_session.get(p).setVisibility(0,true);
-						}
-						if(event.getCurrentItem().equals(GUIicons.WARPCRYSTAL_VISIBILITY_PRIVATE)) {
+						}else if(event.getCurrentItem().equals(GUIicons.WARPCRYSTAL_VISIBILITY_PRIVATE)) {
 							Cache.warp_crystal_gui_session.get(p).setVisibility(2,true);
 						}
 					}else {
@@ -135,6 +134,7 @@ public class PlayerInventory implements Listener{
 				}
 			}
 		}
+		
 		if(e.getInventory().equals(p.getEnderChest())) {
 			p.playSound(p.getEyeLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1, 1);
 		}

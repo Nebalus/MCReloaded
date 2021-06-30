@@ -26,11 +26,9 @@ public class ReloadCommand implements CommandExecutor{
 				for(Player p : Bukkit.getOnlinePlayers()) {
 					p.sendTitle("§cServer Reload", "",1,120,20);
 				}
-				final Runnable task = new Runnable()
-				{
+				final Runnable task = new Runnable(){
 					int times = 60;
-					public void run()
-					{					
+					public void run(){					
 						switch(times) {
 							case 60:
 							case 30:

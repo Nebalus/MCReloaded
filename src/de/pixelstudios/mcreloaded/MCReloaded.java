@@ -19,8 +19,6 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -80,11 +78,7 @@ import fr.mrmicky.fastparticle.FastParticle;
 import fr.mrmicky.fastparticle.ParticleType;
 import io.pixelstudios.libary.ChunkLibary;
 import io.pixelstudios.libary.MathLibary;
-import net.minecraft.server.v1_16_R3.MinecraftServer;
-import net.minecraft.server.v1_16_R3.PacketPlayOutWorldBorder;
-import net.minecraft.server.v1_16_R3.WorldBorder;
-
-
+import net.minecraft.server.MinecraftServer;
 
 public class MCReloaded extends JavaPlugin implements Listener{
 	public static String name = "MCReloaded";
@@ -108,7 +102,7 @@ public class MCReloaded extends JavaPlugin implements Listener{
 		instance = this;
 		ConsoleLogger.info(ConsoleLogger.BOOT_LOADER,"Loading "+ name+"...");
 		// VERSION CHECK
-		if (!Utils.isRunningMinecraft(1, 16, 5)) {
+		if (!Utils.isRunningMinecraft(1, 17, 0)) {
 			String ver = Bukkit.getServer().getBukkitVersion().split("-")[0];
 			ConsoleLogger.error(null,"-----------------------------------------------------------");
 			ConsoleLogger.error(null,messageFormatter.format(false, "console.enable.error.wrong-version.line1",ver));
@@ -399,7 +393,7 @@ public class MCReloaded extends JavaPlugin implements Listener{
 			}
 		}, 0, 1);
 		
-		Bukkit.getScheduler().scheduleAsyncRepeatingTask(mcreloaded, new Runnable() {		
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(mcreloaded, new Runnable() {		
 			@Override
 			public void run() {
 				try {
@@ -423,10 +417,7 @@ public class MCReloaded extends JavaPlugin implements Listener{
 			public void run() {
 				int triggerprozent = 20;
 				for(Player p : Bukkit.getOnlinePlayers()) {
-					WorldBorder worldBorder = new WorldBorder();
-					worldBorder.world = ((CraftWorld) p.getWorld()).getHandle();
-					worldBorder.setSize(p.getWorld().getWorldBorder().getSize());
-					worldBorder.setCenter(p.getWorld().getWorldBorder().getCenter().getX(), p.getWorld().getWorldBorder().getCenter().getZ()); 
+					
 					
 			        int healthProzent = (int) p.getHealth()*100/(int) p.getMaxHealth();
 			        
@@ -441,17 +432,9 @@ public class MCReloaded extends JavaPlugin implements Listener{
 								}
 							});		
 							visualsManager.triggerHeartAnimation(p);
-				            worldBorder.setWarningDistance((int) p.getWorld().getWorldBorder().getSize());
-			            }else {
-							worldBorder.setWarningDistance(0);
-						}
-					}else {
-						worldBorder.setWarningDistance(0);
+			            }
 					}
-					PacketPlayOutWorldBorder packetPlayOutWorldBorder = new PacketPlayOutWorldBorder(worldBorder, PacketPlayOutWorldBorder.EnumWorldBorderAction.INITIALIZE);
-		            ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packetPlayOutWorldBorder);
 				}
-	
 			}
 		}, 0, 25);
 		Bukkit.getScheduler().scheduleAsyncRepeatingTask(mcreloaded, new Runnable() {		

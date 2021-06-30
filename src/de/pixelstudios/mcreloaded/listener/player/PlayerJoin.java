@@ -72,6 +72,7 @@ public class PlayerJoin implements Listener{
 		p.discoverRecipes(Recipes.GOLDERITE_INGOT.getKeys());
 		p.discoverRecipes(Recipes.WARP_FUEL.getKeys());
 		p.discoverRecipes(Recipes.WARP_CRYSTAL.getKeys());
+		p.discoverRecipes(Recipes.INVISIBLE_GLOW_ITEM_FRAME.getKeys());
 		
 		Bukkit.broadcastMessage("§e"+p.getName()+" [§a+§e]");
 
@@ -98,12 +99,9 @@ public class PlayerJoin implements Listener{
 				}
 			}else {
 				try {
-				PreparedStatement ps = LiteSQL.getConnection().prepareStatement("INSERT INTO playerdata (uuid,ipadresse,bantime,banreason,whobannedhim) VALUES (?,?,?,?,?)");
+				PreparedStatement ps = LiteSQL.getConnection().prepareStatement("INSERT INTO playerdata (uuid,ipadresse) VALUES (?,?)");
 				ps.setString(1, p.getUniqueId()+"");
 				ps.setString(2, e.getAddress().getHostAddress());
-				ps.setLong(3, 0l);
-				ps.setString(4, null);
-				ps.setString(5, null);
 				ps.executeUpdate();
 				} catch (SQLException ex) {
 					ex.printStackTrace();

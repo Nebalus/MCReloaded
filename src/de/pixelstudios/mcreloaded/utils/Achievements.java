@@ -8,8 +8,12 @@ public enum Achievements {
 	GILDEDJUICE("GILDEDJUICE","Gilded juice!","Drink a golden apple juice!",0,1),
 	PURIFIED("PURIFIED","Purified water!","Purify water with a cauldron!",0,0),
 	STAYHYDRATED("STAYHYDRATED","Stay hydrated!","Drink a drink and gain water points!",0,0),
-	WHONEEDSSPOTIFY("WHONEEDSSPOTIFY","Who needs spotify?","Have every music disc in your inventory",0,0),
-	FIRSTCHAT("FIRSTCHAT","Let the world hear your voice!","Use the chat for the first time!",0,0);
+	FIRSTCHAT("FIRSTCHAT","Let the world hear your voice!","Use the chat for the first time!",0,0),
+	ANTIBATMAN("ANTIBATMAN", "Anti-Batman","Kill a bat",0,0),
+	MOOTATED("MOOTATED", "Mootated","Murder a mutated cow",0,0),
+	COLLECTIVESECURITY("COLLECTIVESECURITY","Collective Security","Witness the collective power of zombified piglins",0,0),
+	MINESPAWNER("MINESPAWNER","Unthinkable","Break a spawner",0,0),
+	NEWBEDROCK("NEWBEDROCK","Bedrock 2.0","Break a obsidian block with your hand",0,0);
 	
 	String systemname;
 	String name;

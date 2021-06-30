@@ -26,8 +26,8 @@ public class BlockManager {
 					}
 				}else {
 					b.breakNaturally();
-					}
-				}else {
+				}
+			}else {
 				b.setType(Material.AIR);
 			}
 		}

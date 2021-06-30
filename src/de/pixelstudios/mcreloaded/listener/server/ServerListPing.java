@@ -69,15 +69,15 @@ public class ServerListPing implements Listener{
 		ArrayList<OfflinePlayer> op = new ArrayList<OfflinePlayer>();
 		try {
 			try {
-			ResultSet rs = LiteSQL.onQuery("SELECT uuid FROM playerdata WHERE ipadresse = '" + address.getHostAddress()+"'");	
-			while (rs.next()) {
-				UUID uuid = UUID.fromString(rs.getString("uuid"));
-				OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-				op.add(offlinePlayer);
-			}
-			rs.close();	
+				ResultSet rs = LiteSQL.onQuery("SELECT uuid FROM playerdata WHERE ipadresse = '" + address.getHostAddress()+"'");	
+				while (rs.next()) {
+					UUID uuid = UUID.fromString(rs.getString("uuid"));
+					OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+					op.add(offlinePlayer);
+				}
+				rs.close();	
 			}catch(NullPointerException ne) {}
-			}catch (SQLException ex) {
+		}catch (SQLException ex) {
 				ex.printStackTrace();
 		}
 		ipCache.put(address, op);

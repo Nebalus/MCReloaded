@@ -1,10 +1,14 @@
 package de.pixelstudios.mcreloaded.listener.entity;
 
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+
+import de.pixelstudios.mcreloaded.MCReloaded;
+import de.pixelstudios.mcreloaded.utils.Achievements;
 import fr.mrmicky.fastparticle.FastParticle;
 import fr.mrmicky.fastparticle.ParticleType;
 
@@ -21,7 +25,8 @@ public class EntityDeath implements Listener{
 	       switch (entity.getType()) {
 		        case ITEM_FRAME:
 		        case ARMOR_STAND:
-		        break;
+		        break;   
+		      
 		        default:
 		        	/*
 		        	Collection<ItemStack> drops = e.getDrops();
@@ -31,7 +36,21 @@ public class EntityDeath implements Listener{
 					}
 					*/
 		        	FastParticle.spawnParticle(entity.getWorld(), ParticleType.SOUL, entity.getEyeLocation(), 1, 0f, 0f, 0f, 0f);
-		        break;   
+		        break;  
+		        
+	     }
+	     if(entity.getKiller() instanceof Player) {
+		     switch (entity.getType()) {
+		        case BAT:
+		        	MCReloaded.getPlugin().getPlayerManager().getProfile(entity.getKiller()).giveAchievement(Achievements.ANTIBATMAN);
+		        	break;
+		        case MUSHROOM_COW:
+		        	MCReloaded.getPlugin().getPlayerManager().getProfile(entity.getKiller()).giveAchievement(Achievements.MOOTATED);
+		        	break;
+		        
+		        default:
+		        	break;
+		     }
 	     }
     }
 }

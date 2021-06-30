@@ -42,7 +42,6 @@ import io.pixelstudios.libary.InventoryLibary;
 @SuppressWarnings("deprecation")
 public class PlayerInteract implements Listener{
 
-	
 	@EventHandler(
 		      priority = EventPriority.HIGHEST
 		   )
@@ -84,7 +83,7 @@ public class PlayerInteract implements Listener{
 				break;
 			case BOWL:
 				if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
-					if (block == null) return;
+					 
 					if (isWaterBlock(block)) {
 						e.setCancelled(true);
 						if (p.getGameMode() == GameMode.SURVIVAL || p.getGameMode() == GameMode.ADVENTURE) item.setAmount(item.getAmount() - 1);
@@ -134,6 +133,12 @@ public class PlayerInteract implements Listener{
 							Cache.warp_crystal_gui_session.put(p, wcgui);
 							return;
 						}else {
+							if(wc.getVisibility() == 2) {
+								WarpCrystalGUI wcgui = new WarpCrystalGUI(wc,p);
+								wcgui.loadGUI();
+								Cache.warp_crystal_gui_session.put(p, wcgui);
+								return;
+							}
 							p.sendMessage("§cYou do not have permission to access this crystal!!!");
 						}
 						//}else {

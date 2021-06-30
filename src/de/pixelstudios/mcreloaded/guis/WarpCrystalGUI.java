@@ -50,11 +50,11 @@ public class WarpCrystalGUI {
 				}
 				
 				setChargeDisplay(crystal.getWarpCharge(),false);
-				setVisibility(crystal.getVisibility(),false);
 				inv.setItem(48, GUIicons.BACK_ICON);
 				inv.setItem(49, GUIicons.CLOSE_ICON);
 				inv.setItem(50, GUIicons.NEXT_ICON);
 				if(p.getUniqueId().equals(crystal.getOwnerUUID())) {
+					setVisibility(crystal.getVisibility(),false);
 					inv.setItem(53, GUIicons.WARPCRYSTAL_PICKUP);
 				}
 				Bukkit.getScheduler().runTask(MCReloaded.getPlugin(),new Runnable() {
@@ -70,9 +70,10 @@ public class WarpCrystalGUI {
 	public void setVisibility(int visibility, boolean update) {
 		if(update) {
 			Inventory pinv = p.getOpenInventory().getTopInventory();
-			if(crystal.getVisibility() == 0) {
+			crystal.setVisibility(visibility);
+			if(visibility == 0) {
 				pinv.setItem(45, GUIicons.WARPCRYSTAL_VISIBILITY_PRIVATE);
-			}else if(crystal.getVisibility() == 2) {
+			}else if(visibility == 2) {
 				pinv.setItem(45, GUIicons.WARPCRYSTAL_VISIBILITY_PUBLIC);
 			}	
 			Bukkit.getScheduler().runTaskLater(MCReloaded.getPlugin(), new Runnable() {
