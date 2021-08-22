@@ -31,12 +31,6 @@ public class Config {
 	public double MECHANICS_ENERGY_EXHAUSTION;
 	public boolean MECHANICS_ENERGY_COFFEE;
 	
-	public boolean ACHIEVEMENTS_FIRSTJOIN;
-	public boolean ACHIEVEMENTS_STAYHYDRATED;
-	public boolean ACHIEVEMENTS_PURIFIED;
-	public boolean ACHIEVEMENTS_FIRSTCHAT;
-	public boolean ACHIEVEMENTS_GILDEDNETHERITE;
-	
 	public Config(MCReloaded plugin) {
 		this.plugin = plugin;
 		this.messageFormatter = plugin.getMessageFormatter();
@@ -101,12 +95,6 @@ public class Config {
 		this.MECHANICS_ENERGY_SLEEPING_REFRESH_RATE = settings.getDouble("Mechanics.Energy.sleeping-refresh-rate");
 		this.MECHANICS_ENERGY_EXHAUSTION = settings.getDouble("Mechanics.Energy.exhaustion");
 		this.MECHANICS_ENERGY_COFFEE = settings.getBoolean("Mechanics.Energy.coffee");
-		
-		this.ACHIEVEMENTS_FIRSTJOIN = settings.getBoolean("Achievements.FIRSTJOIN");
-		this.ACHIEVEMENTS_FIRSTCHAT = settings.getBoolean("Achievements.FIRSTCHAT");
-		this.ACHIEVEMENTS_GILDEDNETHERITE = settings.getBoolean("Achievements.GILDEDNETHERITE");
-		this.ACHIEVEMENTS_PURIFIED = settings.getBoolean("Achievements.PURIFIED");
-		this.ACHIEVEMENTS_STAYHYDRATED = settings.getBoolean("Achievements.STAYHYDRATED");
 		
 	}
 }

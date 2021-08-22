@@ -60,23 +60,25 @@ public class PlayerInteract implements Listener{
 						if (p.getGameMode() == GameMode.SURVIVAL || p.getGameMode() == GameMode.ADVENTURE) item.setAmount(item.getAmount() - 1);
 						InventoryLibary.addItemToInventory(p, ItemManager.DIRTY_WATER);
 					}else {
-						if(block.getType().equals(Material.CAULDRON)) {
+						if(block.getType().equals(Material.WATER_CAULDRON)) {
 							Levelled cauldron = (Levelled) (block.getBlockData());
-							if(cauldron.getLevel() > 0) {
-								e.setCancelled(true);
-								Block fire = block.getRelative(BlockFace.DOWN);							
+							e.setCancelled(true);
+							Block fire = block.getRelative(BlockFace.DOWN);		
+							if(cauldron.getLevel() > 1) {
 								block.getState().setData(new Cauldron());
 								cauldron.setLevel(cauldron.getLevel() - 1);
-								block.setBlockData(cauldron);						
-								ItemStack waterBottle = ItemManager.DIRTY_WATER;		
-								if (fire.getType() == Material.FIRE || fire.getType() == Material.SOUL_FIRE) {
-									up.giveAchievement(Achievements.PURIFIED);
-									waterBottle = ItemManager.PURIFIED_WATER;
-								}
-								p.playSound(block.getLocation(), Sound.ITEM_BOTTLE_FILL, 1, 1);
-								if (p.getGameMode() == GameMode.SURVIVAL || p.getGameMode() == GameMode.ADVENTURE) item.setAmount(item.getAmount() - 1);
-								InventoryLibary.addItemToInventory(p, waterBottle);
+								block.setBlockData(cauldron);	
+							}else {
+								block.setType(Material.CAULDRON);
 							}
+							ItemStack waterBottle = ItemManager.DIRTY_WATER;		
+							if (fire.getType() == Material.FIRE || fire.getType() == Material.SOUL_FIRE) {
+								up.giveAchievement(Achievements.PURIFIED);
+								waterBottle = ItemManager.PURIFIED_WATER;
+							}
+							p.playSound(block.getLocation(), Sound.ITEM_BOTTLE_FILL, 1, 1);
+							if (p.getGameMode() == GameMode.SURVIVAL || p.getGameMode() == GameMode.ADVENTURE) item.setAmount(item.getAmount() - 1);
+							InventoryLibary.addItemToInventory(p, waterBottle);
 						}
 					}
 				}
@@ -151,7 +153,7 @@ public class PlayerInteract implements Listener{
 		
 		if(e.getAction() == Action.LEFT_CLICK_BLOCK) {
 			if(block == null) return;
-			Utils.lastblockface.put(p,e.getBlockFace());
+			up.setLastBlockFace(e.getBlockFace());
 		}
 		
 	}

@@ -31,7 +31,7 @@ public class ProfileCommand implements CommandExecutor{
 				String uuid = op.getUniqueId().toString();
 				String uuidshort = uuid.substring(0, 2);
 						
-				File playerdir = new File(FileManager.serverPath + "/PixelStudios/MCReloaded/PlayerData/"+uuidshort+"/"+uuid+"/");
+				File playerdir = new File(MCReloaded.serverpath + "/PixelStudios/MCReloaded/PlayerData/"+uuidshort+"/"+uuid+"/");
 				if(playerdir.exists()) {		
 					ProfileGUI.openOtherProfileGui(op.getName(),p);				
 				}else {					

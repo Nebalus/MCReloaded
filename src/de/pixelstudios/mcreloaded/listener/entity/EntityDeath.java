@@ -47,6 +47,10 @@ public class EntityDeath implements Listener{
 		        case MUSHROOM_COW:
 		        	MCReloaded.getPlugin().getPlayerManager().getProfile(entity.getKiller()).giveAchievement(Achievements.MOOTATED);
 		        	break;
+		        case VILLAGER:
+		        case WANDERING_TRADER:
+		        	MCReloaded.getPlugin().getPlayerManager().getProfile(entity.getKiller()).giveAchievement(Achievements.KILLVILLAGER);
+		        	break;
 		        
 		        default:
 		        	break;

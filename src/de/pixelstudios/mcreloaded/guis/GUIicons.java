@@ -52,7 +52,7 @@ public class GUIicons {
 		ItemMeta settings = SETTINGS.getItemMeta();
 		settings.setDisplayName("§aSettings");
 		ArrayList<String> settings1 = new ArrayList<String>();
-		settings1.add("§8View and edit your settings!");
+		settings1.add("§7View and edit your settings!");
 		settings1.add(" ");
 		settings1.add("§eClick to open!");
 		settings.setLore(settings1);
@@ -64,8 +64,8 @@ public class GUIicons {
 		ItemMeta achievements = ACHIEVEMENTS.getItemMeta();
 		achievements.setDisplayName("§aAchievements");
 		ArrayList<String> achievements1 = new ArrayList<String>();
-		achievements1.add("§8Track your progress as you unlock");
-		achievements1.add("§8Achievments.");
+		achievements1.add("§7Track your progress as you unlock");
+		achievements1.add("§7Achievments.");
 		achievements1.add(" ");
 		achievements1.add("§eClick to view your achievements!");
 		achievements.setLore(achievements1);

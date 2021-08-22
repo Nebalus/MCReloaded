@@ -40,6 +40,7 @@ public class LiteSQL {
 			stmt = conn.createStatement();
 			onUpdate("CREATE TABLE IF NOT EXISTs playerdata(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, uuid VARCHAR, ipadresse VARCHAR)");
 			onUpdate("CREATE TABLE IF NOT EXISTs achievements(claims INTEGER, achievementname VARCHAR)");
+			//onUpdate("CREATE TABLE IF NOT EXISTs playerdata(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, uuid VARCHAR, ipadresse VARCHAR)");
 			ConsoleLogger.info(ConsoleLogger.LITESQL,messageFormater.format(false, "console.enable.litesql-loaded"));
 		}catch(SQLException | IOException e) {
 			e.printStackTrace();
@@ -59,14 +60,14 @@ public class LiteSQL {
 	}
 	
 	
-	 public static boolean isConnected() {
-	    	return (conn == null ? false : true);
-	    }
+	public static boolean isConnected() {
+		return (conn == null ? false : true);
+	}
 	 
 	 
-	 public static Connection getConnection() {
-	    	return conn;
-	    }
+	public static Connection getConnection() {
+		return conn;
+	}
 	
 	 
 	public static void onUpdate(String sql) {
@@ -77,13 +78,12 @@ public class LiteSQL {
 		}
 	}
 		
-		public static ResultSet onQuery(String sql) {
+	public static ResultSet onQuery(String sql) {
 		try {
 			return stmt.executeQuery(sql);
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 			return null;
-		}
-	
+	}
 }

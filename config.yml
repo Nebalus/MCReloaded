@@ -11,7 +11,7 @@ ResourcePack:
   # Enable the MCReloaded resource pack for players
   EnableResourcePack: true
   # The link to the pack, you can put a custom link here if need be
-  ResourcePackURL: https://resourcepack.host/dl/jfgleQr050rBXfK99OWydDbUt7qFLenb/%C2%A77Minecraft%C2%A78-%C2%A7aReloaded.zip
+  ResourcePackURL:  http://resourcepack.host/dl/lvIFv8pU19YQFrUn91F2pGqEW7q9SMOp/%C2%A77Minecraft%C2%A78-%C2%A7aReloaded.zip
   # Notify players when they log in if they deny the resource pack
   NotifyMessage: true
 
@@ -41,16 +41,6 @@ Mechanics:
     exhaustion: 0.15
     # Enables coffee recipes and effects (Drink coffee to regain energy)
     coffee: true
-  
-
-Recipes:
-
-Achievements:
-  FIRSTJOIN: true
-  GILDEDNETHERITE: true
-  FIRSTCHAT: true
-  STAYHYDRATED: true
-  PURIFIED: true
    
 # Please don´t remove!!!!!
 Config-Version: '1.0'

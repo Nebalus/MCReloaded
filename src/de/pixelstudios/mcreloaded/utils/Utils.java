@@ -1,13 +1,10 @@
 package de.pixelstudios.mcreloaded.utils;
 
-import java.io.InputStreamReader;
 import java.lang.reflect.Field;
-import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,8 +13,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
-import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -25,8 +20,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 
@@ -35,10 +28,8 @@ import de.pixelstudios.mcreloaded.datamanagement.Cache;
 import de.pixelstudios.mcreloaded.datamanagement.LiteSQL;
 import de.pixelstudios.mcreloaded.items.WarpCrystal;
 import de.pixelstudios.mcreloaded.items.manager.HeadList;
-import net.minecraft.server.level.EntityPlayer;
 public class Utils {
-	
-	public static HashMap<Player, BlockFace> lastblockface = new HashMap<Player, BlockFace>();
+
 	
 	public static Boolean isReloading = false;
 	public static Boolean isStoping = false;
@@ -62,35 +53,11 @@ public class Utils {
         return head;
     }
 	
-	public static String[] getSkin(Player player, String name) {
-		try {
-			URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + name);
-			InputStreamReader reader = new InputStreamReader(url.openStream());
-			String uuid = new JsonParser().parse(reader).getAsJsonObject().get("id").getAsString();
-			
-			URL url2 = new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid
-			     + "?unsigned=false");
-			InputStreamReader reader2 = new InputStreamReader(url2.openStream());
-			JsonObject property = new JsonParser().parse(reader2).getAsJsonObject().get("properties").getAsJsonArray().get(0).getAsJsonObject();
-			String texture = property.get("value").getAsString();
-			String signature = property.get("signature").getAsString();
-			return new String[] {texture, signature};
-		}catch(Exception e) {
-			EntityPlayer p = ((CraftPlayer) player).getHandle();
-			GameProfile profile = p.getProfile();
-			Property property = profile.getProperties().get("textures").iterator().next();
-			String texture = property.getValue();
-			String signature = property.getSignature();
-			return new String[] {texture, signature};
-		}
+	public static NamespacedKey getNamespacedKey(String key) {
+		return new NamespacedKey(MCReloaded.getPlugin(), key);
 	}
-	
-	 public static NamespacedKey getNamespacedKey(String key) {
-		    return new NamespacedKey(MCReloaded.getPlugin(), key);
-	    }
-	
 	 
-	 public static Boolean doesPlayerExists(String UUID) {		
+	public static Boolean doesPlayerExists(String UUID) {		
 		try {	
 			PreparedStatement ps = LiteSQL.getConnection().prepareStatement("SELECT uuid FROM playerdata WHERE uuid = ?");
 			ps.setString(1, UUID);
@@ -114,36 +81,33 @@ public class Utils {
 					
 		if(tage >= 1) {		
 			if(stunden == 0) {
-				return "§b"+tage+" days";
+				return tage+" days";
 			}else {
-				return "§b"+tage+" days, "+stunden+" hours";
+				return tage+" days, "+stunden+" hours";
 			}
 			}else if(stunden >= 1){ 
 				if(minuten == 0) {
-					return "§b"+stunden+" hours";
+					return stunden+" hours";
 				}else {
-					return "§b"+stunden+" hours, "+stunden+" minutes";			
+					return stunden+" hours, "+stunden+" minutes";			
 				}	
 			}else if(minuten >= 1){
 				if(sekunden == 0) {
-					return "§b"+minuten+" minutes";
+					return minuten+" minutes";
 				}else {
-					return "§b"+minuten+" minutes, "+sekunden+" seconds";			
+					return minuten+" minutes, "+sekunden+" seconds";			
 				}	
 			}else if(sekunden >= 1){
-				if(sekunden == 0) {
-					return "§b"+1+"seconds";
-				}else {
-					return "§b"+sekunden+" seconds";			
-				}				
+				return sekunden+" seconds";							
+			}else if(rawData < 1000) {
+				return 1+" second";
 			}
-			return "§bHmm something went wrong ._.";	
+			return "Hmm something went wrong ._.";	
 		}
 		
-		public static int getPing(Player p) {
-			CraftPlayer pingc = (CraftPlayer) p;
-			return	p.getPing();
-		}
+	public static int getPing(Player p) {
+		return p.getPing();
+	}
 		
 		
 	
@@ -161,9 +125,10 @@ public class Utils {
 	        return maj > major || min > minor || (min == minor && rev >= revision);
 	    }
 
-	 public static boolean isRunningSpigot() {
+
+	public static boolean isRunningSpigot() {
 	        return classExists("org.spigotmc.CustomTimingsHandler");
-	    }	    
+	}	    
 	public static boolean classExists(final String className) {
 	    	try {
 	    		Class.forName(className);

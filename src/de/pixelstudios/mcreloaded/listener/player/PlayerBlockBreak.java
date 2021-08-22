@@ -15,8 +15,10 @@ import org.bukkit.persistence.PersistentDataType;
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.manager.BlockManager;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
+import de.pixelstudios.mcreloaded.manager.UserProfile;
 import de.pixelstudios.mcreloaded.utils.Achievements;
 import de.pixelstudios.mcreloaded.utils.Utils;
+import io.pixelstudios.libary.ChunkLibary;
 
 public class PlayerBlockBreak implements Listener{
 	@SuppressWarnings("deprecation")
@@ -28,6 +30,7 @@ public class PlayerBlockBreak implements Listener{
 		Player p = e.getPlayer();
 		Block b = e.getBlock();
 		ItemStack item = new ItemStack(p.getItemInHand());
+		//p.sendMessage(ChunkLibary.isSlimeChunk(b.getWorld().getSeed(), (int)Math.ceil(b.getX()), (int)Math.ceil(b.getZ()))+"");
 		switch(b.getType()) {
 			case SPAWNER:
 				MCReloaded.getPlugin().getPlayerManager().getProfile(p).giveAchievement(Achievements.MINESPAWNER);
@@ -164,7 +167,7 @@ public class PlayerBlockBreak implements Listener{
 		}
 	
 		public void superTools(Block b, Player p1, BlockBreakEvent e1, Boolean isGamemode, ItemStack item) {
-			BlockFace face = Utils.lastblockface.get(p1);
+			BlockFace face = MCReloaded.getPlugin().getPlayerManager().getProfile(p1).getLastBlockFace();
 			if(face.equals(BlockFace.NORTH)||face.equals(BlockFace.SOUTH)) {
 					if(b.getLocation().add(-1, -1, 0).getBlock().getType().equals(b.getType())) {
 						BlockManager.breakblock(b.getLocation().add(-1, -1, 0), isGamemode, p1, item);

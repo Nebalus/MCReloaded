@@ -19,6 +19,7 @@ import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.util.CachedServerIcon;
 
 import de.pixelstudios.mcreloaded.datamanagement.LiteSQL;
+import de.pixelstudios.mcreloaded.utils.Utils;
 
 public class ServerListPing implements Listener{
 
@@ -60,7 +61,8 @@ public class ServerListPing implements Listener{
 		        } catch (Exception e1) {
 		        }
 				
-				e.setMotd("§aWelcome "+ masterOp.getName());
+				e.setMotd("§aWelcome "+ masterOp.getName()+"\n"
+						+ "§3Last Online§e: §b"+Utils.getTimeString(System.currentTimeMillis(), masterOp.getLastPlayed())+" ago");
 				
 			}		
 		}

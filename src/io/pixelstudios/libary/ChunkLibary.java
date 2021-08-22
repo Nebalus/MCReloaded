@@ -1,5 +1,7 @@
 package io.pixelstudios.libary;
 
+import java.util.Random;
+
 import org.bukkit.block.Biome;
 
 public class ChunkLibary {
@@ -43,5 +45,12 @@ public class ChunkLibary {
 				return true;
 		}		
 		return false;
+	}
+	
+	public static boolean isSlimeChunk(long seed, int xPos, int zPos) {
+		int xPosition = xPos >> 4;
+		int zPosition = zPos >> 4;
+		Random rnd = new Random(seed + (long)(xPosition * xPosition * 4987142) + (long)(xPosition * 5947611) + (long)(zPosition * zPosition) * 4392871L + (long)(zPosition * 389711) ^ 987234911L);
+		return rnd.nextInt(10) == 0;
 	}
 }

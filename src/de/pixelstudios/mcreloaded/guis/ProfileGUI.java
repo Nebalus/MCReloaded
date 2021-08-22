@@ -30,7 +30,7 @@ public class ProfileGUI {
 				for (int i = 0; i < GUI_Slots; ++i ) {
 					inventory.setItem(i, GUIicons.GRAYFILLER);
 				}
-				inventory.setItem(0, GUIicons.ACHIEVEMENTS);
+				inventory.setItem(22, GUIicons.ACHIEVEMENTS);
 				inventory.setItem(49, GUIicons.CLOSE_ICON);
 				inventory.setItem(50, GUIicons.SETTINGS);
 				Bukkit.getScheduler().runTask(MCReloaded.getPlugin(),new Runnable() {
@@ -135,8 +135,7 @@ public class ProfileGUI {
 					
 					inventory.setItem(15, Offline);
 				}
-				
-				
+					
 				inventory.setItem(16, SlotfillerClickSlot);
 				inventory.setItem(22, skullinfo);
 				inventory.setItem(24, SlotfillerClickSlot);

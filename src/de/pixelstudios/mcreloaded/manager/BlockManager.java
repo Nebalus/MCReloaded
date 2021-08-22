@@ -14,14 +14,10 @@ public class BlockManager {
 		Block b = loc.getBlock();
 		if(!b.getType().equals(Material.AIR)) {
 			if(dropable) {
-				Location itemLoc = b.getLocation();
-				itemLoc.setY(b.getY() + 0.5);
-				itemLoc.setX(b.getX() + 0.5);
-				itemLoc.setZ(b.getZ() + 0.5);
 				if(item != null) {
 					Collection<ItemStack> drops = b.getDrops(item);
 					if(!drops.isEmpty()) {
-						b.getWorld().dropItemNaturally(itemLoc, drops.iterator().next());
+						b.getWorld().dropItemNaturally(b.getLocation(), drops.iterator().next());
 						b.setType(Material.AIR);
 					}
 				}else {

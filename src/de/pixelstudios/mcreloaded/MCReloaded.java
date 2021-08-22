@@ -44,6 +44,7 @@ import de.pixelstudios.mcreloaded.datamanagement.LiteSQL;
 import de.pixelstudios.mcreloaded.items.GrapplingHook;
 import de.pixelstudios.mcreloaded.items.Invisible_Item_Frame;
 import de.pixelstudios.mcreloaded.items.WarpCrystal;
+import de.pixelstudios.mcreloaded.listener.entity.EntityBlockPlace;
 import de.pixelstudios.mcreloaded.listener.entity.EntityDamage;
 import de.pixelstudios.mcreloaded.listener.entity.EntityDamageByEntity;
 import de.pixelstudios.mcreloaded.listener.entity.EntityDeath;
@@ -81,11 +82,15 @@ import io.pixelstudios.libary.MathLibary;
 import net.minecraft.server.MinecraftServer;
 
 public class MCReloaded extends JavaPlugin implements Listener{
-	public static String name = "MCReloaded";
-	public static String chatprefix = "§aMCReloaded »§r ";
-	public static String infoprefix = "§f§lINFO: §r";
+	public final static String name = "MCReloaded";
+	public final static String chatprefix = "§aMCReloaded »§r ";
+	public final static String infoprefix = "§f§lINFO: §r";
 	private static MCReloaded instance;
 	public static List<World> Worlds = new ArrayList<World>();
+	
+	public final static String serverpath = MCReloaded.getPlugin().getDataFolder().getAbsolutePath()
+			.substring(0, MCReloaded.getPlugin().getDataFolder().getAbsolutePath().length() - (9 + MCReloaded.getPlugin().getName().length()));
+	
 	
 	private MessageFormatter messageFormatter;
 	private PlayerManager playerManager;
@@ -233,6 +238,8 @@ public class MCReloaded extends JavaPlugin implements Listener{
 		Bukkit.getPluginManager() .registerEvents(new EntityDamage(), mcreloaded);	
 		counter++;
 		Bukkit.getPluginManager() .registerEvents(new EntityTargetLivingEntity(this), mcreloaded);	
+		counter++;
+		Bukkit.getPluginManager() .registerEvents(new EntityBlockPlace(), mcreloaded);	
 		counter++;
 		
 		//Player events
@@ -400,13 +407,7 @@ public class MCReloaded extends JavaPlugin implements Listener{
 					Utils.checkWarpCrystal();
 				}catch(ConcurrentModificationException ex) {}
 				for(Player p : Bukkit.getOnlinePlayers()) {
-					UserProfile up = playerManager.getProfile(p);
 					ItemManager.debugInventory(p);
-					if(up.isAfk()) {
-						p.setPlayerListName(p.getName()+" §6[§cAFK§6]");
-					}else {
-						p.setPlayerListName(p.getName());
-					}
 				}
 				
 			}
