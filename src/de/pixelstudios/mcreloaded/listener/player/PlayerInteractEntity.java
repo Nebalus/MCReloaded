@@ -10,13 +10,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-import de.pixelstudios.mcreloaded.guis.ProfileGUI;
+import de.pixelstudios.mcreloaded.guis.menu.MainMenuGUI;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
 import io.pixelstudios.libary.InventoryLibary;
 
 public class PlayerInteractEntity implements Listener{
 
-	 @SuppressWarnings({"deprecation",  })
+	 @SuppressWarnings({"deprecation" })
 	 @EventHandler(
 			  ignoreCancelled = true,
 			  priority = EventPriority.HIGHEST
@@ -28,7 +28,7 @@ public class PlayerInteractEntity implements Listener{
 		 	case PLAYER:
 				Player op = (Player) e.getRightClicked();
 				if(p.isSneaking()) {
-					ProfileGUI.openOtherProfileGui(op.getName(),p);
+					MainMenuGUI.openOtherProfileGui(op.getName(),p);
 				}
 				break;
 		 	case COW:

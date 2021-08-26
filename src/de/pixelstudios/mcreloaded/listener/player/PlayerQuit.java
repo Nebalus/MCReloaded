@@ -9,7 +9,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.manager.PlayerManager;
-import de.pixelstudios.mcreloaded.manager.UserProfile;
 
 public class PlayerQuit implements Listener{
 
@@ -24,10 +23,9 @@ public class PlayerQuit implements Listener{
 		   )
 	public void onLeave(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
-		UserProfile up = playermanager.getProfile(p);
+		playermanager.getProfile(p).setLastTimeOnline(System.currentTimeMillis());
 		Bukkit.broadcastMessage("§e"+p.getName()+" [§c-§e]");
 		e.setQuitMessage(null);
-		up.setLastTimeOnline(System.currentTimeMillis());
 		playermanager.unloadProfile(p);
 	}
 }

@@ -30,6 +30,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.RecipeChoice.ExactChoice;
 import org.bukkit.inventory.RecipeChoice.MaterialChoice;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
@@ -56,30 +57,29 @@ public class ItemManager {
 	public static List<Material> blockedMaterial = new ArrayList<Material>();
 	
 	private static Map<String, ItemStack> ALL_ITEMS = new HashMap<>();
-
+	private final String BONUS_LORE_BEGINNING = "§7● ";
+	private final String SET_BONUS_LORE_HEADER = "§a§lSet Bonus";
+	private final String BONUS_LORE_HEADER = "§a§lBonus";
 	
-    public static NamespacedKey invisible_item_frame_Key = new NamespacedKey(MCReloaded.getPlugin(), "invisible_item_frame");
-    public static NamespacedKey super_pickaxe_Key = new NamespacedKey(MCReloaded.getPlugin(), "super_pickaxe");
-    public static NamespacedKey super_shovel_Key = new NamespacedKey(MCReloaded.getPlugin(), "super_shovel");
-    public static NamespacedKey super_axe_Key = new NamespacedKey(MCReloaded.getPlugin(), "super_axe");
-    public static NamespacedKey portable_crafting_table_Key = new NamespacedKey(MCReloaded.getPlugin(), "portable_crafting_table");
-    public static NamespacedKey portable_enderchest_Key = new NamespacedKey(MCReloaded.getPlugin(), "portable_enderchest");
-    public static NamespacedKey grappling_hook_Key = new NamespacedKey(MCReloaded.getPlugin(), "grappling_hook");
-    public static NamespacedKey drinkables_Key = new NamespacedKey(MCReloaded.getPlugin(), "drinks");
-    public static NamespacedKey coffee_bean_Key = new NamespacedKey(MCReloaded.getPlugin(), "coffee_bean");
-    public static NamespacedKey heart_of_the_mine_Key = new NamespacedKey(MCReloaded.getPlugin(), "heart_of_the_mine");
-    public static NamespacedKey grand_experience_bottle_Key = new NamespacedKey(MCReloaded.getPlugin(), "grand_experience_bottle");
-    public static NamespacedKey warp_crystal_key = new NamespacedKey(MCReloaded.getPlugin(), "warp_crystal");
-    public static NamespacedKey warp_fuel_key = new NamespacedKey(MCReloaded.getPlugin(), "warp_fuel");
+	
+    public final static NamespacedKey invisible_item_frame_Key = new NamespacedKey(MCReloaded.getPlugin(), "invisible_item_frame");
+    public final static NamespacedKey stormlander_cooldown_Key = new NamespacedKey(MCReloaded.getPlugin(), "stormlander_cooldown");
+    public final static NamespacedKey portable_crafting_table_Key = new NamespacedKey(MCReloaded.getPlugin(), "portable_crafting_table");
+    public final static NamespacedKey portable_enderchest_Key = new NamespacedKey(MCReloaded.getPlugin(), "portable_enderchest");
+    public final static NamespacedKey grappling_hook_Key = new NamespacedKey(MCReloaded.getPlugin(), "grappling_hook");
+    public final static NamespacedKey drinkables_Key = new NamespacedKey(MCReloaded.getPlugin(), "drinks");
+    public final static NamespacedKey coffee_bean_Key = new NamespacedKey(MCReloaded.getPlugin(), "coffee_bean");
+    public final static NamespacedKey heart_of_the_mine_Key = new NamespacedKey(MCReloaded.getPlugin(), "heart_of_the_mine");
+    public final static NamespacedKey grand_experience_bottle_Key = new NamespacedKey(MCReloaded.getPlugin(), "grand_experience_bottle");
+    public final static NamespacedKey warp_crystal_key = new NamespacedKey(MCReloaded.getPlugin(), "warp_crystal");
+    public final static NamespacedKey warp_fuel_key = new NamespacedKey(MCReloaded.getPlugin(), "warp_fuel");
     
-    public static NamespacedKey golderite_ingot_Key = new NamespacedKey(MCReloaded.getPlugin(), "golderite_ingot");
-    public static NamespacedKey cristal_fragment_Key = new NamespacedKey(MCReloaded.getPlugin(), "crystal_fragment");
- 
-    public static NamespacedKey golderite_armor_Key = new NamespacedKey(MCReloaded.getPlugin(), "golderite_armor");
-	
+    public final static NamespacedKey golderite_ingot_Key = new NamespacedKey(MCReloaded.getPlugin(), "golderite_ingot");
+    public final static NamespacedKey cristal_fragment_Key = new NamespacedKey(MCReloaded.getPlugin(), "crystal_fragment");
+    
     //*************************************************************
-    public static NamespacedKey telekinesis_enchantment = new NamespacedKey(MCReloaded.getPlugin(), "ENCHANTMENT_TELEKINESIS");
-    public static NamespacedKey smelting_touch_enchantment = new NamespacedKey(MCReloaded.getPlugin(), "ENCHANTMENT_SMELTING_TOUCH");
+    public static NamespacedKey telekinesis_enchantment = new NamespacedKey(MCReloaded.getPlugin(), "ENCHANT_TELEKINESIS");
+    public static NamespacedKey smelting_touch_enchantment = new NamespacedKey(MCReloaded.getPlugin(), "ENCHANT_SMELTING_TOUCH");
     //*************************************************************
     
 	public static ItemStack PORTABLE_CRAFTING_TABLE;
@@ -93,8 +93,8 @@ public class ItemManager {
 	public static ItemStack DIORITE_PICKAXE;
 	public static ItemStack GRANITE_PICKAXE;
 	
-	public static ItemStack SUPER_PICKAXE;
-	public static ItemStack SUPER_PICKAXE_NETHERITE;
+	public static ItemStack IRON_HAMMER;
+	public static ItemStack STORMLANDER;
 	
 	public static ItemStack SUPER_AXE;
 	public static ItemStack SUPER_AXE_NETHERITE;
@@ -118,7 +118,7 @@ public class ItemManager {
 	public static ItemStack COPPER_ARMOR_CHESTPLATE;
 	public static ItemStack COPPER_ARMOR_LEGGINGS;
 	public static ItemStack COPPER_ARMOR_BOOTS;
-	
+
 	//*************************************************************
 	//Costmetics
 	public static ItemStack ELYTRA_RAVEN_WINGS;
@@ -138,7 +138,8 @@ public class ItemManager {
 	public static ItemStack GOLDEN_APPLE_JUICE;
 	public static ItemStack ENCHANTED_GOLDEN_APPLE_JUICE;
 	//*************************************************************
-	
+	//Entitys
+	public static ItemStack BOLT;
 	
 	public void loadItemManager() {
 	    ConsoleLogger.info(null, messageFormatter.format(false, "console.enable.itemmanager.initialize-itemmanager"));
@@ -173,8 +174,7 @@ public class ItemManager {
 		return true;
 	}
 	
-	public void loadHeads() {
-		
+	public void loadHeads() {		
 		String url = "https://textures.minecraft.net/texture/";
 	
 		//https://minecraft-heads.com/custom-heads/miscellaneous/26412-plus
@@ -220,362 +220,456 @@ public class ItemManager {
         HeadList.WARP_CRYSTAL = Utils.getSkullByTextureURL(url+"77400ea19dbd84f75c39ad6823ac4ef786f39f48fc6f84602366ac29b837422", null, null);
         
 	}
+
 	
 	
+    public class CustomItem{
+    	
+    	private ItemStack itemstack;
+    	private ItemMeta itemmeta;
+    	private PersistentDataContainer psc;
+    	private Modifiers[] modifiers;
+        	
+    	public CustomItem(ItemStack itemstack) {
+    		this.itemstack = new ItemStack(itemstack);
+    		this.itemmeta = itemstack.getItemMeta();
+    		this.psc = itemmeta.getPersistentDataContainer();		
+    	}
+    	public CustomItem(Material material) {
+    		this.itemstack = new ItemStack(material);
+    		this.itemmeta = itemstack.getItemMeta();
+    		this.psc = itemmeta.getPersistentDataContainer();		
+    	}
+    	
+    	public CustomItem setDisplayName(String displayname) {
+    		itemmeta.setDisplayName(displayname);
+    		return this;
+    	}
+    	
+    	public CustomItem setCustomModelData(int custommodeldata) {
+    		itemmeta.setCustomModelData(custommodeldata);
+    		return this;
+    	}
+    	
+    	public CustomItem setLore(String... lore) {
+    		List<String> finalLore = new ArrayList<String>();
+    		for(String subLore : lore) {
+    			finalLore.add(subLore);
+    		}
+    		itemmeta.setLore(finalLore);
+    		return this;
+    	}
+    	
+    	public CustomItem setLore(ArrayList<String> lore) {
+    		itemmeta.setLore(lore);
+    		return this;
+    	}
+    	
+    	public CustomItem addItemFlags(ItemFlag... itemflag) {
+    		itemmeta.addItemFlags(itemflag);
+    		return this;
+    	}
+    	
+    	public CustomItem setIdentifierKeys(NamespacedKey... identifierkeys) {
+    		for(NamespacedKey identifierkey : identifierkeys) {
+				psc.set(identifierkey, PersistentDataType.BYTE, (byte) 1);
+			}
+    		return this;
+    	}
+
+    	public CustomItem setModifiers(Modifiers... modifiers) {
+    		this.modifiers = modifiers;
+    		for(Modifiers forModifiers : modifiers) {
+				psc.set(forModifiers.getKey(), PersistentDataType.BYTE, (byte) 1);
+			}
+    		return this;
+    	}
+    	
+    	public CustomItem addEnchant(Enchantment Enchantment, int Level) {
+    		itemmeta.addEnchant(Enchantment, Level, true);
+    		return this;
+    	}
+    	
+    	public ItemStack build() {
+    		List<String> finalLore = new ArrayList<String>();
+    		if(itemmeta.getLore() != null) {
+    			finalLore = itemmeta.getLore();	
+    		}
+    		if(finalLore != null) {
+	    		int line = 0;
+	    		for(String subLore : finalLore) {
+	    			if(subLore.startsWith(BONUS_LORE_BEGINNING)) {
+	    				finalLore.remove(line);
+	    			}else if(subLore.equalsIgnoreCase(BONUS_LORE_HEADER) || subLore.equalsIgnoreCase(SET_BONUS_LORE_HEADER)) {
+	    				finalLore.remove(line-1);
+	    				finalLore.remove(line);
+	    			}
+	    			line++;
+	    		}
+    		}
+    		if(modifiers != null) {
+    			List<String> setbonus = new ArrayList<String>();
+    			List<String> bonus = new ArrayList<String>();
+    			for(Modifiers modify : modifiers) {
+    				if(modify.isSetBonus()) {
+    					if(setbonus.size() == 0) {
+    						setbonus.add(" ");
+    						setbonus.add(SET_BONUS_LORE_HEADER);
+    					}
+    					setbonus.add(BONUS_LORE_BEGINNING+modify.getDescription());
+    				}else {
+    					if(bonus.size() == 0) {
+    						bonus.add(" ");
+    						bonus.add(BONUS_LORE_HEADER);
+    					}
+    					bonus.add(BONUS_LORE_BEGINNING+modify.getDescription());
+    				}
+    			}
+    			if(setbonus != null) {
+    				finalLore.addAll(setbonus);
+    			}
+    			if(bonus != null) {
+    				finalLore.addAll(bonus);
+    			}
+    		}
+    		if(finalLore != null) {
+    			itemmeta.setLore(finalLore);
+    		}
+    		itemstack.setItemMeta(itemmeta);
+    		
+    		return itemstack;
+    	}
+    	
+    }
 	public boolean loadCustomitems() {
 		//Spieler köpfe laden
-		PORTABLE_CRAFTING_TABLE = new ItemStack(HeadList.WORKBENCH);
-		ItemMeta Workbench1 = PORTABLE_CRAFTING_TABLE.getItemMeta();
-		Workbench1.setDisplayName("§fPortable Crafting Table");
-		Workbench1.setCustomModelData(1);
-		Workbench1.getPersistentDataContainer().set(portable_crafting_table_Key, PersistentDataType.BYTE, (byte) 1);
-		PORTABLE_CRAFTING_TABLE.setItemMeta(Workbench1);
+		PORTABLE_CRAFTING_TABLE = new CustomItem(HeadList.WORKBENCH)
+				.setDisplayName("§fPortable Crafting Table")
+				.setCustomModelData(1)
+				.setIdentifierKeys(portable_crafting_table_Key)
+				.build();
 		ALL_ITEMS.put("PORTABLE_CRAFTING_TABLE", PORTABLE_CRAFTING_TABLE);
 		
-		PORTABLE_ENDERCHEST = new ItemStack(HeadList.ENDERCHEST);
-		ItemMeta Portable_enderchest1 = PORTABLE_ENDERCHEST.getItemMeta();
-		Portable_enderchest1.setDisplayName("§fPortable Enderchest");
-		Portable_enderchest1.setCustomModelData(2);
-		Portable_enderchest1.getPersistentDataContainer().set(portable_enderchest_Key, PersistentDataType.BYTE, (byte) 1);
-		PORTABLE_ENDERCHEST.setItemMeta(Portable_enderchest1);
+		PORTABLE_ENDERCHEST = new CustomItem(HeadList.ENDERCHEST)
+				.setDisplayName("§fPortable Enderchest")
+				.setCustomModelData(2)
+				.setIdentifierKeys(portable_enderchest_Key)
+				.build();
 		ALL_ITEMS.put("PORTABLE_ENDERCHEST", PORTABLE_ENDERCHEST);
 		
-		WARP_CRYSTAL = new ItemStack(HeadList.WARP_CRYSTAL);
-		ItemMeta WarpCrystal = WARP_CRYSTAL.getItemMeta();
-		WarpCrystal.setDisplayName("§fWarp Crystal");
-		WarpCrystal.setCustomModelData(3);
-		WarpCrystal.getPersistentDataContainer().set(warp_crystal_key, PersistentDataType.BYTE, (byte) 1);
-		WARP_CRYSTAL.setItemMeta(WarpCrystal);
+		WARP_CRYSTAL = new CustomItem(HeadList.WARP_CRYSTAL)
+				.setDisplayName("§fWarp Crystal")
+				.setCustomModelData(3)
+				.setIdentifierKeys(warp_crystal_key)
+				.build();
 		ALL_ITEMS.put("WARP_CRYSTAL", WARP_CRYSTAL);	
 		
 		//******************************************************************
 		//Costmetics
-		ELYTRA_RAVEN_WINGS = new ItemStack(Material.ELYTRA);
-	    ItemMeta elytra_raven_wings_meta = ELYTRA_RAVEN_WINGS.getItemMeta();
-	    elytra_raven_wings_meta.setCustomModelData(1);
-	    elytra_raven_wings_meta.setDisplayName("§eRaven Wing Elytra");
-	    ELYTRA_RAVEN_WINGS.setItemMeta(elytra_raven_wings_meta);
+		ELYTRA_RAVEN_WINGS = new CustomItem(Material.ELYTRA)
+				.setDisplayName("§eRaven Wing Elytra")
+				.setCustomModelData(1)
+				.build();
 	    ALL_ITEMS.put("ELYTRA_RAVEN_WINGS", ELYTRA_RAVEN_WINGS);
 	    
-	    ELYTRA_DRAGON_WINGS = new ItemStack(Material.ELYTRA);
-	    ItemMeta elytra_dragon_wings_meta = ELYTRA_DRAGON_WINGS.getItemMeta();
-	    elytra_dragon_wings_meta.setCustomModelData(2);
-	    elytra_dragon_wings_meta.setDisplayName("§eDragon Wing Elytra");
-	    ELYTRA_DRAGON_WINGS.setItemMeta(elytra_dragon_wings_meta);
+	    ELYTRA_DRAGON_WINGS = new CustomItem(Material.ELYTRA)
+	    		.setDisplayName("§eDragon Wing Elytra")
+	    		.setCustomModelData(2)
+	    		.build();
 	    ALL_ITEMS.put("ELYTRA_DRAGON_WINGS", ELYTRA_DRAGON_WINGS);
 	    
-	    ELYTRA_MATRIX = new ItemStack(Material.ELYTRA);
-	    ItemMeta elytra_matrix_meta = ELYTRA_MATRIX.getItemMeta();
-	    elytra_matrix_meta.setCustomModelData(3);
-	    elytra_matrix_meta.setDisplayName("§eMatrix Elytra");
-	    ELYTRA_MATRIX.setItemMeta(elytra_matrix_meta);
+	    ELYTRA_MATRIX = new CustomItem(Material.ELYTRA)
+	    		.setDisplayName("§eMatrix Elytra")
+	    		.setCustomModelData(3)
+	    		.build();
 	    ALL_ITEMS.put("ELYTRA_MATRIX", ELYTRA_MATRIX);
 		
 		//******************************************************************
-	    ANDESITE_PICKAXE = new ItemStack(Material.STONE_PICKAXE);
-	    ItemMeta andesite_pickaxe_meta = ANDESITE_PICKAXE.getItemMeta();
-	    andesite_pickaxe_meta.setCustomModelData(1);
-	    andesite_pickaxe_meta.setDisplayName("§fAndesite Pickaxe");
-	    ANDESITE_PICKAXE.setItemMeta(andesite_pickaxe_meta);
+	    ANDESITE_PICKAXE = new CustomItem(Material.STONE_PICKAXE)
+	    		.setCustomModelData(1)
+	    		.setDisplayName("§fAndesite Pickaxe")
+	    		.build();
 	    ALL_ITEMS.put("ANDESITE_PICKAXE", ANDESITE_PICKAXE);
 	    
-	    DIORITE_PICKAXE = new ItemStack(Material.STONE_PICKAXE);
-	    ItemMeta diorite_pickaxe_meta = DIORITE_PICKAXE.getItemMeta();
-	    diorite_pickaxe_meta.setCustomModelData(2);
-	    diorite_pickaxe_meta.setDisplayName("§fDiorite Pickaxe");
-	    DIORITE_PICKAXE.setItemMeta(diorite_pickaxe_meta);
+	    DIORITE_PICKAXE = new CustomItem(Material.STONE_PICKAXE)
+	    		.setDisplayName("§fDiorite Pickaxe")
+	    		.setCustomModelData(2)
+	    		.build();
 	    ALL_ITEMS.put("DIORITE_PICKAXE", DIORITE_PICKAXE);
 	    
-	    GRANITE_PICKAXE = new ItemStack(Material.STONE_PICKAXE);
-	    ItemMeta granite_pickaxe_meta = GRANITE_PICKAXE.getItemMeta();
-	    granite_pickaxe_meta.setCustomModelData(3);
-	    granite_pickaxe_meta.setDisplayName("§fGranite Pickaxe");
-	    GRANITE_PICKAXE.setItemMeta(granite_pickaxe_meta);
+	    GRANITE_PICKAXE = new CustomItem(Material.STONE_PICKAXE)
+	    		.setCustomModelData(3)
+	    		.setDisplayName("§fGranite Pickaxe")
+	    		.build();
 	    ALL_ITEMS.put("GRANITE_PICKAXE", GRANITE_PICKAXE);
 	    
-	    WARP_FUEL = new ItemStack(Material.QUARTZ);
+	    WARP_FUEL = new CustomItem(Material.QUARTZ)
+	    		.setDisplayName("§fWarp Fuel")
+	    		.setCustomModelData(1)
+	    		.setIdentifierKeys(warp_fuel_key)
+	    		.setLore("§7Charge §a3§7/§a3")
+	    		.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+	    		.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 0)
+	    		.build();
 		ItemMeta WarpFuel = WARP_FUEL.getItemMeta();
-		WarpFuel.setDisplayName("§fWarp Fuel");
-		WarpFuel.setCustomModelData(1);
-		WarpFuel.getPersistentDataContainer().set(warp_fuel_key, PersistentDataType.BYTE, (byte) 1);
 		WarpFuel.getPersistentDataContainer().set(new NamespacedKey(MCReloaded.getPlugin(), "fuelcharge"), PersistentDataType.INTEGER, 3);
-		ArrayList<String> WarpFuel_Lore = new ArrayList<String>();
-		WarpFuel_Lore.add("§7Charge §a3§7/§a3");
-		WarpFuel.setLore(WarpFuel_Lore);
-		WarpFuel.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		WarpFuel.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 0, true);
 		WARP_FUEL.setItemMeta(WarpFuel);
 		ALL_ITEMS.put("WARP_FUEL", WARP_FUEL);	
 	    
-	    GOLDERITE_INGOT = new ItemStack(Material.NETHERITE_INGOT);
-		ItemMeta Golderite_Ingot1 = GOLDERITE_INGOT.getItemMeta();
-		Golderite_Ingot1.setDisplayName("§fGolderite Ingot");
-		Golderite_Ingot1.setCustomModelData(1);
-		Golderite_Ingot1.getPersistentDataContainer().set(golderite_ingot_Key, PersistentDataType.BYTE, (byte) 1);
-		GOLDERITE_INGOT.setItemMeta(Golderite_Ingot1);
+	    GOLDERITE_INGOT = new CustomItem(Material.NETHERITE_INGOT)
+	    		.setCustomModelData(1)
+	    		.setDisplayName("§bGolderite Ingot")
+	    		.setIdentifierKeys(golderite_ingot_Key)
+	    		.build();
 		ALL_ITEMS.put("GOLDERITE_INGOT", GOLDERITE_INGOT);
 	    
-		GOLDERITE_SWORD = new ItemStack(Material.NETHERITE_SWORD);
+		GOLDERITE_SWORD = new CustomItem(Material.NETHERITE_SWORD)
+				.setDisplayName("§bGolderite Sword")
+				.setCustomModelData(1)
+				.setIdentifierKeys(golderite_ingot_Key)
+				.build();
 		ItemMeta Golderite_Sword = GOLDERITE_SWORD.getItemMeta();
-		Golderite_Sword.setDisplayName("§fGolderite Sword");
 		ArrayList<String> Golderite_Sword_Lore = new ArrayList<String>();
 		Golderite_Sword_Lore.add(" ");
 		Golderite_Sword_Lore.add("§a§lBonus");
 		Golderite_Sword_Lore.add("§7● Increase §6Damage§7 dealt to §6Piglin Brute§7 by §62§7.");
 		Golderite_Sword_Lore.add("§7● Increase §6Looting Level§7 by §61§7.");
-		Golderite_Sword.setLore(Golderite_Sword_Lore);
-		Golderite_Sword.setCustomModelData(1);
-		Golderite_Sword.getPersistentDataContainer().set(golderite_ingot_Key, PersistentDataType.BYTE, (byte) 1);
 		GOLDERITE_SWORD.setItemMeta(Golderite_Sword);
 		ALL_ITEMS.put("GOLDERITE_SWORD", GOLDERITE_SWORD);
 		
-		ArrayList<String> Golderite_Armor_Lore = new ArrayList<String>();
-		Golderite_Armor_Lore.add(" ");
-		Golderite_Armor_Lore.add("§a§lSet Bonus");
-		Golderite_Armor_Lore.add("§7● §6Piglin §7become §6Passive§7.");
-		
-		GOLDERITE_ARMOR_HELMET = new ItemStack(Material.NETHERITE_HELMET);
-		ItemMeta Gilded_Netherite_Armor_Helmet = GOLDERITE_ARMOR_HELMET.getItemMeta();
-		Gilded_Netherite_Armor_Helmet.setDisplayName("§fGolderite Helmet");
-		Gilded_Netherite_Armor_Helmet.setCustomModelData(1);
-		Gilded_Netherite_Armor_Helmet.setLore(Golderite_Armor_Lore);
-		Gilded_Netherite_Armor_Helmet.getPersistentDataContainer().set(golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-		GOLDERITE_ARMOR_HELMET.setItemMeta(Gilded_Netherite_Armor_Helmet);
+		GOLDERITE_ARMOR_HELMET = new CustomItem(Material.NETHERITE_HELMET)
+				.setDisplayName("§bGolderite Helmet")
+				.setCustomModelData(1)
+				.setModifiers(Modifiers.PIGLIN_PASSIVE)
+				.build();
 		ALL_ITEMS.put("GOLDERITE_ARMOR_HELMET", GOLDERITE_ARMOR_HELMET);
 		
-		GOLDERITE_ARMOR_CHESTPLATE = new ItemStack(Material.NETHERITE_CHESTPLATE);
-		ItemMeta Gilded_Netherite_Armor_Chestplate = GOLDERITE_ARMOR_CHESTPLATE.getItemMeta();
-		Gilded_Netherite_Armor_Chestplate.setDisplayName("§fGolderite Chestplate");
-		Gilded_Netherite_Armor_Chestplate.setCustomModelData(1);
-		Gilded_Netherite_Armor_Chestplate.setLore(Golderite_Armor_Lore);
-		Gilded_Netherite_Armor_Chestplate.getPersistentDataContainer().set(golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-		GOLDERITE_ARMOR_CHESTPLATE.setItemMeta(Gilded_Netherite_Armor_Chestplate);
+		GOLDERITE_ARMOR_CHESTPLATE = new CustomItem(Material.NETHERITE_CHESTPLATE)
+				.setDisplayName("§bGolderite Chestplate")
+				.setCustomModelData(1)
+				.setModifiers(Modifiers.PIGLIN_PASSIVE)
+				.build();
 		ALL_ITEMS.put("GOLDERITE_ARMOR_CHESTPLATE", GOLDERITE_ARMOR_CHESTPLATE);
 		
-		GOLDERITE_ARMOR_LEGGINGS = new ItemStack(Material.NETHERITE_LEGGINGS);
-		ItemMeta Gilded_Netherite_Armor_Leggings = GOLDERITE_ARMOR_LEGGINGS.getItemMeta();
-		Gilded_Netherite_Armor_Leggings.setDisplayName("§fGolderite Leggings");
-		Gilded_Netherite_Armor_Leggings.setCustomModelData(1);
-		Gilded_Netherite_Armor_Leggings.setLore(Golderite_Armor_Lore);
-		Gilded_Netherite_Armor_Leggings.getPersistentDataContainer().set(golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-		GOLDERITE_ARMOR_LEGGINGS.setItemMeta(Gilded_Netherite_Armor_Leggings);
+		GOLDERITE_ARMOR_LEGGINGS = new CustomItem(Material.NETHERITE_LEGGINGS)
+				.setDisplayName("§bGolderite Leggings")
+				.setCustomModelData(1)
+				.setModifiers(Modifiers.PIGLIN_PASSIVE)
+				.build();
 		ALL_ITEMS.put("GOLDERITE_ARMOR_LEGGINGS", GOLDERITE_ARMOR_LEGGINGS);
 		
-		GOLDERITE_ARMOR_BOOTS = new ItemStack(Material.NETHERITE_BOOTS);
-		ItemMeta Gilded_Netherite_Armor_Boots = GOLDERITE_ARMOR_BOOTS.getItemMeta();
-		Gilded_Netherite_Armor_Boots.setDisplayName("§fGolderite Boots");
-		Gilded_Netherite_Armor_Boots.setCustomModelData(1);
-		Gilded_Netherite_Armor_Boots.setLore(Golderite_Armor_Lore);
-		Gilded_Netherite_Armor_Boots.getPersistentDataContainer().set(golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
-		GOLDERITE_ARMOR_BOOTS.setItemMeta(Gilded_Netherite_Armor_Boots);
+		GOLDERITE_ARMOR_BOOTS = new CustomItem(Material.NETHERITE_BOOTS)
+				.setDisplayName("§bGolderite Boots")
+				.setCustomModelData(1)
+				.setModifiers(Modifiers.PIGLIN_PASSIVE)
+				.build();
 		ALL_ITEMS.put("GOLDERITE_ARMOR_BOOTS", GOLDERITE_ARMOR_BOOTS);
 	    
-		COFFEE_BEAN = new ItemStack(Material.COCOA_BEANS);
-	    ItemMeta coffee_bean_meta = COFFEE_BEAN.getItemMeta();
-	    coffee_bean_meta.setCustomModelData(1);
-	    coffee_bean_meta.setDisplayName("§fCoffee Bean");
-	    coffee_bean_meta.getPersistentDataContainer().set(coffee_bean_Key, PersistentDataType.BYTE, (byte)1);
-	    COFFEE_BEAN.setItemMeta(coffee_bean_meta);
+		COFFEE_BEAN = new CustomItem(Material.COCOA_BEANS)
+				.setCustomModelData(1)
+				.setDisplayName("§fCoffee Bean")
+				.setIdentifierKeys(coffee_bean_Key)
+				.build();
 	    ALL_ITEMS.put("COFFEE_BEAN", COFFEE_BEAN);
 		
-	    GRAND_EXPERIENCE_BOTTLE = new ItemStack(Material.EXPERIENCE_BOTTLE);
-		ItemMeta Grand_xp_bottle1 = GRAND_EXPERIENCE_BOTTLE.getItemMeta();
-		Grand_xp_bottle1.setDisplayName("§fGrand Experience Bottle");
-		Grand_xp_bottle1.setCustomModelData(1);
-		Grand_xp_bottle1.getPersistentDataContainer().set(grand_experience_bottle_Key, PersistentDataType.BYTE, (byte) 1);
-		GRAND_EXPERIENCE_BOTTLE.setItemMeta(Grand_xp_bottle1);
+	    GRAND_EXPERIENCE_BOTTLE = new CustomItem(Material.EXPERIENCE_BOTTLE)
+	    		.setDisplayName("§fGrand Experience Bottle")
+	    		.setCustomModelData(1)
+	    		.setIdentifierKeys(grand_experience_bottle_Key)
+	    		.build();
 		ALL_ITEMS.put("GRAND_EXPERIENCE_BOTTLE", GRAND_EXPERIENCE_BOTTLE);
 		
-		HEART_OF_THE_MINE = new ItemStack(Material.HEART_OF_THE_SEA);
-		ItemMeta Heart_of_the_mine = HEART_OF_THE_MINE.getItemMeta();
-		Heart_of_the_mine.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		Heart_of_the_mine.setDisplayName("§bHeart Of The Mine");
-		Heart_of_the_mine.setCustomModelData(1);
-		Heart_of_the_mine.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		Heart_of_the_mine.getPersistentDataContainer().set(heart_of_the_mine_Key, PersistentDataType.BYTE, (byte) 1);
-		HEART_OF_THE_MINE.setItemMeta(Heart_of_the_mine);
+		HEART_OF_THE_MINE = new CustomItem(Material.HEART_OF_THE_SEA)
+				.setDisplayName("§bHeart Of The Mine")
+				.setCustomModelData(1)
+				.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 0)
+				.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+				.setIdentifierKeys(heart_of_the_mine_Key)
+				.build();
 		ALL_ITEMS.put("HEART_OF_THE_MINE", HEART_OF_THE_MINE);
 		
-		INVISIBLE_ITEM_FRAME = new ItemStack(Material.ITEM_FRAME);
-		ItemMeta Invisible_Itemframe = INVISIBLE_ITEM_FRAME.getItemMeta();
-		Invisible_Itemframe.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		Invisible_Itemframe.setDisplayName("§fInvisible Item Frame");
-		Invisible_Itemframe.setCustomModelData(1);
-		Invisible_Itemframe.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		Invisible_Itemframe.getPersistentDataContainer().set(invisible_item_frame_Key, PersistentDataType.BYTE, (byte) 1);
-		INVISIBLE_ITEM_FRAME.setItemMeta(Invisible_Itemframe);
+		INVISIBLE_ITEM_FRAME = new CustomItem(Material.ITEM_FRAME)
+				.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+				.setDisplayName("§fInvisible Item Frame")
+				.setCustomModelData(1)
+				.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1)
+				.setIdentifierKeys(invisible_item_frame_Key)
+				.build();
 		ALL_ITEMS.put("INVISIBLE_ITEM_FRAME", INVISIBLE_ITEM_FRAME);
 		
-		INVISIBLE_GLOW_ITEM_FRAME = new ItemStack(Material.GLOW_ITEM_FRAME);
-		ItemMeta Invisible_GlowItemframe = INVISIBLE_GLOW_ITEM_FRAME.getItemMeta();
-		Invisible_GlowItemframe.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		Invisible_GlowItemframe.setDisplayName("§fInvisible Glow Item Frame");
-		Invisible_GlowItemframe.setCustomModelData(1);
-		Invisible_GlowItemframe.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		Invisible_GlowItemframe.getPersistentDataContainer().set(invisible_item_frame_Key, PersistentDataType.BYTE, (byte) 1);
-		INVISIBLE_GLOW_ITEM_FRAME.setItemMeta(Invisible_GlowItemframe);
+		INVISIBLE_GLOW_ITEM_FRAME = new CustomItem(Material.GLOW_ITEM_FRAME)
+				.setCustomModelData(1)
+				.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+				.setDisplayName("§fInvisible Glow Item Frame")
+				.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 0)
+				.setIdentifierKeys(invisible_item_frame_Key)
+				.build();
 		ALL_ITEMS.put("INVISIBLE_GLOW_ITEM_FRAME", INVISIBLE_GLOW_ITEM_FRAME);
 		
-		GRAPPLING_HOOK = new ItemStack(Material.FISHING_ROD);
-		ItemMeta GrapplingHook1 = GRAPPLING_HOOK.getItemMeta();
-		GrapplingHook1.setDisplayName("§fGrappling Hook");
-		GrapplingHook1.setCustomModelData(1);
-		GrapplingHook1.getPersistentDataContainer().set(grappling_hook_Key, PersistentDataType.BYTE, (byte) 1);
-		GRAPPLING_HOOK.setItemMeta(GrapplingHook1);
+		GRAPPLING_HOOK = new CustomItem(Material.FISHING_ROD)
+				.setDisplayName("§fGrappling Hook")
+				.setCustomModelData(1)
+				.setIdentifierKeys(grappling_hook_Key)
+				.build();
 		ALL_ITEMS.put("GRAPPLING_HOOK", GRAPPLING_HOOK);
 		
-		DIRTY_WATER = new ItemStack(Material.POTION);
+		DIRTY_WATER = new CustomItem(Material.POTION)
+        		.setCustomModelData(1)
+        		.setDisplayName("§fWater Bottle")
+        		.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        		.setIdentifierKeys(drinkables_Key)
+        		.setLore("§7Dirty")
+        		.build();
         ItemMeta dirtyMeta = DIRTY_WATER.getItemMeta();
-        dirtyMeta.setCustomModelData(1);
         ((PotionMeta) dirtyMeta).setBasePotionData(new PotionData(PotionType.WATER));
         ((PotionMeta) dirtyMeta).setColor(Color.fromRGB(12769874));
-        dirtyMeta.setDisplayName("§fWater Bottle");
-        dirtyMeta.setLore(Collections.singletonList("§7Dirty"));
-        dirtyMeta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
-        dirtyMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         DIRTY_WATER.setItemMeta(dirtyMeta);
         ALL_ITEMS.put("DIRTY_WATER", DIRTY_WATER);
         
-        CLEAN_WATER = new ItemStack(Material.POTION);
+        CLEAN_WATER = new CustomItem(Material.POTION)
+        		.setCustomModelData(2)
+        		.setDisplayName("§fWater Bottle")
+        		.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        		.setIdentifierKeys(drinkables_Key)
+        		.setLore("§7Clean")
+        		.build();
         ItemMeta cleanMeta = CLEAN_WATER.getItemMeta();
-        cleanMeta.setCustomModelData(2);
         ((PotionMeta) cleanMeta).setBasePotionData(new PotionData(PotionType.WATER));
         ((PotionMeta) cleanMeta).setColor(Color.fromRGB(1213666));
-        cleanMeta.setDisplayName("§fWater Bottle");
-        cleanMeta.setLore(Collections.singletonList("§7Clean"));
-        cleanMeta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
-        cleanMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         CLEAN_WATER.setItemMeta(cleanMeta);
         ALL_ITEMS.put("CLEAN_WATER", CLEAN_WATER);
         
-        PURIFIED_WATER = new ItemStack(Material.POTION);
+        PURIFIED_WATER = new CustomItem(Material.POTION)
+        		.setCustomModelData(3)
+        		.setDisplayName("§fWater Bottle")
+        		.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        		.setIdentifierKeys(drinkables_Key)
+        		.setLore("§7Purified")
+        		.build();
         ItemMeta purifiedMeta = PURIFIED_WATER.getItemMeta();
-        purifiedMeta.setCustomModelData(3);
         ((PotionMeta) purifiedMeta).setBasePotionData(new PotionData(PotionType.WATER));
         ((PotionMeta) purifiedMeta).setColor(Color.AQUA);
-        purifiedMeta.setDisplayName("§fWater Bottle");
-        purifiedMeta.setLore(Collections.singletonList("§7Purified"));
-        purifiedMeta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
-        purifiedMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         PURIFIED_WATER.setItemMeta(purifiedMeta);
         ALL_ITEMS.put("PURIFIED_WATER", PURIFIED_WATER);
         
-        COLD_MILK = new ItemStack(Material.POTION);
+        COLD_MILK = new CustomItem(Material.POTION)
+        		.setCustomModelData(4)
+        		.setDisplayName("§fCold Milk")
+        		.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        		.setIdentifierKeys(drinkables_Key)
+        		.build();
         ItemMeta cold_milk_Meta = COLD_MILK.getItemMeta();
-        cold_milk_Meta.setCustomModelData(4);
         ((PotionMeta) cold_milk_Meta).setBasePotionData(new PotionData(PotionType.WATER));
         ((PotionMeta) cold_milk_Meta).setColor(Color.fromBGR(16250871));
-        cold_milk_Meta.setDisplayName("§fCold Milk");
-        cold_milk_Meta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
-        cold_milk_Meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         COLD_MILK.setItemMeta(cold_milk_Meta);
         ALL_ITEMS.put("COLD_MILK", COLD_MILK);
         
-        HOT_MILK = new ItemStack(Material.POTION);
+        HOT_MILK = new CustomItem(Material.POTION)
+        		.setCustomModelData(5)
+        		.setDisplayName("§fHot Milk")
+        		.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        		.setIdentifierKeys(drinkables_Key)
+        		.build();
         ItemMeta hot_milk_Meta = HOT_MILK.getItemMeta();
-        hot_milk_Meta.setCustomModelData(5);
         ((PotionMeta) hot_milk_Meta).setBasePotionData(new PotionData(PotionType.WATER));
         ((PotionMeta) hot_milk_Meta).setColor(Color.fromBGR(15456977));
-        hot_milk_Meta.setDisplayName("§fHot Milk");
-        hot_milk_Meta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
-        hot_milk_Meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         HOT_MILK.setItemMeta(hot_milk_Meta);
         ALL_ITEMS.put("HOT_MILK", HOT_MILK);
         
-        COFFEE = new ItemStack(Material.POTION);
+        COFFEE = new CustomItem(Material.POTION)
+        		.setCustomModelData(6)
+        		.setDisplayName("§fCoffee")
+        		.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        		.setIdentifierKeys(drinkables_Key)
+        		.build();
         ItemMeta coffee_meta = COFFEE.getItemMeta();
-        coffee_meta.setCustomModelData(6);
         ((PotionMeta) coffee_meta).setBasePotionData(new PotionData(PotionType.WATER));
         ((PotionMeta) coffee_meta).setColor(Color.OLIVE);
-        coffee_meta.setDisplayName("§fCoffee");
-        coffee_meta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
-        coffee_meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         COFFEE.setItemMeta(coffee_meta);
         ALL_ITEMS.put("COFFEE", COFFEE);
         
-        GOLDEN_APPLE_JUICE = new ItemStack(Material.POTION);
+        GOLDEN_APPLE_JUICE = new CustomItem(Material.POTION)
+        		.setCustomModelData(7)
+        		.setDisplayName("§bGolden Apple Juice")
+        		.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        		.setIdentifierKeys(drinkables_Key)
+        		.build();
         ItemMeta golden_apple_juice_meta = GOLDEN_APPLE_JUICE.getItemMeta();
-        golden_apple_juice_meta.setCustomModelData(7);
         ((PotionMeta) golden_apple_juice_meta).setBasePotionData(new PotionData(PotionType.WATER));
         ((PotionMeta) golden_apple_juice_meta).setColor(Color.YELLOW);
-        golden_apple_juice_meta.setDisplayName("§bGolden Apple Juice");
-        golden_apple_juice_meta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
-        golden_apple_juice_meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         GOLDEN_APPLE_JUICE.setItemMeta(golden_apple_juice_meta);
         ALL_ITEMS.put("GOLDEN_APPLE_JUICE", GOLDEN_APPLE_JUICE);
         
-        ENCHANTED_GOLDEN_APPLE_JUICE = new ItemStack(Material.POTION);
+        ENCHANTED_GOLDEN_APPLE_JUICE = new CustomItem(Material.POTION)
+        		.setCustomModelData(8)
+        		.setDisplayName("§dEnchanted Golden Apple Juice")
+        		.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        		.setIdentifierKeys(drinkables_Key)
+        		.build();
         ItemMeta enchanted_golden_apple_juice_meta = ENCHANTED_GOLDEN_APPLE_JUICE.getItemMeta();
-        enchanted_golden_apple_juice_meta.setCustomModelData(8);
         ((PotionMeta) enchanted_golden_apple_juice_meta).setBasePotionData(new PotionData(PotionType.WATER));
         ((PotionMeta) enchanted_golden_apple_juice_meta).setColor(Color.YELLOW);
         ((PotionMeta) enchanted_golden_apple_juice_meta).addCustomEffect(new PotionEffect(PotionEffectType.REGENERATION, 400, 1), false);
-        enchanted_golden_apple_juice_meta.setDisplayName("§dEnchanted Golden Apple Juice");
-        enchanted_golden_apple_juice_meta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
-        enchanted_golden_apple_juice_meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         ENCHANTED_GOLDEN_APPLE_JUICE.setItemMeta(enchanted_golden_apple_juice_meta);
         ALL_ITEMS.put("ENCHANTED_GOLDEN_APPLE_JUICE", ENCHANTED_GOLDEN_APPLE_JUICE);
         
         //Water Bowl Immer als letztes einfügen
-        WATER_BOWL = new ItemStack(Material.POTION);
+        WATER_BOWL = new CustomItem(Material.POTION)
+        		.setCustomModelData(20)
+        		.setDisplayName("§fWater Bowl")
+        		.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+        		.setIdentifierKeys(drinkables_Key)
+        		.build();
         ItemMeta water_bowl_meta = WATER_BOWL.getItemMeta();
-        water_bowl_meta.setCustomModelData(20);
         ((PotionMeta) water_bowl_meta).setBasePotionData(new PotionData(PotionType.WATER));
-        water_bowl_meta.setDisplayName("§fWater Bowl");
-        water_bowl_meta.getPersistentDataContainer().set(drinkables_Key, PersistentDataType.BYTE, (byte) 1);
-        water_bowl_meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         WATER_BOWL.setItemMeta(water_bowl_meta);
         ALL_ITEMS.put("WATER_BOWL", WATER_BOWL);
         
-        SUPER_PICKAXE = new ItemStack(Material.DIAMOND_PICKAXE);
-		ItemMeta Superpickaxe1 = SUPER_PICKAXE.getItemMeta();
-		Superpickaxe1.setDisplayName("§bSuper Pickaxe");
-		Superpickaxe1.getPersistentDataContainer().set(super_pickaxe_Key, PersistentDataType.BYTE, (byte) 1);
-		//Fügt denn telekinesis hinzu
-		//Superpickaxe1.getPersistentDataContainer().set(telekinesis_enchantment, PersistentDataType.BYTE, (byte) 1);
-		Superpickaxe1.setCustomModelData(1);
-		SUPER_PICKAXE.setItemMeta(Superpickaxe1);
-		ALL_ITEMS.put("SUPER_PICKAXE", SUPER_PICKAXE);
+        IRON_HAMMER = new CustomItem(Material.IRON_PICKAXE)
+        		.setDisplayName("§fIron Hammer")
+        		.setCustomModelData(1)
+        		.setModifiers(Modifiers.MINI_EXCAVATOR)
+        		.build();
+		ALL_ITEMS.put("IRON_HAMMER", IRON_HAMMER);
 		
-		SUPER_PICKAXE_NETHERITE = new ItemStack(Material.NETHERITE_PICKAXE);
-		ItemMeta Superpickaxe_typ_netherite1 = SUPER_PICKAXE_NETHERITE.getItemMeta();
-		Superpickaxe_typ_netherite1.setDisplayName("§bSuper Pickaxe");
-		Superpickaxe_typ_netherite1.getPersistentDataContainer().set(super_pickaxe_Key, PersistentDataType.BYTE, (byte) 1);
-		Superpickaxe_typ_netherite1.setCustomModelData(1); 
-		SUPER_PICKAXE_NETHERITE.setItemMeta(Superpickaxe_typ_netherite1);
-		ALL_ITEMS.put("SUPER_PICKAXE_NETHERITE", SUPER_PICKAXE_NETHERITE);
+		STORMLANDER = new CustomItem(Material.IRON_PICKAXE)
+				.setDisplayName("§fStormlander")
+        		.setCustomModelData(2)
+        		.setModifiers(Modifiers.THUNDER_SHOT,Modifiers.MINI_EXCAVATOR)
+        		.build();
+		ALL_ITEMS.put("STORMLANDER", STORMLANDER);
 		
-		SUPER_AXE = new ItemStack(Material.DIAMOND_AXE);
-		ItemMeta Superaxe1 = SUPER_AXE.getItemMeta();
-		Superaxe1.setDisplayName("§bSuper Axe");
-		Superaxe1.getPersistentDataContainer().set(super_axe_Key, PersistentDataType.BYTE, (byte) 1);
-		Superaxe1.setCustomModelData(1);
-		SUPER_AXE.setItemMeta(Superaxe1);
+		SUPER_AXE = new CustomItem(Material.DIAMOND_AXE)
+				.setDisplayName("§bSuper Axe")
+        		.setCustomModelData(1)
+        		.setModifiers(Modifiers.MINI_EXCAVATOR)
+        		.build();
 		ALL_ITEMS.put("SUPER_AXE", SUPER_AXE);
 		
-		SUPER_AXE_NETHERITE = new ItemStack(Material.NETHERITE_AXE);
-		ItemMeta Superaxe_typ_netherite1 = SUPER_AXE_NETHERITE.getItemMeta();
-		Superaxe_typ_netherite1.setDisplayName("§bSuper Axe");
-		Superaxe_typ_netherite1.getPersistentDataContainer().set(super_axe_Key, PersistentDataType.BYTE, (byte) 1);
-		Superaxe_typ_netherite1.setCustomModelData(1); 
-		SUPER_AXE_NETHERITE.setItemMeta(Superaxe_typ_netherite1);
+		SUPER_AXE_NETHERITE = new CustomItem(Material.NETHERITE_AXE)
+				.setDisplayName("§bSuper Axe")
+        		.setCustomModelData(1)
+        		.setModifiers(Modifiers.MINI_EXCAVATOR)
+        		.build();;
 		ALL_ITEMS.put("SUPER_AXE_NETHERITE", SUPER_AXE_NETHERITE);
 		
-		SUPER_SHOVEL = new ItemStack(Material.DIAMOND_SHOVEL);
-		ItemMeta Supershovel1 = SUPER_SHOVEL.getItemMeta();
-		Supershovel1.setDisplayName("§bSuper Shovel");
-		Supershovel1.getPersistentDataContainer().set(super_shovel_Key, PersistentDataType.BYTE, (byte) 1);
-		Supershovel1.setCustomModelData(1);
-		SUPER_SHOVEL.setItemMeta(Supershovel1);
+		SUPER_SHOVEL = new CustomItem(Material.DIAMOND_SHOVEL)
+				.setDisplayName("§bSuper Shovel")
+				.setCustomModelData(1)
+				.setModifiers(Modifiers.MINI_EXCAVATOR)
+				.build();
 		ALL_ITEMS.put("SUPER_SHOVEL", SUPER_SHOVEL);
 		
-		SUPER_SHOVEL_NETHERITE = new ItemStack(Material.NETHERITE_SHOVEL);
-		ItemMeta Supershovel_typ_netherite1 = SUPER_SHOVEL_NETHERITE.getItemMeta();
-		Supershovel_typ_netherite1.setDisplayName("§bSuper Shovel");
-		Supershovel_typ_netherite1.getPersistentDataContainer().set(super_shovel_Key, PersistentDataType.BYTE, (byte) 1);
-		Supershovel_typ_netherite1.setCustomModelData(1); 
-		SUPER_SHOVEL_NETHERITE.setItemMeta(Supershovel_typ_netherite1);
+		SUPER_SHOVEL_NETHERITE = new CustomItem(Material.NETHERITE_SHOVEL)
+				.setDisplayName("§bSuper Shovel")
+				.setCustomModelData(1)
+				.setModifiers(Modifiers.MINI_EXCAVATOR)
+				.build();
 		ALL_ITEMS.put("SUPER_SHOVEL_NETHERITE", SUPER_SHOVEL_NETHERITE);
+		
+		BOLT = new CustomItem(Material.PAPER)
+				.setCustomModelData(1)
+				.build();
 		
 		return true;
 		
@@ -751,11 +845,11 @@ public class ItemManager {
         
 		//*******************************************************************
 		
-		ShapedRecipe Super_Pickaxe = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "super_pickaxe"), SUPER_PICKAXE);
-		Super_Pickaxe.shape("LLL", " N ", " N ");
-		Super_Pickaxe.setIngredient('N', Material.STICK);
-		Super_Pickaxe.setIngredient('L', Material.DIAMOND_BLOCK);
-		Bukkit.getServer().addRecipe(Super_Pickaxe);		
+		ShapedRecipe ironhammer = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "iron_hammer"), IRON_HAMMER);
+		ironhammer.shape("LLL", " N ", " N ");
+		ironhammer.setIngredient('N', Material.STICK);
+		ironhammer.setIngredient('L', Material.IRON_BLOCK);
+		Bukkit.getServer().addRecipe(ironhammer);		
 		//*******************************************************************
 		
 		ShapedRecipe Granite_Pickaxe = new ShapedRecipe(new NamespacedKey(MCReloaded.getPlugin(), "granite_pickaxe"), GRANITE_PICKAXE);
@@ -917,8 +1011,7 @@ public class ItemManager {
     	
     	GRINDSTONE_BLOCKED(DIRTY_WATER, CLEAN_WATER, PURIFIED_WATER, WATER_BOWL, COLD_MILK, HOT_MILK,
     			COFFEE, GRAPPLING_HOOK, HEART_OF_THE_MINE, PORTABLE_CRAFTING_TABLE, INVISIBLE_ITEM_FRAME, INVISIBLE_GLOW_ITEM_FRAME,
-    			ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE,
-    			GOLDERITE_INGOT, WARP_FUEL),
+    			ENCHANTED_GOLDEN_APPLE_JUICE, GOLDEN_APPLE_JUICE, GOLDERITE_INGOT, WARP_FUEL),
     	
     	ANVIL_BLOCKED(HEART_OF_THE_MINE, DIRTY_WATER, CLEAN_WATER, PURIFIED_WATER, WATER_BOWL,
     			COLD_MILK, HOT_MILK, COFFEE, COFFEE_BEAN, WARP_CRYSTAL, INVISIBLE_GLOW_ITEM_FRAME,
@@ -967,7 +1060,7 @@ public class ItemManager {
         }
 
     }
- 
+
 	 /**
      * Enums of all custom recipes
      */
@@ -975,7 +1068,7 @@ public class ItemManager {
         // CUSTOM TOOLS/ITEMS
     	PORTABLE_CRAFTING_TABLE("portable_crafting_table"),
     	PORTABLE_ENDERCHEST("portable_enderchest"),
-    	SUPER_PICKAXE("super_pickaxe"),
+    	IRON_HAMMER("iron_hammer"),
     	SUPER_AXE("super_axe"),
     	SUPER_SHOVEL("super_shovel"),
     	INVISIBLE_ITEM_FRAME("invisible_item_frame"),
@@ -1051,12 +1144,34 @@ public class ItemManager {
             return this.keys;
         }
 
-        private static Collection<NamespacedKey> getAllKeys() {
+        @SuppressWarnings("unused")
+		private static Collection<NamespacedKey> getAllKeys() {
             return allKeys;
         }
     }
 	
-
+    public enum Modifiers {
+        PIGLIN_PASSIVE("golderite_armor","§6Piglin §7become §6Passive§7.",true),
+        THUNDER_SHOT("stormlander","§7You can shoot §6Thunderbolts§7.",false),
+        MINI_EXCAVATOR("mini_excavator","§7You can mine §63x3§7 blocks at one time.",false);
+    	NamespacedKey key;
+    	Boolean isSetBonus;
+    	String description;
+    	Modifiers(String key,String description,Boolean isSetBonus){
+    		this.key = new NamespacedKey(MCReloaded.getPlugin(), key);
+    		this.isSetBonus = isSetBonus;
+    		this.description = description;
+    	}
+    	public NamespacedKey getKey() {
+    		return key;
+    	}
+    	public boolean isSetBonus() {
+    		return isSetBonus;
+    	}
+    	public String getDescription() {
+    		return description;
+    	}
+    }
 	/*
 	public static boolean compare(ItemStack itemStack, Item type) {
         if (itemStack.getType() == type.getMaterialType()) {
@@ -1078,67 +1193,60 @@ public class ItemManager {
 	    }
 	 
 	 */
+	public static ItemStack valueOf(String value) {
+		if (ALL_ITEMS.containsKey(value.toUpperCase())) {
+	    	return ALL_ITEMS.get(value.toUpperCase());
+		}
+		return null;
+	}
 	 
-	 public static ItemStack valueOf(String value) {
-	        if (ALL_ITEMS.containsKey(value.toUpperCase())) {
-	            return ALL_ITEMS.get(value.toUpperCase());
+	public static Collection<ItemStack> values() {
+		return ALL_ITEMS.values();
+	}
+	
+	public static Collection<String> valuesString() {
+		return ALL_ITEMS.keySet();
+	}
+	
+	public static boolean isSimilar(ItemStack item1, ItemStack item2) {
+		if (item2.getType() == item1.getType()) {
+			ItemMeta item1Meta = item1.getItemMeta();
+			ItemMeta item2Meta = item2.getItemMeta();
+			if (item1Meta.hasDisplayName() != item2Meta.hasDisplayName()) {
+	        	return false;
+	    	}      
+	    	if (item1Meta.hasDisplayName()) {
+	        	if (!item1Meta.getDisplayName().equals(item2Meta.getDisplayName())) {
+	            	return false;
+	        	}
+	    	}     
+	        if (item1Meta.hasLore() != item2Meta.hasLore()) {
+	            return false;
 	        }
-	        return null;
-	    }
-	 
-	 
-	 
-	 
-	 public static Collection<ItemStack> values() {
-	        return ALL_ITEMS.values();
-	    }
-	 public static Collection<String> valuesString() {
-	        return ALL_ITEMS.keySet();
-	    }
-	 public static boolean isSimilar(ItemStack item1, ItemStack item2) {
-
-	        if (item2.getType() == item1.getType()) {
-	            ItemMeta item1Meta = item1.getItemMeta();
-	            ItemMeta item2Meta = item2.getItemMeta();
-	            if (item1Meta.hasDisplayName() != item2Meta.hasDisplayName()) {
-	                return false;
+	        if (item1Meta.hasLore()) {
+	            if (item1Meta.getLore().size() != item2Meta.getLore().size()) {
+	            	return false;
 	            }
+	        	for (int index = 0; index < item1Meta.getLore().size(); index++) {
+	            	if (item1Meta.getLore().get(index).equals(item2Meta.getLore().get(index))) {
+	                	return false;
+	            	}
+	        	}
+	        }
+	        if (item1Meta.hasEnchants() != item2Meta.hasEnchants()) {
+	        	return false;
+	        }
 	            
-	            if (item1Meta.hasDisplayName()) {
-	                if (!item1Meta.getDisplayName().equals(item2Meta.getDisplayName())) {
-	                    return false;
-	                }
+	        if (item1Meta.hasEnchants()) {
+	        	if (item1Meta.getEnchants().size() != item2Meta.getEnchants().size()) {
+	            	return false;
+	        	}
+	        	for (Entry<Enchantment, Integer> enchantInfo : item1Meta.getEnchants().entrySet()) {
+	            	if (item1Meta.getEnchantLevel(enchantInfo.getKey()) != item2Meta.getEnchantLevel(enchantInfo.getKey())) {
+	                	return false;
+	            	}
 	            }
-	            
-	            if (item1Meta.hasLore() != item2Meta.hasLore()) {
-	                return false;
-	            }
-	            
-	            if (item1Meta.hasLore()) {
-	                if (item1Meta.getLore().size() != item2Meta.getLore().size()) {
-	                    return false;
-	                }
-	                for (int index = 0; index < item1Meta.getLore().size(); index++) {
-	                    if (item1Meta.getLore().get(index).equals(item2Meta.getLore().get(index))) {
-	                        return false;
-	                    }
-	                }
-	            }
-	            
-	            if (item1Meta.hasEnchants() != item2Meta.hasEnchants()) {
-	                return false;
-	            }
-	            
-	            if (item1Meta.hasEnchants()) {
-	                if (item1Meta.getEnchants().size() != item2Meta.getEnchants().size()) {
-	                    return false;
-	                }
-	                for (Entry<Enchantment, Integer> enchantInfo : item1Meta.getEnchants().entrySet()) {
-	                    if (item1Meta.getEnchantLevel(enchantInfo.getKey()) != item2Meta.getEnchantLevel(enchantInfo.getKey())) {
-	                        return false;
-	                    }
-	                }
-	            }
+	        }
 	            
 	            if (item1Meta.getItemFlags().size() != item2Meta.getItemFlags().size()) {
 	                return false;
@@ -1153,33 +1261,24 @@ public class ItemManager {
 	        }
 	        return false;
 	    }
-	 public static void debugInventory(Player p) {
-		 for(ItemStack item : p.getInventory().getContents()) {
-			 if(item != null) {
-				 if(item.getType().equals(Material.PLAYER_HEAD)) {
-					 for(ItemStack checkItem : Tags.PLAYER_HEAD.items) {
-						 if(isSimilar(checkItem, item)) {
-							 if(!item.getItemMeta().equals(checkItem.getItemMeta())) {
-								 item.setItemMeta(checkItem.getItemMeta());
-							 }
-						 } 
-					 }
-				 }
-			 }
-		 }
-		 
-	 }
-	 public static ItemStack removeEnchants(ItemStack item) {
-			ItemMeta itemmeta = item.getItemMeta();
-			if(itemmeta.hasEnchants()){
-				for(Enchantment en: Enchantment.values()) {
-					itemmeta.removeEnchant(en);
-					item.setItemMeta(itemmeta);
+	
+	
+	public static void debugInventory(Player p) {
+		for(ItemStack item : p.getInventory().getContents()) {
+			if(item != null) {
+				if(item.getType().equals(Material.PLAYER_HEAD)) {
+					for(ItemStack checkItem : Tags.PLAYER_HEAD.items) {
+						if(isSimilar(checkItem, item)) {
+							if(!item.getItemMeta().equals(checkItem.getItemMeta())) {
+								item.setItemMeta(checkItem.getItemMeta());
+							}
+						} 
+					}
 				}
 			}
-			return item;
-		}
-	 public static ItemStack compareEnchantsToOtherItem(ItemStack item1, ItemStack item2) {
+		} 
+	}
+	public static ItemStack compareEnchantsToOtherItem(ItemStack item1, ItemStack item2) {
 		Map<Enchantment, Integer> e1 = item1.getItemMeta().getEnchants();
 		ItemMeta item2meta = item2.getItemMeta();
 		for(Map.Entry<Enchantment, Integer> entry : e1.entrySet()) {
@@ -1187,5 +1286,12 @@ public class ItemManager {
 		}
 		item2.setItemMeta(item2meta);
 		return item2;	 
-	 }
+	}
+	
+	public static boolean hasModifier(Modifiers modifier, ItemStack itemstack) {
+		if(itemstack.getItemMeta().getPersistentDataContainer().has(modifier.getKey(), PersistentDataType.BYTE)) {
+			return true;
+		}
+		return false;
+	}
 }

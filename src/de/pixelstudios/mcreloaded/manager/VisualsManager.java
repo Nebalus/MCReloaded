@@ -5,7 +5,6 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import de.pixelstudios.mcreloaded.MCReloaded;
-import de.pixelstudios.mcreloaded.utils.Actionbar;
 import io.pixelstudios.libary.MathLibary;
 
 public class VisualsManager {
@@ -30,7 +29,7 @@ public class VisualsManager {
 							UserProfile up = playerManager.getProfile(p);
 							double thirst = MathLibary.roundUp(MathLibary.getPercent(up.getThirst(),up.getMaxThirst()));
 							double energy = MathLibary.roundUp(MathLibary.getPercent(up.getEnergy(),up.getMaxEnergy()));
-							new Actionbar("§b"+thirst+"≈         §6"+energy+"⚡").send(p);
+							up.sendActionBar("§b"+thirst+"≈         §6"+energy+"⚡");
 						}
 					}
 				}
@@ -41,31 +40,31 @@ public class VisualsManager {
 		UserProfile up = playerManager.getProfile(p);
 		double thirst = MathLibary.roundUp(MathLibary.getPercent(up.getThirst(),up.getMaxThirst()));
 		double energy = MathLibary.roundUp(MathLibary.getPercent(up.getEnergy(),up.getMaxEnergy()));
-		
+
 		if(p.getGameMode().equals(GameMode.ADVENTURE) || p.getGameMode().equals(GameMode.SURVIVAL)) {
-			new Actionbar("§b"+thirst+"≈       §c❤       §6"+energy+"⚡").send(p);
+			up.sendActionBar("§b"+thirst+"≈       §c❤       §6"+energy+"⚡");
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,new Runnable() {
 				@Override
 				public void run() {
-					new Actionbar("§b"+thirst+"≈      §c(§f❤§c)      §6"+energy+"⚡").send(p);
+					up.sendActionBar("§b"+thirst+"≈      §c(§f❤§c)      §6"+energy+"⚡");
 				}
 			}, 3);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,new Runnable() {
 				@Override
 				public void run() {
-					new Actionbar("§b"+thirst+"≈     §c( ❤ )     §6"+energy+"⚡").send(p);
+					up.sendActionBar("§b"+thirst+"≈     §c( ❤ )     §6"+energy+"⚡");
 				}
 			}, 6);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,new Runnable() {
 				@Override
 				public void run() {
-					new Actionbar("§b"+thirst+"≈    §c(  ❤  )    §6"+energy+"⚡").send(p);	
+					up.sendActionBar("§b"+thirst+"≈    §c(  ❤  )    §6"+energy+"⚡");	
 				}
 			}, 9);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,new Runnable() {
 				@Override
 				public void run() {			
-					new Actionbar("§b"+thirst+"≈       §c❤       §6"+energy+"⚡").send(p);	
+					up.sendActionBar("§b"+thirst+"≈       §c❤       §6"+energy+"⚡");	
 				}
 			}, 12);
 		}

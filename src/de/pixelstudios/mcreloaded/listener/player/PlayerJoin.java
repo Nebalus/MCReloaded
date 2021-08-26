@@ -52,7 +52,7 @@ public class PlayerJoin implements Listener{
 		p.discoverRecipes(Recipes.CHEST.getKeys());
 		p.discoverRecipes(Recipes.ICE.getKeys());
 		p.discoverRecipes(Recipes.PORTABLE_CRAFTING_TABLE.getKeys());
-		p.discoverRecipes(Recipes.SUPER_PICKAXE.getKeys());
+		p.discoverRecipes(Recipes.IRON_HAMMER.getKeys());
 		p.discoverRecipes(Recipes.SUPER_SHOVEL.getKeys());
 		p.discoverRecipes(Recipes.INVISIBLE_ITEM_FRAME.getKeys());
 		p.discoverRecipes(Recipes.GRAPPLING_HOOK.getKeys());

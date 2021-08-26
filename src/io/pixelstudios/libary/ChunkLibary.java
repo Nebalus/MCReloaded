@@ -1,8 +1,16 @@
 package io.pixelstudios.libary;
 
+import java.util.Collection;
 import java.util.Random;
 
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Waterlogged;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class ChunkLibary {
 
@@ -52,5 +60,31 @@ public class ChunkLibary {
 		int zPosition = zPos >> 4;
 		Random rnd = new Random(seed + (long)(xPosition * xPosition * 4987142) + (long)(xPosition * 5947611) + (long)(zPosition * zPosition) * 4392871L + (long)(zPosition * 389711) ^ 987234911L);
 		return rnd.nextInt(10) == 0;
+	}
+	public static boolean isWaterBlock(Block block) {
+	    if (block.getType() == Material.WATER) {
+	        return true;
+        }
+        BlockData data = block.getBlockData();
+        return data instanceof Waterlogged && ((Waterlogged) data).isWaterlogged();
+    }
+	
+	public static void breakblock(Location loc, Boolean dropable, Player player, ItemStack item) {
+		Block b = loc.getBlock();
+		if(!b.getType().equals(Material.AIR)) {
+			if(dropable) {
+				if(item != null) {
+					Collection<ItemStack> drops = b.getDrops(item);
+					if(!drops.isEmpty()) {
+						b.getWorld().dropItemNaturally(b.getLocation(), drops.iterator().next());
+						b.setType(Material.AIR);
+					}
+				}else {
+					b.breakNaturally();
+				}
+			}else {
+				b.setType(Material.AIR);
+			}
+		}
 	}
 }

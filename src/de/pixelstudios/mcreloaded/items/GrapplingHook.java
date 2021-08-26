@@ -43,7 +43,7 @@ public class GrapplingHook implements Listener{
 	}
 	private void onFish(PlayerFishEvent event, Player p) {
 		if (event.getState() == State.IN_GROUND) {
-			List<Entity> nearbyEntities = p.getNearbyEntities(50, 50, 50);
+			List<Entity> nearbyEntities = p.getNearbyEntities(25, 25, 25);
 
 			Entity hook = null;
 

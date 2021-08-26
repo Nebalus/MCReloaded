@@ -10,8 +10,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.utils.Achievements;
-import io.pixelstudios.libary.FormatLibary;
-
+import net.md_5.bungee.api.ChatColor;
 public class PlayerChat implements Listener{
 
 	@EventHandler(
@@ -37,7 +36,7 @@ public class PlayerChat implements Listener{
 				message = message.replace(emote.getCode(), emote.getEmote()+"§r");
 			}
 			
-			all.sendMessage("§7"+p.getName()+" §8» §r"+FormatLibary.format(message));
+			all.sendMessage("§7"+p.getName()+" §8» §r"+ChatColor.translateAlternateColorCodes('&', message));
 		}
 		Bukkit.getConsoleSender().sendMessage(p.getName()+": "+e.getMessage());
 	}

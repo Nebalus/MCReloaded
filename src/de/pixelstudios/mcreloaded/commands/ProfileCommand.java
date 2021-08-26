@@ -9,8 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.pixelstudios.mcreloaded.MCReloaded;
-import de.pixelstudios.mcreloaded.datamanagement.FileManager;
-import de.pixelstudios.mcreloaded.guis.ProfileGUI;
+import de.pixelstudios.mcreloaded.guis.menu.MainMenuGUI;
 import de.pixelstudios.mcreloaded.messaging.MessageFormatter;
 
 public class ProfileCommand implements CommandExecutor{
@@ -25,7 +24,7 @@ public class ProfileCommand implements CommandExecutor{
 		if(sender instanceof Player) {
 			Player p = (Player) sender;
 			if(args.length == 0) {		
-				ProfileGUI.openProfileGui(p);
+				MainMenuGUI.openProfileGui(p);
 			}else if(args.length == 1) {		
 				OfflinePlayer op = Bukkit.getOfflinePlayer(args[0]);
 				String uuid = op.getUniqueId().toString();
@@ -33,7 +32,7 @@ public class ProfileCommand implements CommandExecutor{
 						
 				File playerdir = new File(MCReloaded.serverpath + "/PixelStudios/MCReloaded/PlayerData/"+uuidshort+"/"+uuid+"/");
 				if(playerdir.exists()) {		
-					ProfileGUI.openOtherProfileGui(op.getName(),p);				
+					MainMenuGUI.openOtherProfileGui(op.getName(),p);				
 				}else {					
 					p.sendMessage(messageFormatter.format(false, "error.player-was-never-online",args[0]));	
 				}

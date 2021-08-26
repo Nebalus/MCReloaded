@@ -25,12 +25,10 @@ public class PlayerMove implements Listener{
 		Vector vec = to.toVector();
 		double i = vec.distance(from.toVector());
 		
-		UserProfile up = MCReloaded.getPlugin().getPlayerManager().getProfile(p);
-		//up.setAfk(System.currentTimeMillis()+up.timeUntilAfk);
 		/*
 		Player p = e.getPlayer();
 		Location loc = p.getLocation();
-		loc.setY(loc.getY()-1);
+		loc.setY(loc.getY()-1);p
 		if(!loc.getBlock().getType().equals(Material.AIR)) {
 			p.sendBlockChange(loc, Material.BEACON, (byte)0);
 		}

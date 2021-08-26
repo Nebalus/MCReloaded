@@ -82,15 +82,13 @@ import io.pixelstudios.libary.MathLibary;
 import net.minecraft.server.MinecraftServer;
 
 public class MCReloaded extends JavaPlugin implements Listener{
-	public final static String name = "MCReloaded";
-	public final static String chatprefix = "§aMCReloaded »§r ";
-	public final static String infoprefix = "§f§lINFO: §r";
+	public static String name = "MCReloaded";
+	public static String chatprefix = "§aMCReloaded »§r ";
+	public static String infoprefix = "§f§lINFO: §r";
 	private static MCReloaded instance;
 	public static List<World> Worlds = new ArrayList<World>();
 	
-	public final static String serverpath = MCReloaded.getPlugin().getDataFolder().getAbsolutePath()
-			.substring(0, MCReloaded.getPlugin().getDataFolder().getAbsolutePath().length() - (9 + MCReloaded.getPlugin().getName().length()));
-	
+	public static String serverpath;
 	
 	private MessageFormatter messageFormatter;
 	private PlayerManager playerManager;
@@ -105,9 +103,11 @@ public class MCReloaded extends JavaPlugin implements Listener{
 		long setuptime = System.currentTimeMillis();
 		this.messageFormatter = new MessageFormatter();
 		instance = this;
+		serverpath = MCReloaded.getPlugin().getDataFolder().getAbsolutePath().substring(0, MCReloaded.getPlugin().getDataFolder().getAbsolutePath().length() - (9 + MCReloaded.getPlugin().getName().length()));
+			
 		ConsoleLogger.info(ConsoleLogger.BOOT_LOADER,"Loading "+ name+"...");
 		// VERSION CHECK
-		if (!Utils.isRunningMinecraft(1, 17, 0)) {
+		if (!Utils.isRunningMinecraft(1, 17, 1)) {
 			String ver = Bukkit.getServer().getBukkitVersion().split("-")[0];
 			ConsoleLogger.error(null,"-----------------------------------------------------------");
 			ConsoleLogger.error(null,messageFormatter.format(false, "console.enable.error.wrong-version.line1",ver));
@@ -143,10 +143,9 @@ public class MCReloaded extends JavaPlugin implements Listener{
 		Worlds.add(Bukkit.getWorld("world_the_end"));
 		config = new Config(this);
 		
-		String url = config.RESOURCE_PACK_URL;
 		boolean resourcePack = config.RESOURCE_PACK_ENABLED;
 		if (resourcePack) {
-			if (url.isEmpty()) {
+			if (config.RESOURCE_PACK_URL.isEmpty()) {
 				ConsoleLogger.error(null,messageFormatter.format(false, "console.enable.resourcepack.no-url"));
 				Bukkit.getPluginManager().disablePlugin(this);
 				loaded = false;
@@ -391,7 +390,7 @@ public class MCReloaded extends JavaPlugin implements Listener{
 					}
 		        }
 				for(Player p : Bukkit.getOnlinePlayers()) {	
-					int ping = Utils.getPing(p);
+					final int ping = p.getPing();
 					p.setPlayerListHeader(" \n \n");
 					p.setPlayerListFooter(" \n"
 							+ " \n"
@@ -527,20 +526,19 @@ public class MCReloaded extends JavaPlugin implements Listener{
 				}
 			}
 		}, 0, 2);
-	
 	}
 	
-		   public Config getMCReloadedConfig() {
-				return this.config;
-			}
-		   public PlayerManager getPlayerManager() {
-				return this.playerManager;
-			}
-		   public MessageFormatter getMessageFormatter() {
-			    return this.messageFormatter;
-			}
-		   public static MCReloaded getPlugin() {
-				return instance;
-			}
+	public Config getMCReloadedConfig() {
+		return this.config;
+	}
+	public PlayerManager getPlayerManager() {
+		return this.playerManager;
+	}
+	public MessageFormatter getMessageFormatter() {
+		return this.messageFormatter;
+	}
+	public static MCReloaded getPlugin() {
+		return instance;
+	}
 }
 

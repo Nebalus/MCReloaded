@@ -73,11 +73,13 @@ public class PrepareCraftEvent implements Listener{
 					case NETHERITE_HELMET:
 						if(!itemSlot1.getItemMeta().hasCustomModelData()) {
 							if(pdc.has(ItemManager.golderite_ingot_Key, PersistentDataType.BYTE)) {
+								
 								newItemMeta.setCustomModelData(ItemManager.GOLDERITE_ARMOR_HELMET.getItemMeta().getCustomModelData());
-								newItemMeta.getPersistentDataContainer().set(ItemManager.golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+								newItemMeta.getPersistentDataContainer().set(ItemManager.Modifiers.PIGLIN_PASSIVE.getKey(), PersistentDataType.BYTE, (byte) 1);
 								if(!newItem.getItemMeta().hasDisplayName()) {
 									newItemMeta.setDisplayName(ItemManager.GOLDERITE_ARMOR_HELMET.getItemMeta().getDisplayName());
 								}
+								newItemMeta.setLore(ItemManager.GOLDERITE_ARMOR_HELMET.getItemMeta().getLore());
 								newItem.setItemMeta(newItemMeta);
 								e.setResult(newItem);
 							}
@@ -89,10 +91,11 @@ public class PrepareCraftEvent implements Listener{
 						if(!itemSlot1.getItemMeta().hasCustomModelData()) {
 							if(pdc.has(ItemManager.golderite_ingot_Key, PersistentDataType.BYTE)) {
 								newItemMeta.setCustomModelData(ItemManager.GOLDERITE_ARMOR_CHESTPLATE.getItemMeta().getCustomModelData());
-								newItemMeta.getPersistentDataContainer().set(ItemManager.golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+								newItemMeta.getPersistentDataContainer().set(ItemManager.Modifiers.PIGLIN_PASSIVE.getKey(), PersistentDataType.BYTE, (byte) 1);
 								if(!newItem.getItemMeta().hasDisplayName()) {
 									newItemMeta.setDisplayName(ItemManager.GOLDERITE_ARMOR_CHESTPLATE.getItemMeta().getDisplayName());
 								}
+								newItemMeta.setLore(ItemManager.GOLDERITE_ARMOR_HELMET.getItemMeta().getLore());
 								newItem.setItemMeta(newItemMeta);
 								e.setResult(newItem);
 							}
@@ -104,10 +107,11 @@ public class PrepareCraftEvent implements Listener{
 						if(!itemSlot1.getItemMeta().hasCustomModelData()) {
 							if(pdc.has(ItemManager.golderite_ingot_Key, PersistentDataType.BYTE)) {
 								newItemMeta.setCustomModelData(ItemManager.GOLDERITE_ARMOR_LEGGINGS.getItemMeta().getCustomModelData());
-								newItemMeta.getPersistentDataContainer().set(ItemManager.golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+								newItemMeta.getPersistentDataContainer().set(ItemManager.Modifiers.PIGLIN_PASSIVE.getKey(), PersistentDataType.BYTE, (byte) 1);
 								if(!newItem.getItemMeta().hasDisplayName()) {
 									newItemMeta.setDisplayName(ItemManager.GOLDERITE_ARMOR_LEGGINGS.getItemMeta().getDisplayName());
 								}
+								newItemMeta.setLore(ItemManager.GOLDERITE_ARMOR_HELMET.getItemMeta().getLore());
 								newItem.setItemMeta(newItemMeta);
 								e.setResult(newItem);						
 							}
@@ -119,10 +123,11 @@ public class PrepareCraftEvent implements Listener{
 						if(!itemSlot1.getItemMeta().hasCustomModelData()) {
 							if(pdc.has(ItemManager.golderite_ingot_Key, PersistentDataType.BYTE)) {
 								newItemMeta.setCustomModelData(ItemManager.GOLDERITE_ARMOR_BOOTS.getItemMeta().getCustomModelData());
-								newItemMeta.getPersistentDataContainer().set(ItemManager.golderite_armor_Key, PersistentDataType.BYTE, (byte) 1);
+								newItemMeta.getPersistentDataContainer().set(ItemManager.Modifiers.PIGLIN_PASSIVE.getKey(), PersistentDataType.BYTE, (byte) 1);
 								if(!newItem.getItemMeta().hasDisplayName()) {
 									newItemMeta.setDisplayName(ItemManager.GOLDERITE_ARMOR_BOOTS.getItemMeta().getDisplayName());
 								}
+								newItemMeta.setLore(ItemManager.GOLDERITE_ARMOR_HELMET.getItemMeta().getLore());
 								newItem.setItemMeta(newItemMeta);
 								e.setResult(newItem);							
 							}

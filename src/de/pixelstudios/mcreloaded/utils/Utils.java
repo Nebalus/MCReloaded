@@ -69,45 +69,7 @@ public class Utils {
 		return false;
 	} 
 	 
-	public static String getTimeString(Long from, Long to) {			
-		Long rawData = from - to;
-		long sekunden = rawData/1000;
-		long minuten = sekunden/60;
-		long stunden = minuten/60;
-		long tage = stunden/24;
-		sekunden %= 60;
-		minuten %= 60;
-		stunden %= 24;
-					
-		if(tage >= 1) {		
-			if(stunden == 0) {
-				return tage+" days";
-			}else {
-				return tage+" days, "+stunden+" hours";
-			}
-			}else if(stunden >= 1){ 
-				if(minuten == 0) {
-					return stunden+" hours";
-				}else {
-					return stunden+" hours, "+stunden+" minutes";			
-				}	
-			}else if(minuten >= 1){
-				if(sekunden == 0) {
-					return minuten+" minutes";
-				}else {
-					return minuten+" minutes, "+sekunden+" seconds";			
-				}	
-			}else if(sekunden >= 1){
-				return sekunden+" seconds";							
-			}else if(rawData < 1000) {
-				return 1+" second";
-			}
-			return "Hmm something went wrong ._.";	
-		}
-		
-	public static int getPing(Player p) {
-		return p.getPing();
-	}
+
 		
 		
 	
@@ -130,13 +92,13 @@ public class Utils {
 	        return classExists("org.spigotmc.CustomTimingsHandler");
 	}	    
 	public static boolean classExists(final String className) {
-	    	try {
-	    		Class.forName(className);
-	    		return true;
-			} catch (ClassNotFoundException ex) {
-	    		return false;
-			}
+		try {
+	    	Class.forName(className);
+	    	return true;
+		} catch (ClassNotFoundException ex) {
+	    	return false;
 		}
+	}
 	public static void checkWarpCrystal() {
 			
 			//Fehler muss noch behoben werden:

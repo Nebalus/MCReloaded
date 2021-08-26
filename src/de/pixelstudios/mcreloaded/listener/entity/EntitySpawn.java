@@ -17,9 +17,9 @@ public class EntitySpawn implements Listener{
 		Entity e = event.getEntity();
 		if(e.getType().equals(EntityType.ARMOR_STAND)) {
 			ArmorStand armorstand = (ArmorStand) e;
-			armorstand.setArms(true);
+			if(armorstand.getCustomName() != null && !armorstand.getCustomName().equalsIgnoreCase("Bolt")) {
+				armorstand.setArms(true);
+			}
 		}
-		
 	}
-	
 }

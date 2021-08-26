@@ -12,9 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
-import org.bukkit.block.data.Waterlogged;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -31,12 +29,13 @@ import org.bukkit.persistence.PersistentDataType;
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.datamanagement.Cache;
 import de.pixelstudios.mcreloaded.guis.WarpCrystalGUI;
+import de.pixelstudios.mcreloaded.items.ThunderHammer;
 import de.pixelstudios.mcreloaded.items.WarpCrystal;
 import de.pixelstudios.mcreloaded.items.manager.HeadList;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
 import de.pixelstudios.mcreloaded.manager.UserProfile;
 import de.pixelstudios.mcreloaded.utils.Achievements;
-import de.pixelstudios.mcreloaded.utils.Utils;
+import io.pixelstudios.libary.ChunkLibary;
 import io.pixelstudios.libary.InventoryLibary;
 
 @SuppressWarnings("deprecation")
@@ -47,6 +46,7 @@ public class PlayerInteract implements Listener{
 		   )
 	public void handleBlockblocker(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
+		//p.sendMessage(e.getItem().toString());
 		UserProfile up = MCReloaded.getPlugin().getPlayerManager().getProfile(p);
 		ItemStack item = e.getItem();
 		Block block = p.getTargetBlockExact(5, FluidCollisionMode.ALWAYS);
@@ -55,7 +55,7 @@ public class PlayerInteract implements Listener{
 			case GLASS_BOTTLE:
 				if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
 					if (block == null) return;
-					if (isWaterBlock(block)) {
+					if (ChunkLibary.isWaterBlock(block)) {
 						e.setCancelled(true);
 						if (p.getGameMode() == GameMode.SURVIVAL || p.getGameMode() == GameMode.ADVENTURE) item.setAmount(item.getAmount() - 1);
 						InventoryLibary.addItemToInventory(p, ItemManager.DIRTY_WATER);
@@ -86,7 +86,7 @@ public class PlayerInteract implements Listener{
 			case BOWL:
 				if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
 					 
-					if (isWaterBlock(block)) {
+					if (ChunkLibary.isWaterBlock(block)) {
 						e.setCancelled(true);
 						if (p.getGameMode() == GameMode.SURVIVAL || p.getGameMode() == GameMode.ADVENTURE) item.setAmount(item.getAmount() - 1);
 						InventoryLibary.addItemToInventory(p, ItemManager.WATER_BOWL);
@@ -101,10 +101,14 @@ public class PlayerInteract implements Listener{
 				if(item.getItemMeta().getPersistentDataContainer().has(ItemManager.portable_crafting_table_Key, PersistentDataType.BYTE)) {
 					e.setCancelled(true);
 					p.openWorkbench(p.getLocation(), true);
-				}else if(item.getItemMeta().getPersistentDataContainer().has(ItemManager.portable_enderchest_Key, PersistentDataType.BYTE)) {
+				}
+				if(item.getItemMeta().getPersistentDataContainer().has(ItemManager.portable_enderchest_Key, PersistentDataType.BYTE)) {
 					e.setCancelled(true);
 					p.openInventory(p.getEnderChest());
 					p.playSound(p.getEyeLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1, 1);
+				}
+				if(ItemManager.hasModifier(ItemManager.Modifiers.THUNDER_SHOT, item)) {
+					ThunderHammer.attack(p, item);
 				}
 			}
 			
@@ -157,13 +161,6 @@ public class PlayerInteract implements Listener{
 		}
 		
 	}
-	private boolean isWaterBlock(Block block) {
-	    if (block.getType() == Material.WATER) {
-	        return true;
-        }
-        BlockData data = block.getBlockData();
-        return data instanceof Waterlogged && ((Waterlogged) data).isWaterlogged();
-    }
 
 	private boolean spawnWarpCrystal(Location loc, ItemStack itemStack, Player p) {
 			Location Spawnloc = loc;

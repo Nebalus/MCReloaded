@@ -99,8 +99,6 @@ private MCReloaded plugin;
 		}, 0, 5);
 	}
 	
-	//10 schlafen
-	//20 online
 	public boolean isEnough() {
 		if(isNight()) {
 			if(onlineplayers > 0) {

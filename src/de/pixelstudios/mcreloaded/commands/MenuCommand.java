@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.pixelstudios.mcreloaded.guis.ProfileGUI;
+import de.pixelstudios.mcreloaded.guis.menu.MainMenuGUI;
 
 public class MenuCommand implements CommandExecutor{
 	
@@ -13,7 +13,7 @@ public class MenuCommand implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command cmd, String lable, String[] args) {
 		if(sender instanceof Player) {
 			Player p = (Player) sender;
-			ProfileGUI.openProfileGui(p);
+			MainMenuGUI.openProfileGui(p);
 		}
 		return false;
 	}

@@ -9,7 +9,7 @@ public enum Achievements {
 	GILDEDJUICE("GILDEDJUICE","Gilded juice!","Drink a golden apple juice!",0,1),
 	PURIFIED("PURIFIED","Purified?","Purify water with a cauldron!",0,0),
 	STAYHYDRATED("STAYHYDRATED","Stay hydrated!","Drink a drink and gain water points!",0,0),
-	ANTIBATMAN("ANTIBATMAN", "Anti-Batman","Kill a bat",0,0),
+	ANTIBATMAN("ANTIBATMAN", "Anti-Batman","Murder a bat",0,0),
 	MOOTATED("MOOTATED", "Mootated","Murder a mutated cow",0,1),
 	COLLECTIVESECURITY("COLLECTIVESECURITY","Collective Security","Witness the collective power of zombified piglins",0,1),
 	MINESPAWNER("MINESPAWNER","Unthinkable","Break a spawner",0,1),

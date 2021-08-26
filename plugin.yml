@@ -1,8 +1,7 @@
 main: de.pixelstudios.mcreloaded.MCReloaded
 name: MCReloaded
-version: Alpha0.4.1
-author: AidenRocktDas
-api-version: 1.16
+version: Alpha0.4.3
+api-version: 1.17
 
 commands:
   menu:

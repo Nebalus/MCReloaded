@@ -38,7 +38,7 @@ public class EntityTargetLivingEntity implements Listener{
 				int ifGolderiteArmor = 0;
 				for(ItemStack is : ac) {
 					if(is != null && is.hasItemMeta()) {
-						if(is.getItemMeta().getPersistentDataContainer().has(ItemManager.golderite_armor_Key, PersistentDataType.BYTE)) {
+						if(is.getItemMeta().getPersistentDataContainer().has(ItemManager.Modifiers.PIGLIN_PASSIVE.getKey(), PersistentDataType.BYTE)) {
 							ifGolderiteArmor++;
 						}
 					}

@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.utils.Achievements;
 import fr.mrmicky.fastparticle.FastParticle;
@@ -15,7 +14,6 @@ import fr.mrmicky.fastparticle.ParticleType;
 
 public class EntityDeath implements Listener{
    
-	
 	@EventHandler(
 			  ignoreCancelled = true,
 			  priority = EventPriority.HIGHEST
@@ -36,6 +34,7 @@ public class EntityDeath implements Listener{
 					}
 					*/
 		        	FastParticle.spawnParticle(entity.getWorld(), ParticleType.SOUL, entity.getEyeLocation(), 1, 0f, 0f, 0f, 0f);
+		        	
 		        break;  
 		        
 	     }

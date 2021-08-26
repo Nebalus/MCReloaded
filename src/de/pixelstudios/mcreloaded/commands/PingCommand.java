@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.messaging.MessageFormatter;
-import de.pixelstudios.mcreloaded.utils.Utils;
 
 
 public class PingCommand  implements CommandExecutor, TabCompleter {
@@ -26,14 +25,14 @@ public class PingCommand  implements CommandExecutor, TabCompleter {
 		if(sender instanceof Player) {
 			Player p = (Player) sender;
 			if(args.length == 0) {
-				p.sendMessage(messageFormatter.format(false, "commands.ping.self", Utils.getPing(p)));
+				p.sendMessage(messageFormatter.format(false, "commands.ping.self", p.getPing()));
 			}else if(args.length == 1) {
 				Player target = Bukkit.getPlayer(args[0]);
 				if(target != null) {
 					if(target != p) {
-						p.sendMessage(messageFormatter.format(false, "commands.ping.other",target.getName() , Utils.getPing(target)));
+						p.sendMessage(messageFormatter.format(false, "commands.ping.other",target.getName() , target.getPing()));
 					}else {
-						p.sendMessage(messageFormatter.format(false, "commands.ping.self", Utils.getPing(p)));	
+						p.sendMessage(messageFormatter.format(false, "commands.ping.self", p.getPing()));	
 					}
 				}else {
 					p.sendMessage(messageFormatter.format(false, "error.player-not-online", args[0]));

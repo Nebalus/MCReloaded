@@ -11,7 +11,7 @@ ResourcePack:
   # Enable the MCReloaded resource pack for players
   EnableResourcePack: true
   # The link to the pack, you can put a custom link here if need be
-  ResourcePackURL:  http://resourcepack.host/dl/lvIFv8pU19YQFrUn91F2pGqEW7q9SMOp/%C2%A77Minecraft%C2%A78-%C2%A7aReloaded.zip
+  ResourcePackURL:  http://resourcepack.host/dl/s61WkfojW6hQGVyyRCfxDhU7tDmxh4sg/%C2%A77Minecraft%C2%A78-%C2%A7aReloaded.zip
   # Notify players when they log in if they deny the resource pack
   NotifyMessage: true
 

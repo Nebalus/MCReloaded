@@ -19,7 +19,7 @@ import org.bukkit.persistence.PersistentDataType;
 import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.datamanagement.Cache;
 import de.pixelstudios.mcreloaded.guis.GUIicons;
-import de.pixelstudios.mcreloaded.guis.ProfileGUI;
+import de.pixelstudios.mcreloaded.guis.menu.MainMenuGUI;
 import de.pixelstudios.mcreloaded.manager.ItemManager;
 import de.pixelstudios.mcreloaded.manager.UserProfile;
 import de.pixelstudios.mcreloaded.utils.Achievements;
@@ -98,7 +98,7 @@ public class PlayerInventory implements Listener{
 						event.setCancelled(false);
 					}
 				}
-				OfflinePlayer socialmediaOther = ProfileGUI.OtherProfileSave.get(p);
+				OfflinePlayer socialmediaOther = MainMenuGUI.OtherProfileSave.get(p);
 				if(socialmediaOther != null) {
 					if(p.getOpenInventory().getTitle().equals("§5"+socialmediaOther.getName()+"`s profile!")) {
 						switch(event.getCurrentItem().getType()) {

@@ -20,6 +20,7 @@ import org.bukkit.util.CachedServerIcon;
 
 import de.pixelstudios.mcreloaded.datamanagement.LiteSQL;
 import de.pixelstudios.mcreloaded.utils.Utils;
+import io.pixelstudios.libary.MathLibary;
 
 public class ServerListPing implements Listener{
 
@@ -62,7 +63,7 @@ public class ServerListPing implements Listener{
 		        }
 				
 				e.setMotd("§aWelcome "+ masterOp.getName()+"\n"
-						+ "§3Last Online§e: §b"+Utils.getTimeString(System.currentTimeMillis(), masterOp.getLastPlayed())+" ago");
+						+ "§3Last Online§e: §b"+MathLibary.getTimeRange(System.currentTimeMillis(), masterOp.getLastPlayed())+" ago");
 				
 			}		
 		}

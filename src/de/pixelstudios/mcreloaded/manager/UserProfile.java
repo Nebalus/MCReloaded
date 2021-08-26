@@ -20,6 +20,7 @@ import de.pixelstudios.mcreloaded.MCReloaded;
 import de.pixelstudios.mcreloaded.datamanagement.Config;
 import de.pixelstudios.mcreloaded.datamanagement.LiteSQL;
 import de.pixelstudios.mcreloaded.utils.Achievements;
+import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -307,5 +308,8 @@ public class UserProfile {
 	}
 	public BlockFace getLastBlockFace() {
 		return lastblockface;
+	}
+	public void sendActionBar(String message) {
+		player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
 	}
 }

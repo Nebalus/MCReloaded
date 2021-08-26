@@ -37,18 +37,17 @@ public class PlayerManager {
 
 	public boolean loadProfile(Player p) {	
 		if(!playerprofile.containsKey(p)) {
-			ConsoleLogger.debug(null,"Loading profile for "+p.getName());
 			UserProfile pp = new UserProfile(p);
 			playerprofile.put(p, pp);
+			ConsoleLogger.debug(null,"Loading profile for "+p.getName());
 			return true;
 		}
 		return false;
 	}
 	public boolean unloadProfile(Player p) {
 		if(playerprofile.containsKey(p)) {
+			playerprofile.remove(p);
 			ConsoleLogger.debug(null,"Unloading profile for "+p.getName());
-			UserProfile pp = playerprofile.get(p);
-			playerprofile.remove(p, pp);
 			return true;
 		}
 		return false;
