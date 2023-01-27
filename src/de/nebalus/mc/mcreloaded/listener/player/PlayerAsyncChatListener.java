@@ -24,22 +24,23 @@ public class PlayerAsyncChatListener implements Listener
 		e.setCancelled(true);
 		
 		final Player p = e.getPlayer();
-		final String m = e.getMessage();
 		
 		for(Player cp : Bukkit.getOnlinePlayers())
 		{
-			if(m.contains(cp.getName().toLowerCase())) 
+			if(e.getMessage().toLowerCase().contains(cp.getName().toLowerCase())) 
 			{
 				cp.playSound(cp.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 3, 2);
 			}		
 			
-			sendMessage(p, m);
+			sendMessage(p, cp, e.getMessage());
 		}
+		
+		Bukkit.getConsoleSender().sendMessage("[GLOBALCHAT] " + p.getName() + ": " + e.getMessage());
 	}
 	
-	private void sendMessage(Player p, String message)
+	private void sendMessage(Player p, Player cp, String message)
 	{
-		p.sendMessage("§7" + p.getName() + " §8» §r" + ChatColor.translateAlternateColorCodes('&', DEFAULT_CHATCOLOR + message));
+		cp.sendMessage("§7" + p.getName() + " §8» §r" + ChatColor.translateAlternateColorCodes('&', DEFAULT_CHATCOLOR + message));
 	}
 
 	
