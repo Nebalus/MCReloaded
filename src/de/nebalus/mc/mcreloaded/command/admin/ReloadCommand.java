@@ -1,0 +1,69 @@
+package de.nebalus.mc.mcreloaded.command.admin;
+
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import de.nebalus.mc.mcreloaded.Core;
+import de.nebalus.mc.mcreloaded.command.MCCommand;
+
+public class ReloadCommand extends MCCommand
+{
+	
+	private boolean isReloading = false;
+	
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) 
+	{
+		if(isReloading)
+		{
+			sender.sendMessage("§cThe server is allready reloading");
+			return false;
+		}		
+		
+		isReloading = true;	
+		for(Player p : Bukkit.getOnlinePlayers()) 
+		{
+			p.sendTitle("§cServer Reload", "", 1, 120, 20);
+		}
+		
+		final Runnable task = new Runnable()
+		{
+			int times = 60;
+			
+			public void run()
+			{					
+				switch(times) 
+				{
+					case 60:
+					case 30:
+					case 15:
+					case 10:
+					case 5:
+					case 3:
+					case 2:
+						Bukkit.broadcastMessage("§cThe server will reload in §6" + times + " §cseconds!");
+						break;
+					case 1:
+						Bukkit.broadcastMessage("§cThe server will reload in §6" + times + " §csecond!");
+						break;
+					case 0:
+						Bukkit.broadcastMessage("§cThe server is now §areloading§c this task may contains lags!");
+						Bukkit.reload();
+						break;
+				}
+			
+				if(times-- > 0)
+				{
+					Bukkit.getScheduler().scheduleSyncDelayedTask(Core.getInstance(), this, 20);	
+				}
+			}
+		};
+		
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Core.getInstance(), task, -1);
+				
+		return false;
+	}
+
+}
