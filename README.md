@@ -1,3 +1,3 @@
 # MCReloaded
-A plugin for Minecraft Spigot 1.18 Servers\n
-Adds Some advanced survival features
+A server plugin for the game Minecraft v1.19
+Adds some advanced survival QoL (Quality of Life) features 
