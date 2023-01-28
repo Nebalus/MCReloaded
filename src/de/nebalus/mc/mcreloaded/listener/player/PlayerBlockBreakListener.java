@@ -11,8 +11,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import de.nebalus.mc.mcreloaded.Core;
-import de.nebalus.mc.mcreloaded.customitem.CustomItem;
+import de.nebalus.mc.mcreloaded.MCRCore;
+import de.nebalus.mc.mcreloaded.item.CustomItem;
 
 public class PlayerBlockBreakListener implements Listener
 {
@@ -37,7 +37,7 @@ public class PlayerBlockBreakListener implements Listener
 		
 		for(NamespacedKey ns : pdc.getKeys())
 		{
-			final NamespacedKey convertedNK = new NamespacedKey(Core.getInstance(), ns.getKey());
+			final NamespacedKey convertedNK = new NamespacedKey(MCRCore.getInstance(), ns.getKey());
 			
 			if(ns.getNamespace().equalsIgnoreCase("hanswurst") && !pdc.has(convertedNK, PersistentDataType.BYTE))
 			{
@@ -49,7 +49,7 @@ public class PlayerBlockBreakListener implements Listener
 		}	
 		//
 		
-		for(CustomItem citem : Core.getInstance().getCustomItemHandler().getCustomItemList())
+		for(CustomItem citem : MCRCore.getInstance().getDataManager().getCustomItemHandler().getCustomItemList())
 		{	
 			if(pdc.has(citem.getNamespacedKey(), PersistentDataType.BYTE))
 			{

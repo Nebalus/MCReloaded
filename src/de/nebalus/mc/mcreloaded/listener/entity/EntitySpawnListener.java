@@ -30,7 +30,7 @@ public class EntitySpawnListener implements Listener
 		{
 			Phantom phantom = (Phantom) entity;
 			Random random = new Random();
-			int iran = random.nextInt(1, 10);
+			int iran = random.nextInt(1, 15);
 			
 			phantom.setSize(iran);
 		}

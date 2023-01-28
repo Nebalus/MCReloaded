@@ -3,14 +3,14 @@ package de.nebalus.mc.mcreloaded.data;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 
-import de.nebalus.mc.mcreloaded.Core;
+import de.nebalus.mc.mcreloaded.MCRCore;
 import de.nebalus.mc.mcreloaded.command.MCCommand;
 import de.nebalus.mc.mcreloaded.command.admin.ReloadCommand;
 import de.nebalus.mc.mcreloaded.command.admin.RepairCommand;
 import de.nebalus.mc.mcreloaded.listener.entity.EntityDeathListener;
 import de.nebalus.mc.mcreloaded.listener.entity.EntitySpawnListener;
-import de.nebalus.mc.mcreloaded.listener.player.PlayerBlockBreakListener;
 import de.nebalus.mc.mcreloaded.listener.player.PlayerAsyncChatListener;
+import de.nebalus.mc.mcreloaded.listener.player.PlayerBlockBreakListener;
 import de.nebalus.mc.mcreloaded.listener.player.PlayerDeathListener;
 import de.nebalus.mc.mcreloaded.listener.player.PlayerInteractListener;
 import de.nebalus.mc.mcreloaded.listener.player.PlayerItemConsumeListener;
@@ -26,12 +26,12 @@ public final class BukkitRegister
 	{
 		if(enableExecutor)
 		{
-			Core.getInstance().getCommand(name).setExecutor(command);
+			MCRCore.getInstance().getCommand(name).setExecutor(command);
 		}
 		
 		if(enableTabCompleter)
 		{
-			Core.getInstance().getCommand(name).setTabCompleter(command);
+			MCRCore.getInstance().getCommand(name).setTabCompleter(command);
 		}
 	}
 	
@@ -43,7 +43,7 @@ public final class BukkitRegister
 	
 	public static void registerListener(Listener listener)
 	{
-		Bukkit.getPluginManager().registerEvents(listener, Core.getInstance());
+		Bukkit.getPluginManager().registerEvents(listener, MCRCore.getInstance());
 	}
 	
 	public static void registerListeners() 
@@ -62,4 +62,5 @@ public final class BukkitRegister
 		
 		registerListener(new ServerLoadListener());	
 	}
+	
 }

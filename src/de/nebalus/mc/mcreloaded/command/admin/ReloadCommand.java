@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.nebalus.mc.mcreloaded.Core;
+import de.nebalus.mc.mcreloaded.MCRCore;
 import de.nebalus.mc.mcreloaded.command.MCCommand;
 
 public class ReloadCommand extends MCCommand
@@ -23,9 +23,9 @@ public class ReloadCommand extends MCCommand
 		}		
 		
 		isReloading = true;	
-		for(Player p : Bukkit.getOnlinePlayers()) 
+		for(Player allp : Bukkit.getOnlinePlayers()) 
 		{
-			p.sendTitle("§cServer Reload", "", 1, 120, 20);
+			allp.sendTitle("§cServer Reload", "", 1, 120, 20);
 		}
 		
 		final Runnable task = new Runnable()
@@ -56,12 +56,12 @@ public class ReloadCommand extends MCCommand
 			
 				if(times-- > 0)
 				{
-					Bukkit.getScheduler().scheduleSyncDelayedTask(Core.getInstance(), this, 20);	
+					Bukkit.getScheduler().scheduleSyncDelayedTask(MCRCore.getInstance(), this, 20);	
 				}
 			}
 		};
 		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Core.getInstance(), task, -1);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(MCRCore.getInstance(), task, -1);
 				
 		return false;
 	}

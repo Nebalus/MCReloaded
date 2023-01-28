@@ -1,6 +1,6 @@
-main: de.nebalus.mc.mcreloaded.Core
+main: de.nebalus.mc.mcreloaded.MCRCore
 name: MCReloaded
-prefix: MCReloaded
+prefix: MCR
 version: 1.0
 api-version: 1.19
 description: 42

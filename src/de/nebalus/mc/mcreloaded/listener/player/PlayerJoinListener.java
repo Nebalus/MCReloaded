@@ -5,8 +5,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import de.nebalus.mc.mcreloaded.Core;
-import de.nebalus.mc.mcreloaded.customitem.CustomItem;
+import de.nebalus.mc.mcreloaded.MCRCore;
+import de.nebalus.mc.mcreloaded.item.CustomItem;
 
 public class PlayerJoinListener implements Listener
 {
@@ -18,7 +18,7 @@ public class PlayerJoinListener implements Listener
 		
 		e.setJoinMessage("§e" + p.getName() + " [§a+§e]");
 		
-		for(CustomItem citem : Core.getInstance().getCustomItemHandler().getCustomItemList())
+		for(CustomItem citem : MCRCore.getInstance().getDataManager().getCustomItemHandler().getCustomItemList())
 		{
 			p.discoverRecipe(citem.getNamespacedKey());
 		}

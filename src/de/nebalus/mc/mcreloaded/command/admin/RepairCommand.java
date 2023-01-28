@@ -1,15 +1,17 @@
 package de.nebalus.mc.mcreloaded.command.admin;
 
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.ItemStack;
 
 import de.nebalus.mc.mcreloaded.command.MCCommand;
 
 public class RepairCommand extends MCCommand
 {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) 
 	{
@@ -20,7 +22,17 @@ public class RepairCommand extends MCCommand
 		}
 		
 		Player p = (Player) sender;
+		ItemStack mainItem = p.getInventory().getItemInMainHand();
 		
+		if((mainItem = p.getInventory().getItemInMainHand()).getType().equals(Material.AIR) || mainItem.getDurability() <= 0)
+		{
+			sender.sendMessage("Please hold a damaged item/tool your main hand!");
+			return false;
+		}
+		
+		p.sendMessage(mainItem.getDurability() + " durability points has been added to [" + mainItem.getType().name() + "]");
+		
+		mainItem.setDurability((short) 0);
 		
 		return false;
 	}

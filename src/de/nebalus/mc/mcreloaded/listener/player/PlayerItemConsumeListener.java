@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 public class PlayerItemConsumeListener implements Listener
 {
 	@EventHandler
-	private void onJoin(PlayerItemConsumeEvent e)
+	private void onConsume(PlayerItemConsumeEvent e)
 	{
 		Player p = e.getPlayer();
 	}
