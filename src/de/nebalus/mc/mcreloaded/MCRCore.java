@@ -38,10 +38,10 @@ public class MCRCore extends JavaPlugin
 		//NOTE: Dont change ist is formated correctly
 		System.out.println("############################################################################");
 		System.out.println("#                                                                          #");
-		System.out.println("#        __  ___  _____   ___         __                __          __     #");
-		System.out.println("#       /  |/  / / ___/  / _ \\ ___   / / ___  ___ _ ___/ / ___  ___/ /     #");
-		System.out.println("#      / /|_/ / / /__   / , _// -_) / / / _ \\/ _ `// _  / / -_)/ _  /      #");
-		System.out.println("#     /_/  /_/  \\___/  /_/|_| \\__/ /_/  \\___/\\_,_/ \\_,_/  \\__/ \\_,_/       #");
+		System.out.println("#        §6__  ___  _____   §a___         __                __          __§r     #");
+		System.out.println("#       §6/  |/  / / ___/  §a/ _ \\ ___   / / ___  ___ _ ___/ / ___  ___/ /§r     #");
+		System.out.println("#      §6/ /|_/ / / /__   §a/ , _// -_) / / / _ \\/ _ `// _  / / -_)/ _  /§r      #");
+		System.out.println("#     §6/_/  /_/  \\___/  §a/_/|_| \\__/ /_/  \\___/\\_,_/ \\_,_/  \\__/ \\_,_/§r       #");
 		System.out.println("#                               by Nebalus                                 #");
 		System.out.println("#                                                                          #");
 		System.out.println("############################################################################");
