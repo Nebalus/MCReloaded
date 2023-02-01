@@ -1,4 +1,4 @@
-package de.nebalus.mc.mcreloaded.item.custom;
+package de.nebalus.mc.mcreloaded.item.legacy.custom;
 
 import java.util.Collection;
 
@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-import de.nebalus.mc.mcreloaded.item.CustomItem;
+import de.nebalus.mc.mcreloaded.item.legacy.CustomItem;
 import de.nebalus.mc.mcreloaded.listener.player.PlayerInteractListener;
 
 public class SuperTool extends CustomItem

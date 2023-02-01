@@ -1,4 +1,4 @@
-package de.nebalus.mc.mcreloaded.item.custom;
+package de.nebalus.mc.mcreloaded.item.legacy.custom;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

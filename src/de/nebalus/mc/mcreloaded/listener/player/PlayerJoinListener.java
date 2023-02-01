@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import de.nebalus.mc.mcreloaded.MCRCore;
-import de.nebalus.mc.mcreloaded.item.CustomItem;
+import de.nebalus.mc.mcreloaded.item.legacy.CustomItem;
 
 public class PlayerJoinListener implements Listener
 {

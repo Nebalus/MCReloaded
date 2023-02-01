@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import de.nebalus.mc.mcreloaded.data.BukkitRegister;
 import de.nebalus.mc.mcreloaded.data.DataManager;
-import de.nebalus.mc.mcreloaded.item.CustomItemHandler;
+import de.nebalus.mc.mcreloaded.item.legacy.CustomItemHandler;
 
 public class MCRCore extends JavaPlugin
 {

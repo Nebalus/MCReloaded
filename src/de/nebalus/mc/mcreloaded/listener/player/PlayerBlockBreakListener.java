@@ -1,6 +1,5 @@
 package de.nebalus.mc.mcreloaded.listener.player;
 
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,7 +11,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import de.nebalus.mc.mcreloaded.MCRCore;
-import de.nebalus.mc.mcreloaded.item.CustomItem;
+import de.nebalus.mc.mcreloaded.item.CustomItemReader;
+import de.nebalus.mc.mcreloaded.item.legacy.CustomItem;
 
 public class PlayerBlockBreakListener implements Listener
 {
@@ -24,30 +24,12 @@ public class PlayerBlockBreakListener implements Listener
 		if(e.getPlayer() == null) return;
 		
 		Player p = e.getPlayer();
-		ItemStack item = p.getInventory().getItemInMainHand();
-
-		if(item.getType().equals(Material.AIR)) return;
+		ItemStack heldItem = p.getInventory().getItemInMainHand();
+		ItemMeta itemMeta = heldItem.getItemMeta();
+		CustomItemReader cir = new CustomItemReader(heldItem);
+		PersistentDataContainer pdc = itemMeta.getPersistentDataContainer();
 		
-		ItemMeta itemmeta = item.getItemMeta();
-		
-		if(itemmeta.getPersistentDataContainer().isEmpty()) return;
-		
-		//
-		PersistentDataContainer pdc = itemmeta.getPersistentDataContainer();
-		
-		for(NamespacedKey ns : pdc.getKeys())
-		{
-			final NamespacedKey convertedNK = new NamespacedKey(MCRCore.getInstance(), ns.getKey());
-			
-			if(ns.getNamespace().equalsIgnoreCase("hanswurst") && !pdc.has(convertedNK, PersistentDataType.BYTE))
-			{
-				p.sendMessage("§cERROR: Legacy ItemStack format for Item (§a" + itemmeta.getDisplayName() + "§c) has been found!!");
-				p.sendMessage("§cTrying to autocorrect the Namespaces for the ItemStack: " + ns.getNamespace() + " - " + ns.getKey());
-				pdc.set(convertedNK, PersistentDataType.BYTE, (byte) 1);
-				item.setItemMeta(itemmeta);
-			}
-		}	
-		//
+		if(cir.isEmpty() && !cir.isCustomItem()) return;
 		
 		for(CustomItem citem : MCRCore.getInstance().getDataManager().getCustomItemHandler().getCustomItemList())
 		{	
@@ -58,3 +40,17 @@ public class PlayerBlockBreakListener implements Listener
 		}
 	}
 }
+//PersistentDataContainer pdc = itemMeta.getPersistentDataContainer();
+//
+//for(NamespacedKey ns : pdc.getKeys())
+//{
+//	final NamespacedKey convertedNK = new NamespacedKey(MCRCore.getInstance(), ns.getKey());
+//	
+//	if(ns.getNamespace().equalsIgnoreCase("hanswurst") && !pdc.has(convertedNK, PersistentDataType.BYTE))
+//	{
+//		p.sendMessage("§cERROR: Legacy ItemStack format for Item (§a" + itemMeta.getDisplayName() + "§c) has been found!!");
+//		p.sendMessage("§cTrying to autocorrect the Namespaces for the ItemStack: " + ns.getNamespace() + " - " + ns.getKey());
+//		pdc.set(convertedNK, PersistentDataType.BYTE, (byte) 1);
+//		heldItem.setItemMeta(itemMeta);
+//	}
+//}	

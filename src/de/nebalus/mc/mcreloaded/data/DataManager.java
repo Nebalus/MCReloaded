@@ -3,7 +3,7 @@ package de.nebalus.mc.mcreloaded.data;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import de.nebalus.mc.mcreloaded.MCRCore;
-import de.nebalus.mc.mcreloaded.item.CustomItemHandler;
+import de.nebalus.mc.mcreloaded.item.legacy.CustomItemHandler;
 
 public class DataManager 
 {
