@@ -25,11 +25,12 @@ public class PlayerBlockBreakListener implements Listener
 		
 		Player p = e.getPlayer();
 		ItemStack heldItem = p.getInventory().getItemInMainHand();
-		ItemMeta itemMeta = heldItem.getItemMeta();
 		CustomItemReader cir = new CustomItemReader(heldItem);
-		PersistentDataContainer pdc = itemMeta.getPersistentDataContainer();
-		
+
 		if(cir.isEmpty() && !cir.isCustomItem()) return;
+		
+		ItemMeta itemMeta = heldItem.getItemMeta();
+		PersistentDataContainer pdc = itemMeta.getPersistentDataContainer();
 		
 		for(CustomItem citem : MCRCore.getInstance().getDataManager().getCustomItemHandler().getCustomItemList())
 		{	

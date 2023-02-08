@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.nebalus.mc.mcreloaded.MCRCore;
+import de.nebalus.mc.mcreloaded.announcement.Announcement;
 import de.nebalus.mc.mcreloaded.command.MCCommand;
 
 public class ReloadCommand extends MCCommand
@@ -43,13 +44,15 @@ public class ReloadCommand extends MCCommand
 					case 5:
 					case 3:
 					case 2:
-						Bukkit.broadcastMessage("§cThe server will reload in §6" + times + " §cseconds!");
-						break;
 					case 1:
-						Bukkit.broadcastMessage("§cThe server will reload in §6" + times + " §csecond!");
+						new Announcement()
+						.setMessage("§cThe server will reload in §6" + times + " §csecond" + (times == 1 ? "" : "s") + "!")
+						.broadcast();
 						break;
 					case 0:
-						Bukkit.broadcastMessage("§cThe server is now §areloading§c this task may contains lags!");
+						new Announcement()
+						.setMessage("§cThe server is now §areloading§c this task may contains lags!")
+						.broadcast();
 						Bukkit.reload();
 						break;
 				}

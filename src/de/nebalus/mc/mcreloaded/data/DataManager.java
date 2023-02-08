@@ -57,7 +57,6 @@ public class DataManager
 	{
 		if (!this.doSave)
 			return;
-
 	}
 	
 	public void setDoSave(boolean doSave) 

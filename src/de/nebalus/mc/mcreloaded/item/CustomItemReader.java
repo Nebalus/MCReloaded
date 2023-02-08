@@ -9,7 +9,7 @@ import de.nebalus.mc.mcreloaded.MCRCore;
 
 public class CustomItemReader 
 {
-
+	
 	private final ItemStack itemstack;
 	
 	public CustomItemReader(ItemStack itemstack)
