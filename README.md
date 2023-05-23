@@ -1,4 +1,4 @@
-# ⚠️WARNING!!!⚠️ This plugin is still in heavy development
+# ⚠️WARNING!!!⚠️ This plugin is still in development
 
 # MCReloaded
 A server plugin for the game Minecraft v1.19
