@@ -44,7 +44,7 @@ public class PlayerDeathListener implements Listener
 		ItemStack skullstack = new ItemStack(Material.PLAYER_HEAD);
     	SkullMeta skullmeta = (SkullMeta) skullstack.getItemMeta();
     	ArrayList<String> lore = new ArrayList<>();
-    	lore.add("§7☠ Cause: " + deathmessage.replace(p.getName(), "He"));
+    	lore.add("§7☠ Cause: " + deathmessage.replace(p.getName(), "This person"));
     	lore.add("§7☠ Count: " + (p.getStatistic(Statistic.DEATHS) + 1));
     	lore.add(" ");
     	lore.add("§4WARNING: The stats are gone if placed");

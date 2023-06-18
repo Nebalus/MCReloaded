@@ -1,29 +1,34 @@
 package de.nebalus.mc.mcreloaded.announcement;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Instrument;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Note;
+import org.bukkit.Note.Tone;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 
+import de.nebalus.mc.mcreloaded.MCRCore;
+
 public class Announcement 
 {
 
-	protected String notifySound;
+	//protected String notifySound;
 	protected String prefix;
 	protected String messsage;
 	protected String suffix;
 	
-	protected boolean playNotifySound = false;
+	protected boolean playNotifySound;
 	
-	protected boolean showToConsole = false;
-	protected boolean showToOperator = false;	
-	protected boolean showToEveryone = false;
+	protected boolean showToConsole;
+	protected boolean showToOperator;	
+	protected boolean showToEveryone;
 	
 	public Announcement()
 	{
 		//Init der default werte
-		this.setNotificationSound(Sound.BLOCK_NOTE_BLOCK_BIT);
+		//this.setNotificationSound(Sound.BLOCK_NOTE_BLOCK_BIT);
 		this.setPrefix("§7[§aMCR§eAlert§7]: §r");
 		this.setMessage("UNDEFINED");
 		this.setSuffix("");
@@ -34,7 +39,7 @@ public class Announcement
 		this.showToOperator(true);
 		this.showToEveryone(true);
 	}
-	
+/*	
 	public Announcement setNotificationSound(String namespacepath)
 	{
 		this.notifySound = namespacepath;
@@ -43,14 +48,12 @@ public class Announcement
 	}
 	
 	public Announcement setNotificationSound(Sound newNotifySound)
-	{
-		final NamespacedKey key = newNotifySound.getKey();
-		
-		this.notifySound = key.getNamespace() + key.getKey();
+	{	
+		this.notifySound = newNotifySound.getKey().getKey();
 		
 		return this;
 	}
-	
+**/
 	public Announcement setPrefix(String newPrefix)
 	{
 		this.prefix = newPrefix;
@@ -112,18 +115,27 @@ public class Announcement
 		if(showToOperator || showToEveryone)
 		{
 			for(Player p : Bukkit.getOnlinePlayers())
-			{
-				if(playNotifySound)
-				{
-					p.playSound(p.getEyeLocation(), notifySound, SoundCategory.MASTER, 1, 1);
-				}
-				
+			{	
 				if((showToOperator && p.isOp()) || showToEveryone)
 				{
+					if(playNotifySound)
+					{
+						Bukkit.getScheduler().runTaskTimer(MCRCore.getInstance(), new Runnable() {
+							
+							@Override
+							public void run() {
+								p.playSound(p.getEyeLocation(), Sound.ITEM_TOTEM_USE, 200f, 1f);
+								p.playSound(p.getEyeLocation(), Sound.ENTITY_WITHER_SHOOT, 200f, 1f);
+								p.playNote(p.getEyeLocation(), Instrument.BELL, Note.natural(1, Tone.C));
+								
+							}
+						}, 1, 1);
+						p.playNote(p.getEyeLocation(), Instrument.BELL, Note.natural(1, Tone.C));
+					}
+					
 					p.sendMessage(finalMessage);
 				}
 			}
 		}
-	}
-	
+	}	
 }

@@ -22,12 +22,12 @@ public class SuperTool extends CustomItem
 		super(material, namespace_key);
 	}
 
-	private void breakblock(Location loc, ItemStack item, Boolean isdropable) 
+	private void breakblock(Location loc, ItemStack item, Boolean isDropable) 
 	{
 		Block b = loc.getBlock();
 		if(!b.getType().equals(Material.AIR)) 
 		{
-			if(isdropable) 
+			if(isDropable) 
 			{
 				if(item != null) 
 				{

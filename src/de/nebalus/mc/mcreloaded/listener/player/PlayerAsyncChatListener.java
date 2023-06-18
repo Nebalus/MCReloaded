@@ -21,6 +21,7 @@ public class PlayerAsyncChatListener implements Listener
 	public void onChat(AsyncPlayerChatEvent e)
 	{
 		if(e.isCancelled()) return;
+		
 		e.setCancelled(true);
 		
 		final Player p = e.getPlayer();
