@@ -12,27 +12,22 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class PlayerInteractListener implements Listener
-{
+public class PlayerInteractListener implements Listener {
 	public static HashMap<UUID, BlockFace> LASTBLOCKFACE = new HashMap<UUID, BlockFace>();
-	
+
 	@EventHandler
-	private void onBlockInteract(PlayerInteractEvent e) 
-	{
+	private void onBlockInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
 		Block block = p.getTargetBlockExact(5, FluidCollisionMode.ALWAYS);
-		
-		if(block == null) return;
-		
-		if(e.getAction() == Action.LEFT_CLICK_BLOCK)
-		{	
-			if(LASTBLOCKFACE.containsKey(uuid))
-			{
+
+		if (block == null)
+			return;
+
+		if (e.getAction() == Action.LEFT_CLICK_BLOCK) {
+			if (LASTBLOCKFACE.containsKey(uuid)) {
 				LASTBLOCKFACE.replace(uuid, e.getBlockFace());
-			}
-			else
-			{
+			} else {
 				LASTBLOCKFACE.put(uuid, e.getBlockFace());
 			}
 		}

@@ -1,6 +1,5 @@
 package de.nebalus.mc.mcreloaded.data;
 
-public final class Constants 
-{
-	
+public final class Constants {
+
 }

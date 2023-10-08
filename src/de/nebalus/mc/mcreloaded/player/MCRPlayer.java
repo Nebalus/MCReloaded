@@ -4,11 +4,8 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MCRPlayer
-{
-	
+public class MCRPlayer {
+
 	private static Map<UUID, MCRPlayer> playerCache = new ConcurrentHashMap<>();
-	
-	
-	
+
 }

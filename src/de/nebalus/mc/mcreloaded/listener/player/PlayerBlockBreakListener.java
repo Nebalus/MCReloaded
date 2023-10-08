@@ -17,28 +17,27 @@ import de.nebalus.mc.mcreloaded.MCRCore;
 import de.nebalus.mc.mcreloaded.item.CustomItemReader;
 import de.nebalus.mc.mcreloaded.item.legacy.CustomItem;
 
-public class PlayerBlockBreakListener implements Listener
-{
-	
+public class PlayerBlockBreakListener implements Listener {
+
 	@EventHandler
-	private void onBlockBreak(BlockBreakEvent e)
-	{
-		if(e.isCancelled()) return;
-		if(e.getPlayer() == null) return;
-		
+	private void onBlockBreak(BlockBreakEvent e) {
+		if (e.isCancelled())
+			return;
+		if (e.getPlayer() == null)
+			return;
+
 		Player p = e.getPlayer();
 		ItemStack heldItem = p.getInventory().getItemInMainHand();
 		CustomItemReader cir = new CustomItemReader(heldItem);
 
-		if(cir.isEmpty() && !cir.isCustomItem()) return;
-		
+		if (cir.isEmpty() && !cir.isCustomItem())
+			return;
+
 		ItemMeta itemMeta = heldItem.getItemMeta();
 		PersistentDataContainer pdc = itemMeta.getPersistentDataContainer();
-		
-		for(CustomItem citem : MCRCore.getInstance().getDataManager().getCustomItemHandler().getCustomItemList())
-		{	
-			if(pdc.has(citem.getNamespacedKey(), PersistentDataType.BYTE))
-			{
+
+		for (CustomItem citem : MCRCore.getInstance().getDataManager().getCustomItemHandler().getCustomItemList()) {
+			if (pdc.has(citem.getNamespacedKey(), PersistentDataType.BYTE)) {
 				citem.executeOnBreak(e);
 			}
 		}

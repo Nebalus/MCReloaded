@@ -4,19 +4,16 @@ import java.util.ArrayList;
 
 import de.nebalus.mc.mcreloaded.item.legacy.custom.IronHammer;
 
-public class CustomItemHandler 
-{
+public class CustomItemHandler {
 	private final ArrayList<CustomItem> customitemlist;
-	
-	public CustomItemHandler()
-	{
+
+	public CustomItemHandler() {
 		customitemlist = new ArrayList<CustomItem>();
-		
+
 		customitemlist.add(new IronHammer());
 	}
-	
-	public ArrayList<CustomItem> getCustomItemList()
-	{
+
+	public ArrayList<CustomItem> getCustomItemList() {
 		return customitemlist;
 	}
 }

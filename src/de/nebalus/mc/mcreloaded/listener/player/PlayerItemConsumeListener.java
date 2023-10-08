@@ -5,11 +5,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 
-public class PlayerItemConsumeListener implements Listener
-{
+public class PlayerItemConsumeListener implements Listener {
 	@EventHandler
-	private void onConsume(PlayerItemConsumeEvent e)
-	{
+	private void onConsume(PlayerItemConsumeEvent e) {
 		Player p = e.getPlayer();
 	}
 }
