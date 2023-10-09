@@ -102,16 +102,6 @@ public class Announcement {
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				if ((showToOperator && p.isOp()) || showToEveryone) {
 					if (playNotifySound) {
-						Bukkit.getScheduler().runTaskTimer(MCRCore.getInstance(), new Runnable() {
-
-							@Override
-							public void run() {
-								p.playSound(p.getEyeLocation(), Sound.ITEM_TOTEM_USE, 200f, 1f);
-								p.playSound(p.getEyeLocation(), Sound.ENTITY_WITHER_SHOOT, 200f, 1f);
-								p.playNote(p.getEyeLocation(), Instrument.BELL, Note.natural(1, Tone.C));
-
-							}
-						}, 1, 1);
 						p.playNote(p.getEyeLocation(), Instrument.BELL, Note.natural(1, Tone.C));
 					}
 
