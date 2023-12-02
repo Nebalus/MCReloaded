@@ -1,20 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>MCReloaded</groupId>
+
+  <groupId>de.nebalus.mc</groupId>
   <artifactId>MCReloaded</artifactId>
-  <version>1.0</version>
+  <version>dev</version>
+  <name>MCReloaded</name>
+  <description>A simple minecraft plugin that adds some new features</description>
+  <packaging>jar</packaging>
+
+  <developers>
+    <developer>
+      <name>Nebalus</name>    
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://www.opensource.org/licenses/mit/</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
+
   <build>
-    <sourceDirectory>src</sourceDirectory>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <outputDirectory>target/classes</outputDirectory>
+    <testOutputDirectory>target/test-classes</testOutputDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <release>17</release>
-        </configuration>
+        <version>3.11.0</version>
       </plugin>
     </plugins>
   </build>
+
   <repositories>
     <!-- This adds the Spigot Maven repository to the build -->
     <repository>
@@ -22,12 +55,13 @@
         <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
     </repository>
   </repositories>
+
   <dependencies>
     <!--This adds the Spigot API artifact to the build -->
     <dependency>
         <groupId>org.spigotmc</groupId>
         <artifactId>spigot-api</artifactId>
-        <version>1.20.1-R0.1-SNAPSHOT</version>
+        <version>1.20.2-R0.1-SNAPSHOT</version>
         <scope>provided</scope>
     </dependency>
   </dependencies>
