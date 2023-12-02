@@ -2,14 +2,9 @@ package de.nebalus.mc.mcreloaded.announcement;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Instrument;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Note.Tone;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
-
-import de.nebalus.mc.mcreloaded.MCRCore;
 
 public class Announcement {
 
@@ -27,66 +22,66 @@ public class Announcement {
 	public Announcement() {
 		// Init der default werte
 		// this.setNotificationSound(Sound.BLOCK_NOTE_BLOCK_BIT);
-		this.setPrefix("§7[§aMCR§eAlert§7]: §r");
-		this.setMessage("UNDEFINED");
-		this.setSuffix("");
+		setPrefix("§7[§aMCR§eAlert§7]: §r");
+		setMessage("UNDEFINED");
+		setSuffix("");
 
-		this.playNotifySound(true);
+		playNotifySound(true);
 
-		this.showToConsole(true);
-		this.showToOperator(true);
-		this.showToEveryone(true);
+		showToConsole(true);
+		showToOperator(true);
+		showToEveryone(true);
 	}
 
 	/*
 	 * public Announcement setNotificationSound(String namespacepath) {
 	 * this.notifySound = namespacepath;
-	 * 
+	 *
 	 * return this; }
-	 * 
+	 *
 	 * public Announcement setNotificationSound(Sound newNotifySound) {
 	 * this.notifySound = newNotifySound.getKey().getKey();
-	 * 
+	 *
 	 * return this; }
 	 **/
 	public Announcement setPrefix(String newPrefix) {
-		this.prefix = newPrefix;
+		prefix = newPrefix;
 
 		return this;
 	}
 
 	public Announcement setMessage(String newMessage) {
-		this.messsage = newMessage;
+		messsage = newMessage;
 
 		return this;
 	}
 
 	public Announcement setSuffix(String newSuffix) {
-		this.suffix = newSuffix;
+		suffix = newSuffix;
 
 		return this;
 	}
 
 	public Announcement playNotifySound(boolean newPlayNotifySound) {
-		this.playNotifySound = newPlayNotifySound;
+		playNotifySound = newPlayNotifySound;
 
 		return this;
 	}
 
 	public Announcement showToConsole(boolean newShowToConsole) {
-		this.showToConsole = newShowToConsole;
+		showToConsole = newShowToConsole;
 
 		return this;
 	}
 
 	public Announcement showToOperator(boolean newShowToOperator) {
-		this.showToOperator = newShowToOperator;
+		showToOperator = newShowToOperator;
 
 		return this;
 	}
 
 	public Announcement showToEveryone(boolean newShowToEveryone) {
-		this.showToEveryone = newShowToEveryone;
+		showToEveryone = newShowToEveryone;
 
 		return this;
 	}

@@ -28,6 +28,7 @@ public class ReloadCommand extends CommandAdapter {
 		final Runnable task = new Runnable() {
 			int times = 60;
 
+			@Override
 			public void run() {
 				switch (times) {
 				case 60:

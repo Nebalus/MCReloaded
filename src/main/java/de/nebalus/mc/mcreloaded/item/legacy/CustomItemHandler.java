@@ -8,7 +8,7 @@ public class CustomItemHandler {
 	private final ArrayList<CustomItem> customitemlist;
 
 	public CustomItemHandler() {
-		customitemlist = new ArrayList<CustomItem>();
+		customitemlist = new ArrayList<>();
 
 		customitemlist.add(new IronHammer());
 	}

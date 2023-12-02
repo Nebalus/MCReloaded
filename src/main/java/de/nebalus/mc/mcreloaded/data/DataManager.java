@@ -23,11 +23,11 @@ public class DataManager {
 	}
 
 	public void load() {
-		this.customItemHandler = new CustomItemHandler();
+		customItemHandler = new CustomItemHandler();
 
-		this.startAutoSaveThread();
+		startAutoSaveThread();
 
-		this.doSave = true;
+		doSave = true;
 	}
 
 	private void startAutoSaveThread() {
@@ -46,8 +46,8 @@ public class DataManager {
 	}
 
 	public void save() {
-		if (!this.doSave)
-			return;
+		if (!doSave) {
+		}
 	}
 
 	public void setDoSave(boolean doSave) {

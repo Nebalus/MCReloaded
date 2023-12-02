@@ -15,7 +15,7 @@ public class MCRCore extends JavaPlugin {
 
 	@Override
 	public void onLoad() {
-		this.failed = false;
+		failed = false;
 		instance = this;
 
 		super.onLoad();
@@ -27,8 +27,8 @@ public class MCRCore extends JavaPlugin {
 
 //		    __  ___  _____   ___         __                __          __
 // 		   /  |/  / / ___/  / _ \ ___   / / ___  ___ _ ___/ / ___  ___/ /
-//		  / /|_/ / / /__   / , _// -_) / / / _ \/ _ `// _  / / -_)/ _  / 
-//		 /_/  /_/  \___/  /_/|_| \__/ /_/  \___/\_,_/ \_,_/  \__/ \_,_/  
+//		  / /|_/ / / /__   / , _// -_) / / / _ \/ _ `// _  / / -_)/ _  /
+//		 /_/  /_/  \___/  /_/|_| \__/ /_/  \___/\_,_/ \_,_/  \__/ \_,_/
 
 		// NOTE: Dont change ist is formated correctly
 		System.out.println("############################################################################");
@@ -57,7 +57,7 @@ public class MCRCore extends JavaPlugin {
 	public void onDisable() {
 		long timestamp = System.currentTimeMillis();
 
-		if (dataManager != null && !this.failed) {
+		if (dataManager != null && !failed) {
 			System.out.println("Saving data...");
 			dataManager.save();
 		}
@@ -73,12 +73,12 @@ public class MCRCore extends JavaPlugin {
 	}
 
 	public void fail() {
-		this.failed = true;
+		failed = true;
 		Bukkit.getPluginManager().disablePlugin(this);
 	}
 
 	public boolean isFailed() {
-		return this.failed;
+		return failed;
 	}
 
 	public DataManager getDataManager() {

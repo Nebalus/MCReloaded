@@ -8,7 +8,6 @@ import de.nebalus.mc.mcreloaded.command.CommandAdapter;
 import de.nebalus.mc.mcreloaded.command.admin.ReloadCommand;
 import de.nebalus.mc.mcreloaded.command.admin.RepairCommand;
 import de.nebalus.mc.mcreloaded.listener.entity.EntityDeathListener;
-import de.nebalus.mc.mcreloaded.listener.entity.EntitySpawnListener;
 import de.nebalus.mc.mcreloaded.listener.player.PlayerAsyncChatListener;
 import de.nebalus.mc.mcreloaded.listener.player.PlayerBlockBreakListener;
 import de.nebalus.mc.mcreloaded.listener.player.PlayerDeathListener;
@@ -43,7 +42,6 @@ public final class BukkitRegister {
 
 	public static void registerListeners() {
 		registerListener(new EntityDeathListener());
-		registerListener(new EntitySpawnListener());
 
 		registerListener(new PlayerAsyncChatListener());
 		registerListener(new PlayerBlockBreakListener());

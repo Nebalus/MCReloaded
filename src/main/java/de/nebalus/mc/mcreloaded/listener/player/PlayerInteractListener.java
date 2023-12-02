@@ -13,7 +13,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class PlayerInteractListener implements Listener {
-	public static HashMap<UUID, BlockFace> LASTBLOCKFACE = new HashMap<UUID, BlockFace>();
+	public static HashMap<UUID, BlockFace> LASTBLOCKFACE = new HashMap<>();
 
 	@EventHandler
 	private void onBlockInteract(PlayerInteractEvent e) {
@@ -21,8 +21,9 @@ public class PlayerInteractListener implements Listener {
 		UUID uuid = p.getUniqueId();
 		Block block = p.getTargetBlockExact(5, FluidCollisionMode.ALWAYS);
 
-		if (block == null)
+		if (block == null) {
 			return;
+		}
 
 		if (e.getAction() == Action.LEFT_CLICK_BLOCK) {
 			if (LASTBLOCKFACE.containsKey(uuid)) {

@@ -5,6 +5,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
+
 import de.nebalus.mc.mcreloaded.MCRCore;
 
 public class CustomItemReader {
@@ -24,13 +25,15 @@ public class CustomItemReader {
 	}
 
 	public boolean isCustomItem() {
-		if (!itemstack.hasItemMeta())
+		if (!itemstack.hasItemMeta()) {
 			return false;
+		}
 
 		final ItemMeta itemmeta = itemstack.getItemMeta();
 
-		if (itemmeta.getPersistentDataContainer().isEmpty())
+		if (itemmeta.getPersistentDataContainer().isEmpty()) {
 			return false;
+		}
 
 		PersistentDataContainer pdc = itemmeta.getPersistentDataContainer();
 

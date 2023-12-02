@@ -1,6 +1,7 @@
 package de.nebalus.mc.mcreloaded.item.legacy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Material;
@@ -38,10 +39,8 @@ public class CustomItem {
 	}
 
 	protected void setLore(String... lore) {
-		List<String> finallore = new ArrayList<String>();
-		for (String sublore : lore) {
-			finallore.add(sublore);
-		}
+		List<String> finallore = new ArrayList<>();
+		Collections.addAll(finallore, lore);
 		imeta.setLore(finallore);
 	}
 
