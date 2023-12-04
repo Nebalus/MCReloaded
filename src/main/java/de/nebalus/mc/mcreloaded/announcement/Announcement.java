@@ -8,9 +8,8 @@ import org.bukkit.entity.Player;
 
 public class Announcement {
 
-	// protected String notifySound;
 	protected String prefix;
-	protected String messsage;
+	protected String message;
 	protected String suffix;
 
 	protected boolean playNotifySound;
@@ -21,29 +20,17 @@ public class Announcement {
 
 	public Announcement() {
 		// Init der default werte
-		// this.setNotificationSound(Sound.BLOCK_NOTE_BLOCK_BIT);
-		setPrefix("§7[§aMCR§eAlert§7]: §r");
-		setMessage("UNDEFINED");
-		setSuffix("");
+		prefix = "§7[§aMCR§eAlert§7]: §r";
+		message = "UNDEFINED";
+		suffix = "";
 
-		playNotifySound(true);
+		playNotifySound = true;
 
-		showToConsole(true);
-		showToOperator(true);
-		showToEveryone(true);
+		showToConsole = true;
+		showToOperator = true;
+		showToEveryone = true;
 	}
 
-	/*
-	 * public Announcement setNotificationSound(String namespacepath) {
-	 * this.notifySound = namespacepath;
-	 *
-	 * return this; }
-	 *
-	 * public Announcement setNotificationSound(Sound newNotifySound) {
-	 * this.notifySound = newNotifySound.getKey().getKey();
-	 *
-	 * return this; }
-	 **/
 	public Announcement setPrefix(String newPrefix) {
 		prefix = newPrefix;
 
@@ -51,7 +38,7 @@ public class Announcement {
 	}
 
 	public Announcement setMessage(String newMessage) {
-		messsage = newMessage;
+		message = newMessage;
 
 		return this;
 	}
@@ -87,7 +74,7 @@ public class Announcement {
 	}
 
 	public void broadcast() {
-		final String finalMessage = prefix + messsage + suffix;
+		final String finalMessage = prefix + message + suffix;
 
 		if (showToConsole) {
 			Bukkit.getConsoleSender().sendMessage(finalMessage);

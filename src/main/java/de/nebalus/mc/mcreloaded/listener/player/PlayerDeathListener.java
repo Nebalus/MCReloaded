@@ -33,6 +33,8 @@ public class PlayerDeathListener implements Listener {
 				player.sendMessage(" §c☠ §7" + deathmessage);
 			}
 		}
+		
+		Bukkit.getConsoleSender().sendMessage(deathmessage);
 
 		ItemStack skullstack = new ItemStack(Material.PLAYER_HEAD);
 		SkullMeta skullmeta = (SkullMeta) skullstack.getItemMeta();

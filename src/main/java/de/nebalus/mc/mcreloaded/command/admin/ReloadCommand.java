@@ -44,8 +44,7 @@ public class ReloadCommand extends CommandAdapter {
 							.broadcast();
 					break;
 				case 0:
-					new Announcement().setMessage("§cThe server is now §areloading§c this task may contains lags!")
-							.broadcast();
+					new Announcement().setMessage("§cThe server is now §areloading§c this task may contains lags!").broadcast();
 					Bukkit.reload();
 					break;
 				}

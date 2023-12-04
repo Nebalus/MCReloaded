@@ -20,8 +20,7 @@ import de.nebalus.mc.mcreloaded.listener.server.ServerLoadListener;
 
 public final class BukkitRegister {
 
-	public static void registerCommand(String name, CommandAdapter command, boolean enableExecutor,
-			boolean enableTabCompleter) {
+	public static void registerCommand(String name, CommandAdapter command, boolean enableExecutor, boolean enableTabCompleter) {
 		if (enableExecutor) {
 			MCRCore.getInstance().getCommand(name).setExecutor(command);
 		}

@@ -27,8 +27,7 @@ public class RepairCommand extends CommandAdapter {
 			return false;
 		}
 
-		p.sendMessage(
-				mainItem.getDurability() + " durability points has been added to [" + mainItem.getType().name() + "]");
+		p.sendMessage(mainItem.getDurability() + " durability points has been added to [" + mainItem.getType().name() + "]");
 
 		mainItem.setDurability((short) 0);
 

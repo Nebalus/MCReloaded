@@ -18,6 +18,7 @@ public class EntityDeathListener implements Listener {
 
 		switch (entity.getType()) {
 		case ITEM_FRAME:
+		case GLOW_ITEM_FRAME:
 		case ARMOR_STAND:
 			break;
 
