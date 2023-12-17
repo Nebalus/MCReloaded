@@ -46,84 +46,56 @@ public class SuperTool extends CustomItem {
 		ItemStack item = event.getPlayer().getItemInUse();
 		boolean isSurvival = p.getGameMode().equals(GameMode.SURVIVAL);
 		BlockFace face = PlayerInteractListener.LASTBLOCKFACE.get(p.getUniqueId());
-
+		
 		if (face.equals(BlockFace.NORTH) || face.equals(BlockFace.SOUTH)) {
-			if (b.getLocation().add(-1, -1, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(-1, -1, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(0, -1, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, -1, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(1, -1, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(1, -1, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(-1, 0, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(-1, 0, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(1, 0, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(1, 0, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(-1, 1, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(-1, 1, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(0, 1, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, 1, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(1, 1, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(1, 1, 0), item, isSurvival);
-			}
+			int[][] field = {
+					{-1, -1, 0},
+					{0, -1, 0},
+					{1, -1, 0},
+					{-1, 0, 0},
+					{1, 0, 0},
+					{-1, 1, 0},
+					{0, 1, 0},
+					{1, 1, 0}
+			};
+			
+			breakField(field, b.getLocation(), item, isSurvival);
 		}
+		
 		if (face.equals(BlockFace.DOWN) || face.equals(BlockFace.UP)) {
-			if (b.getLocation().add(-1, 0, 1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(-1, 0, 1), item, isSurvival);
-			}
-			if (b.getLocation().add(0, 0, 1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, 0, 1), item, isSurvival);
-			}
-			if (b.getLocation().add(1, 0, 1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(1, 0, 1), item, isSurvival);
-			}
-			if (b.getLocation().add(-1, 0, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(-1, 0, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(1, 0, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(1, 0, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(-1, 0, -1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(-1, 0, -1), item, isSurvival);
-			}
-			if (b.getLocation().add(0, 0, -1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, 0, -1), item, isSurvival);
-			}
-			if (b.getLocation().add(1, 0, -1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(1, 0, -1), item, isSurvival);
-			}
+			int[][] field = {
+					{-1, 0, 1},
+					{0, 0, 1},
+					{1, 0, 1},
+					{-1, 0, 0},
+					{1, 0, 0},
+					{-1, 0, -1},
+					{0, 0, -1},
+					{1, 0, -1}
+			};
+			
+			breakField(field, b.getLocation(), item, isSurvival);
 		}
+		
 		if (face.equals(BlockFace.WEST) || face.equals(BlockFace.EAST)) {
-			if (b.getLocation().add(0, -1, -1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, -1, -1), item, isSurvival);
-			}
-			if (b.getLocation().add(0, -1, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, -1, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(0, -1, 1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, -1, 1), item, isSurvival);
-			}
-			if (b.getLocation().add(0, 0, -1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, 0, -1), item, isSurvival);
-			}
-			if (b.getLocation().add(0, 0, 1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, 0, 1), item, isSurvival);
-			}
-			if (b.getLocation().add(0, 1, -1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, 1, -1), item, isSurvival);
-			}
-			if (b.getLocation().add(0, 1, 0).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, 1, 0), item, isSurvival);
-			}
-			if (b.getLocation().add(0, 1, 1).getBlock().getType().equals(b.getType())) {
-				breakblock(b.getLocation().add(0, 1, 1), item, isSurvival);
-			}
+			int[][] field = {
+					{0, -1, -1},
+					{0, -1, 0},
+					{0, -1, 1},
+					{0, 0, -1},
+					{0, 0, 1},
+					{0, 1, -1},
+					{0, 1, 0},
+					{0, 1, 1}
+			};
+			
+			breakField(field, b.getLocation(), item, isSurvival);
 		}
+	}
+	
+	private void breakField(int[][] field, Location loc, ItemStack item, Boolean isSurvival) {
+		for(int i = 0; i < field.length; i++) {
+			breakblock(loc.add(field[i][0], field[i][1], field[i][2]), item, isSurvival);
+		}	
 	}
 }

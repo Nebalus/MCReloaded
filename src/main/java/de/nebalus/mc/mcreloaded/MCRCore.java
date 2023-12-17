@@ -3,9 +3,6 @@ package de.nebalus.mc.mcreloaded;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.nebalus.framework.gfw.api.GFW;
-import de.nebalus.framework.gfw.api.GFWBuilder;
-import de.nebalus.framework.gfw.api.service.logging.Logger;
 import de.nebalus.mc.mcreloaded.data.BukkitRegister;
 import de.nebalus.mc.mcreloaded.data.DataManager;
 
@@ -21,15 +18,6 @@ public class MCRCore extends JavaPlugin {
 		failed = false;
 		instance = this;
 
-		GFWBuilder gfwBuilder = GFWBuilder.create();
-		gfwBuilder.setExecutionRootDirectory(getDataFolder());
-		
-		GFW gfw = gfwBuilder.build();
-		gfw.initialize();
-		
-		Logger logger = gfw.getLogService().buildLogger("MCReloaded");
-		logger.log("TEST");
-		
 		super.onLoad();
 	}
 
@@ -53,7 +41,6 @@ public class MCRCore extends JavaPlugin {
 		System.out.println("#                                                                          #");
 		System.out.println("############################################################################");
 
-		
 		
 		dataManager = new DataManager(instance);
 		dataManager.preLoad();

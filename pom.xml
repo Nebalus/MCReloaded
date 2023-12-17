@@ -57,14 +57,6 @@
   </repositories>
 
   <dependencies>
-	  
-  	<!-- Local Framework -->
-	<dependency>	
-		<groupId>de.nebalus.framework</groupId>
-		<artifactId>GFW</artifactId>
-		<version>dev</version>
-		<scope>compile</scope>
-	</dependency>
 	
     <!--This adds the Spigot API artifact to the build -->
     <dependency>
